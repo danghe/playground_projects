@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T15:01:42.523606",
+    "payload_hash": "9046346c9424a323bc567573b2ba7b4346e950aba4a62a5fc621c34ba79b0b84",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": "All"
+  },
+  "payload": {
+    "sector": "Tech",
+    "sub_industry": "All",
+    "macro": {
+      "date": "2026-01-18",
+      "hy_spread": 3.8,
+      "ig_spread": 1.1,
+      "lbo_feasibility_index": 78.0,
+      "expected_leverage_range": "5.0x - 6.0x",
+      "updated_at": "2026-01-18 12:38:44"
+    },
+    "aggregates": {
+      "avg_spi": 6.9,
+      "sector": "Tech"
+    },
+    "top_drivers": []
+  },
+  "brief": {
+    "executive_takeaways": [
+      "The 'Now' focuses on capital efficiency as HY spreads at 3.8 allow for disciplined leverage, shifting away from zero-rate speculative growth.",
+      "The 'Next' involves a surge in take-private activity facilitated by a high LBO Feasibility Index of 78.0, targeting mature SaaS with steady cash flows.",
+      "PE firms must pivot from multiple expansion to operational EBITDA growth, as leverage remains capped at 5.0x - 6.0x."
+    ],
+    "regime_guidance": "In the current regime dated 2026-01-18, the narrow IG spread of 1.1 and HY spread of 3.8 indicate a 'Goldilocks' environment for credit. This stability allows for predictable debt servicing. The LBO Feasibility Index of 78.0 suggests that while credit is accessible, the market is pricing in moderate risk, favoring 'Buy and Build' strategies over mega-buyouts. This regime works best for mid-market tech firms that can support 5.0x - 6.0x leverage without breaching covenants during potential volatility spikes.",
+    "industry_dynamics": "The Tech sector is currently maintaining a strong performance profile with an Avg SPI of 6.9. While the 'Top Company Drivers' sample is currently thin, the aggregate data indicates that the sector is benefiting from stabilized credit costs. The spread between IG (1.1) and HY (3.8) of 2.7 points suggests a healthy premium for riskier tech assets, encouraging lenders to support deals in the 5.0x to 6.0x leverage range. Strategic acquirers are focusing on consolidation within fragmented sub-sectors to achieve the scale necessary to justify current SPI levels.",
+    "trend_narrative": {
+      "headline": "Credit Market Stability Catalyzes High-Conviction Tech Buyouts",
+      "bullets": [
+        {
+          "bullet": "LBO Feasibility has climbed to 78.0, signaling the strongest environment for tech private equity since late 2023.",
+          "metric_refs": [
+            "lbo_feasibility_index: 78.0"
+          ]
+        },
+        {
+          "bullet": "Debt financing for tech acquisitions is tightening slightly but remains viable with expected leverage ranges holding at 5.0x - 6.0x.",
+          "metric_refs": [
+            "expected_leverage_range: 5.0x - 6.0x"
+          ]
+        },
+        {
+          "bullet": "Corporate credit health remains high as Investment Grade spreads sit at 1.1, providing a low-cost floor for blue-chip tech refinancings.",
+          "metric_refs": [
+            "ig_spread: 1.1"
+          ]
+        },
+        {
+          "bullet": "High Yield spreads at 3.8 indicate that the market is not yet pricing in a recession, keeping the cost of subordinate debt manageable for tech firms.",
+          "metric_refs": [
+            "hy_spread: 3.8"
+          ]
+        }
+      ],
+      "where_to_look_next": [
+        {
+          "action": "Evaluate Cybersecurity and Infrastructure Software",
+          "why": "High average SPI of 6.9 suggests resilient demand that can support the higher end of the 6.0x leverage range.",
+          "metric_refs": [
+            "avg_spi: 6.9",
+            "expected_leverage_range: 5.0x - 6.0x"
+          ]
+        }
+      ],
+      "data_quality_note": {
+        "note": "Analysis is constrained by the lack of specific company-level driver data, requiring reliance on sector-wide credit aggregates.",
+        "metric_refs": [
+          "Top Company Drivers (Sample): []"
+        ]
+      }
+    },
+    "playbook": {
+      "ceo": "Focus on maintaining an EBITDA margin that comfortably services debt at 6.0x leverage; prioritize organic growth to maintain an SPI above the 6.9 sector average.",
+      "banker": "Structure deals with flexible covenants to accommodate the 3.8 HY spread volatility; target assets in the 5.0x leverage tier to maximize LBO feasibility."
+    },
+    "risks": [
+      "Potential widening of the 3.8 HY spread could quickly erode the current 78.0 feasibility index.",
+      "Over-leveraging beyond 6.0x in a sector where SPI averages 6.9 leaves little room for operational underperformance.",
+      "Compression of the 1.1 IG spread may lead to aggressive refinancing that masks underlying structural weaknesses in tech balance sheets."
+    ]
+  }
+}

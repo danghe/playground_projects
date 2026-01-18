@@ -1,0 +1,40 @@
+# Adjacency/Theme Map for "What They'll Buy"
+# Maps broader sectors to specific hot themes/sub-sectors for adjacency matching.
+
+adjacencies:
+  Technology:
+    - "AI Infrastructure"
+    - "Cybersecurity"
+    - "Vertical SaaS"
+    - "Fintech"
+    - "Digital Health"
+    
+  Healthcare:
+    - "Biotech"
+    - "MedTech"
+    - "Digital Health"
+    - "Life Sciences Tools"
+    
+  Financials:
+    - "Fintech"
+    - "Insurtech"
+    - "Wealth Tech"
+    - "Payments"
+    
+  Consumer:
+    - "E-commerce"
+    - "Direct-to-Consumer"
+    - "Food & Beverage"
+    - "Wellness"
+
+  Energy:
+    - "Renewables"
+    - "Clean Tech"
+    - "Grid Infrastructure"
+    - "Storage"
+
+  Industrials:
+    - "Robotics"
+    - "Automation"
+    - "Aerospace"
+    - "Defense"

@@ -1,0 +1,35 @@
+spi:
+  weights:
+    fsp: 0.65 # Financial Stress
+    ssi: 0.35 # Strategic Stress
+  drivers:
+    fsp:
+      debt_stress: 30
+      price_distress: 20
+      liquidity_stress: 25
+      maturity_pressure: 25 # NEW: Delta 5
+    ssi:
+      activist: 25
+      strategic_review: 40 # Increased weight
+      carve_out_signal: 35 # NEW: Delta 5
+
+buyer_readiness:
+  weights:
+    capacity: 0.60
+    motive: 0.40
+  drivers:
+    capacity:
+      firepower: 40
+      leverage_headroom: 30
+      cash_drag: 15
+      stock_currency: 15 # NEW: Delta 5
+    motive:
+      growth_stall: 40
+      margin_pressure: 30
+      strategic_appetite: 30
+
+exclusions:
+  exclude_z_score:
+    - Financial Services
+    - Real Estate
+    - Financials

@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T14:58:40.289622",
+    "payload_hash": "9044f31d80d8714813a8ed5658a0a43190e746cefe49e4c2e4801697f4229f81",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": "Software"
+  },
+  "payload": {
+    "sector": "Tech",
+    "sub_industry": "Software",
+    "macro": {
+      "date": "2026-01-18",
+      "hy_spread": 3.8,
+      "ig_spread": 1.1,
+      "lbo_feasibility_index": 78.0,
+      "expected_leverage_range": "5.0x - 6.0x",
+      "updated_at": "2026-01-18 12:38:44"
+    },
+    "aggregates": {
+      "avg_spi": 6.9,
+      "sector": "Tech"
+    },
+    "top_drivers": []
+  },
+  "brief": {
+    "executive_takeaways": [
+      "Credit conditions have stabilized, with an LBO Feasibility Index of 78.0 signaling a return to platform-scale acquisitions.",
+      "The 5.0x - 6.0x leverage range necessitates a shift from 'growth at any cost' to sustainable EBITDA margins to service debt.",
+      "A Tech sector SPI of 6.9 suggests moderate industry outperformance, making software targets with recurring revenue highly attractive for leveraged structures."
+    ],
+    "regime_guidance": "The current regime is characterized by tight credit spreads (HY at 3.8 and IG at 1.1), creating a 'Goldilocks' environment for mid-market software buyouts. With an LBO Feasibility Index of 78.0, the cost of capital is sufficiently low to support 5.5x leverage without crippling debt service coverage ratios. Firms should prioritize 'Rule of 40' companies that can justify the upper bound of the 5.0x-6.0x leverage range through high-visibility cash flows.",
+    "industry_dynamics": "The software sector is currently operating at a Strategic Performance Index (SPI) of 6.9, which sits above the broader market average, indicating robust underlying demand. However, the lack of specific company-level drivers in the current sample suggests a macro-driven market where valuation multiples are sensitive to the 3.8% HY spread. The primary lever for value creation in this regime is multiple expansion through platform bolt-ons rather than organic expansion alone.",
+    "trend_narrative": {
+      "headline": "Software Sector Entry Window Opens as Credit Spreads Compress to 3.8%",
+      "bullets": [
+        {
+          "bullet": "Financing availability has surged, evidenced by the LBO Feasibility Index reaching a robust 78.0.",
+          "metric_refs": [
+            "LBO Feasibility Index 78.0"
+          ]
+        },
+        {
+          "bullet": "Debt markets are supporting leverage levels of 5.0x to 6.0x, allowing for competitive bidding on high-quality SaaS assets.",
+          "metric_refs": [
+            "Leverage 5.0x - 6.0x"
+          ]
+        },
+        {
+          "bullet": "Investment Grade (IG) spreads at 1.1% provide a low-cost exit route via corporate M&A or public markets.",
+          "metric_refs": [
+            "IG Spread 1.1"
+          ]
+        }
+      ],
+      "where_to_look_next": [
+        {
+          "action": "Target Vertical SaaS",
+          "why": "Higher defensibility in the 6.9 SPI environment compared to horizontal players.",
+          "metric_refs": [
+            "Sector SPI 6.9"
+          ]
+        }
+      ],
+      "data_quality_note": {
+        "note": "Analysis is constrained by a lack of specific company-level drivers (0 drivers reported), relying heavily on macro regime proxies.",
+        "metric_refs": [
+          "Company Drivers: 0"
+        ]
+      }
+    },
+    "playbook": {
+      "ceo": "Focus on optimizing the free cash flow conversion rate to support the 5.0x leverage floor. Implement rigorous OpEx controls to maintain an SPI above the 6.9 sector average.",
+      "banker": "Pitch 'Take-Private' candidates where the current public valuation does not reflect the 78.0 feasibility index for private credit-backed buyouts."
+    },
+    "risks": [
+      "Sudden widening of HY spreads beyond 4.0% could break the 5.0x leverage model.",
+      "Sector-wide SPI reversion below 5.0 would signal a cooling of software demand.",
+      "Interest rate volatility undermining the stability suggested by the 1.1 IG spread."
+    ]
+  }
+}

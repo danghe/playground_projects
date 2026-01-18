@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intralinks Deal Radar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Executive Navbar (Shared) -->
+    <!-- Shared Executive Header -->
+    {% with active_page='radar' %}
+    {% include 'header_partial.html' %}
+    {% endwith %}
+
+
+    <!-- 1. MARKET STATE BAR -->
+    <div class="market-state-bar sticky-top">
+        <div class="d-flex align-items-center">
+            <span class="fw-bold fs-5 me-4 text-dark">INTRALINKS <span style="color:var(--il-blue)">CMD</span></span>
+
+            <div class="metric-card">
+                <span class="metric-label">Deal Window</span>
+                <span class="metric-value">{{ market_state['deal_window_score'] }}/100</span>
+            </div>
+
+
+            <div class="metric-card">
+                <span class="metric-label">Financing</span>
+                <span class="metric-value"
+                    style="color: {{ '#dc3545' if market_state['financing'] == 'Fragile' else '#198754' }}">
+                    {{ market_state['financing']|upper }}
+                </span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Volatility (VIX)</span>
+                <span class="metric-value">{{ market_state['vol_value'] }} <small class="text-muted fw-normal">({{
+                        market_state['volatility'] }})</small></span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Avg. Seller Pressure</span>
+                <span class="metric-value">{{ market_state['seller_pressure'] }}</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Pipeline</span>
+                <span class="metric-value text-primary">{{ market_state['pipeline']|upper }}</span>
+            </div>
+        </div>
+
+        <form class="d-flex ms-auto" method="GET" action="/deal-radar">
+            <select class="form-select form-select-sm bg-white text-dark border-secondary num-font" name="sector"
+                style="width: 140px;" onchange="this.form.submit()">
+                {% for s in sectors %}
+                <option value="{{ s }}" {% if s==sector %}selected{% endif %}>{{ s|upper }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <!-- LOADING PROGRESS BANNER -->
+    <div id="loadingBanner" class="{{ 'd-none' if targets|length > 0 else '' }}">
+        <div class="bg-white border-bottom border-secondary py-2 px-4">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-arrow-repeat spin text-primary me-2"></i>
+                <span class="text-muted small me-3" id="loadingMessage">Loading universe data in background...</span>
+                <div class="progress flex-grow-1 me-3" style="height: 6px; max-width: 300px;">
+                    <div id="loadingProgress" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                        role="progressbar" style="width: 0%"></div>
+                </div>
+                <span id="loadingStatus" class="text-info small num-font fw-bold" style="min-width: 45px;">0%</span>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spin {
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+    </style>
+
+    <!-- 2. LENS NAV MOVED BELOW -->
+
+    <div class="container-fluid px-0">
+        <div class="row g-0">
+
+            <!-- 3. UNIFIED RADAR TABLE -->
+            <div class="col-lg-9 border-end border-secondary border-opacity-25 pb-5">
+                <div class="p-3">
+                    <!-- Sector Intelligence Band -->
+
+                    <!-- Top Heatmap Removed -->
+
+                    <!-- New Vertical Stack for Intelligence -->
+                    <div class="mt-3">
+                        <!-- 1. Trend Narrative Box -->
+                        <div class="card bg-white border border-light mb-3">
+                            <div class="card-header border-secondary border-opacity-25 py-2">
+                                <h6 class="text-uppercase text-muted fw-bold mb-0 small">
+                                    <i class="bi bi-graph-up-arrow me-2"></i>Trend Narrative (Data-Driven)
+                                </h6>
+                            </div>
+                            <div class="card-body py-2">
+                                <ul class="mb-0 ps-3" id="trendNarrativeList">
+                                    {% for n in narrative %}
+                                    <li class="mb-1 text-dark"><small>{{ n|replace('**', '<b>')|replace('**',
+                                                '</b>')|safe }}</small>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 2. AI Strategic Brief Box -->
+                        <div class="card bg-white border border-light">
+                            <div
+                                class="card-header border-light py-2 d-flex justify-content-between align-items-center">
+                                <h6 class="text-uppercase text-info fw-bold mb-0 small">
+                                    <i class="bi bi-stars me-2"></i>Regime-Based Industry Brief (AI)
+                                </h6>
+                                <button class="btn btn-sm btn-primary" onclick="generateBrief()">
+                                    Generate Brief
+                                </button>
+                            </div>
+                            <div class="card-body" id="briefContainer" style="min-height: 100px;">
+                                <div class="text-muted small fst-italic text-center py-3">
+                                    Click 'Generate Brief' to analyze market regime and sub-industry drivers.
+                                </div>
+                            </div>
+                            <div class="card-footer border-secondary border-opacity-25 py-1 text-end">
+                                <span class="text-muted small me-2" id="briefMeta"></span>
+                                <button class="btn btn-xs btn-outline-secondary" onclick="generateBrief(true)"
+                                    style="font-size:0.7rem">Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Filter Control & Table (moved header inside div to align) -->
+            <div class="col-lg-12 px-3">
+                <!-- MOVED: Sub-Sector Heatmap Tiles -->
+                <div class="mb-3">
+                    <h6 class="text-muted small fw-bold mb-2">SUB-SECTOR INTELLIGENCE (Click to Filter)</h6>
+                    <div class="heatmap-container d-flex overflow-auto pb-2">
+                        <!-- Tiles -->
+                        {% if heatmap %}
+                        {% for h in heatmap %}
+                        <div class="heatmap-tile me-3 p-2 border border-light rounded bg-white"
+                            style="min-width: 160px; cursor: pointer;"
+                            onclick="applySubSectorFilter('{{ h['sub_industry'] }}', this)"
+                            onmouseover="this.classList.add('border-light')"
+                            onmouseout="this.classList.remove('border-light')">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold text-dark small">{{ h['sub_industry'] }}</span>
+                                <span
+                                    class="badge bg-{{ 'danger' if h['posture'] == 'Pressured' else ('success' if h['posture'] == 'Stable' else 'secondary') }} bg-opacity-25 text-{{ 'danger' if h['posture'] == 'Pressured' else ('success' if h['posture'] == 'Stable' else 'dark') }}"
+                                    style="font-size:0.6rem">{{ h['posture'] }}</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-end mb-2">
+                                <div>
+                                    <div class="text-muted small" style="font-size:0.6rem">MEDIAN SPI</div>
+                                    <div
+                                        class="fw-bold fs-5 {{ 'text-danger' if h['median_spi'] > 50 else 'text-dark' }}">
+                                        {{ h['median_spi'] }}</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="text-muted small" style="font-size:0.6rem">VALUATION</div>
+                                    <div class="fw-bold text-light small">{{ h['median_valuation'] }}</div>
+                                </div>
+                            </div>
+
+                            <div class="border-top border-secondary border-opacity-25 pt-1 mt-1">
+                                <div class="d-flex justify-content-between text-muted" style="font-size:0.6rem">
+                                    <span>Breadth: {{ h['spi_breadth'] }}%</span>
+                                    <span>Cats: {{ h['catalyst_intensity'] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="text-muted small fst-italic p-3">Analzying Sub-Sectors...</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- MOVED LENS NAV: SIMPLIFIED -->
+                <div
+                    class="lens-nav mb-3 rounded border border-light p-2 bg-white d-flex justify-content-between align-items-center">
+
+                    <!-- Strategy Room (Prominent) -->
+                    <button class="btn btn-sm btn-outline-warning fw-bold" data-bs-toggle="modal"
+                        data-bs-target="#playbookModal">
+                        <i class="bi bi-journal-text me-2"></i>Strategy Room
+                    </button>
+
+                    <!-- Audit Badge -->
+                    <div class="small text-muted fst-italic">
+                        <i class="bi bi-shield-check me-1"></i> Audit-Grade Data (SEC + Live Market)
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <!-- Search Box -->
+                    <div class="input-group" style="max-width: 280px;">
+                        <span class="input-group-text bg-white border-secondary">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control bg-white text-dark border-secondary" id="companySearch"
+                            placeholder="Search ticker or name..." oninput="handleSearch(this.value)">
+                        <button class="btn btn-outline-secondary d-none" type="button" id="searchClear"
+                            onclick="clearSearch()">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <h5 class="mb-0 text-dark">Targets</h5>
+                            <span
+                                class="badge bg-secondary bg-opacity-25 text-muted border border-secondary border-opacity-25"
+                                id="target-count">
+                                {{ targets|length }}
+                            </span>
+                        </div>
+
+                        <!-- Active Filter Display (Hidden by default) -->
+                        <div id="active-filter-container" class="d-none animate__animated animate__fadeIn">
+                            <span class="text-muted small me-2">Filtering by:</span>
+                            <span class="badge bg-primary text-light pe-1">
+                                <span id="active-filter-label">Software</span>
+                                <button type="button" class="btn-close btn-close-white ms-2"
+                                    style="width: 0.5rem; height: 0.5rem;" aria-label="Close"
+                                    onclick="clearSubSectorFilter()"></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="radar-table" id="radarTable">
+                        <thead>
+                            <th class="ps-3">Company / Trend</th>
+                            <th>
+                                Deal Scores
+                                <i class="bi bi-info-circle ms-1 text-muted" style="font-size: 0.75rem;"
+                                    data-bs-toggle="tooltip"
+                                    title="Proprietary 0-100 scores. BUY=Buyer Readiness, SELL=Seller Pressure, TGT=Target Susceptibility, NOW=Deal Imminence."></i>
+                            </th>
+                            <th>Top Drivers</th>
+                            <th>Likely Path</th>
+                            <th class="text-end">
+                                Firepower
+                                <i class="bi bi-info-circle ms-1 text-muted" style="font-size: 0.65rem;"
+                                    data-bs-toggle="tooltip"
+                                    title="Acquisition Capacity: Cash + (3x EBITDA leverage) - Debt. 0.0B = high debt or low EBITDA."></i>
+                            </th>
+                            <th class="text-end">
+                                Valuation
+                                <i class="bi bi-info-circle ms-1 text-muted" style="font-size: 0.65rem;"
+                                    data-bs-toggle="tooltip"
+                                    title="Enterprise Value / EBITDA multiple. Lower = cheaper. N/A if missing data."></i>
+                            </th>
+                            <th class="text-end pe-3">Recent Catalyst</th>
+                            <th class="text-center">Actions</th>
+                        </thead>
+                        <tbody>
+                            {% for t in targets %}
+                            <tr id="row-{{ t['ticker'] }}" data-sub-industry="{{ t['sub_industry'] }}"
+                                data-ticker="{{ t['ticker']|lower }}" data-name="{{ t['name']|lower }}"
+                                class="radar-row target-row">
+                                <td class="ps-3">
+                                    <div class="d-flex align-items-center justify-content-between"
+                                        style="width: 160px;">
+                                        <div>
+                                            <div class="fw-bold text-primary ticker-text">{{ t['ticker'] }}</div>
+                                            <div class="small text-muted name-text" style="font-size:0.65rem"
+                                                title="{{ t['name'] }}">{{
+                                                t['name']|truncate(18) }}</div>
+                                        </div>
+                                        <!-- Sparkline SVG -->
+                                        <svg width="60" height="20" class="sparkline-svg">
+                                            <polyline points="
+                                                    {% for p in t['sparkline'] %}
+                                                        {{ loop.index0 * (60 / (t['sparkline']|length)) }},
+                                                        {{ 20 - ((p - (t['sparkline']|min)) / ((t['sparkline']|max) - (t['sparkline']|min) + 0.1) * 18) }}
+                                                    {% endfor %}
+                                                " />
+                                        </svg>
+                                    </div>
+                                </td>
+
+                                <!-- SCORES GRID -->
+                                <td style="width: 280px;" class="cell-scores">
+                                    <div class="row g-0 text-center">
+                                        <div class="col-3 border-end border-secondary border-opacity-25 px-1">
+                                            <div class="small text-muted mb-1" style="font-size:0.6rem"
+                                                data-bs-toggle="tooltip"
+                                                title="Buyer Readiness: Firepower ÷ Market Cap. Higher = more acquisition capacity.">
+                                                BUY</div>
+                                            <span
+                                                class="fw-bold fs-6 {{ 'text-success' if t['scores']['buyer_readiness'] > 70 else 'text-muted' }}">{{
+                                                t['scores']['buyer_readiness'] }}</span>
+                                        </div>
+                                        <div class="col-3 border-end border-secondary border-opacity-25 px-1">
+                                            <div class="small text-muted mb-1" style="font-size:0.6rem"
+                                                data-bs-toggle="tooltip"
+                                                title="Seller Pressure Index: Price stress, earnings problems, leverage, governance issues.">
+                                                SELL</div>
+                                            <span
+                                                class="fw-bold fs-6 {{ 'text-danger' if t['scores']['spi'] > 50 else 'text-muted' }}">{{
+                                                t['scores']['spi'] }}</span>
+                                        </div>
+                                        <div class="col-3 border-end border-secondary border-opacity-25 px-1">
+                                            <div class="small text-muted mb-1" style="font-size:0.6rem"
+                                                data-bs-toggle="tooltip"
+                                                title="Target Susceptibility: Price dislocation + governance instability. 0 = stable.">
+                                                TGT</div>
+                                            <span
+                                                class="fw-bold fs-6 {{ 'text-warning' if t['scores']['susceptibility'] > 50 else 'text-muted' }}">{{
+                                                t['scores']['susceptibility'] }}</span>
+                                        </div>
+                                        <div class="col-3 px-1">
+                                            <div class="small text-muted mb-1" style="font-size:0.6rem"
+                                                data-bs-toggle="tooltip"
+                                                title="Imminence: Urgency based on recent SEC catalysts (8-K, 13D, Form 4 clusters).">
+                                                NOW</div>
+                                            <span
+                                                class="fw-bold fs-6 {{ 'text-dark' if t['scores']['imminence'] > 50 else 'text-muted' }}">{{
+                                                t['scores']['imminence'] }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- DRIVERS (Badges) -->
+                                <td style="width: 220px;">
+                                    <div class="d-flex flex-wrap gap-1">
+                                        {% for d in t['evidence']['top_drivers'] %}
+                                        <span
+                                            class="badge bg-{{ d['type'] }} bg-opacity-10 text-{{ d['type'] }} border border-{{ d['type'] }} border-opacity-25"
+                                            style="cursor:help; font-size:0.6rem; font-weight:normal;"
+                                            data-bs-toggle="tooltip" title="{{ d['desc'] }}">
+                                            {{ d['label'] }}
+                                        </span>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+
+                                <!-- PATH -->
+                                <td>
+                                    <div class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-25 fw-normal text-wrap"
+                                        style="width: 100px;">
+                                        {{ t['prediction']['path'] }}
+                                    </div>
+                                </td>
+
+                                <!-- METRICS (Existing) -->
+                                <td class="text-end num-font cell-buyer" style="width: 100px;">
+                                    <span
+                                        class="{{ 'text-success' if t['evidence']['firepower']|float > 1e9 else 'text-muted' }} fw-bold">
+                                        ${{ "%.1f"|format(t['evidence']['firepower']/1e9) }}B
+                                    </span>
+                                </td>
+                                <!-- Valuation -->
+                                <td class="text-end align-middle font-monospace small">
+                                    {% if t['ev_ebitda'] and t['ev_ebitda'] != 'N/A' %}
+                                    <span class="text-info">{{ t['ev_ebitda'] }}</span>
+                                    {% else %}
+                                    <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+
+                                <td class="text-end pe-3">
+                                    {% if t['catalysts'] %}
+                                    {% set cat = t['catalysts'][0] %}
+                                    {% if cat['link'] %}
+                                    <a href="{{ cat['link'] }}" target="_blank" class="text-decoration-none">
+                                        {% endif %}
+                                        <span
+                                            class="badge bg-{{ cat['badge'] }} bg-opacity-10 text-{{ cat['badge'] }} border border-{{ cat['badge'] }} border-opacity-25"
+                                            data-bs-toggle="tooltip" data-bs-html="true"
+                                            data-bs-custom-class="custom-tooltip"
+                                            title="<div class='text-start'><div class='fw-bold mb-1'>{{ cat['type'] }}</div><div class='text-muted small'>{{ cat['date'] }}</div><div class='tooltip-divider'></div><div>{{ cat['implication'] }}</div>{% if cat['link'] %}<div class='mt-2 text-primary small'><i class='bi bi-box-arrow-up-right me-1'></i>Click to open SEC Filing</div>{% endif %}</div>">
+                                            {{ cat['type'] }}
+                                        </span>
+                                        {% if cat['link'] %}
+                                    </a>
+                                    {% endif %}
+                                    <div class="small text-muted" style="font-size:0.6rem">{{ cat['date'] }}</div>
+                                    {% else %}
+                                    <span class="text-muted opacity-25">-</span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- ACTIONS COLUMN -->
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary border-0" type="button"
+                                            data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-light">
+                                            <li>
+                                                <h6 class="dropdown-header text-uppercase small fw-bold">Analysis</h6>
+                                            </li>
+                                            <li><a class="dropdown-item" href="#"
+                                                    onclick="openDossier('{{ t['ticker'] }}'); return false;">
+                                                    <i class="bi bi-stars text-primary me-2"></i>AI Dossier
+                                                </a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item small"
+                                                    href="https://finance.yahoo.com/quote/{{ t['ticker'] }}"
+                                                    target="_blank">
+                                                    <i class="bi bi-graph-up me-2"></i>Yahoo Finance
+                                                </a></li>
+                                            <li><a class="dropdown-item small"
+                                                    href="https://www.sec.gov/cgi-bin/browse-edgar?CIK={{ t['ticker'] }}&action=getcompany"
+                                                    target="_blank">
+                                                    <i class="bi bi-file-text me-2"></i>SEC Filings
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. CATALYST FEED PANEL -->
+            <div class="col-lg-3">
+                <div class="feed-container">
+                    <h6 class="text-uppercase text-muted fw-bold mb-3 small d-flex align-items-center">
+                        <i class="bi bi-broadcast me-2"></i> Live Catalyst Feed
+                    </h6>
+
+                    {% set all_catalysts = [] %}
+                    {% for t in targets %}
+                    {% for c in t['catalysts'] %}
+                    {% set _ = c.update({'ticker': t['ticker']}) %}
+                    {% set _ = all_catalysts.append(c) %}
+                    {% endfor %}
+                    {% endfor %}
+
+                    <!-- We ideally sort this list in Python, but let's assume raw order mostly works or sort via JS. Simple iteration for now -->
+
+                    {% for cat in all_catalysts[:20] %}
+                    <div class="feed-card fc-{{ cat['badge'] }}" style="cursor: pointer;"
+                        onclick="openEvidence('{{ cat['ticker'] }}', '{{ cat['type'] }}', '{{ cat.get('headline', '')|escape }}', '{{ cat['implication']|escape }}', '{{ cat.get('link', '') }}', '{{ cat.get('confidence', 'M') }}', '{{ cat['date'] }}')">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="badge bg-{{ cat['badge'] }} bg-opacity-10 text-{{ cat['badge'] }}"
+                                style="font-size:0.65rem">{{ cat['type'] }}</span>
+                            <span class="small text-muted num-font" style="font-size:0.65rem">{{ cat['date'] }}</span>
+                        </div>
+                        <div class="fw-bold mb-1">{{ cat['ticker'] }}</div>
+                        <div class="small text-muted fst-italic mb-2" style="font-size:0.75rem; line-height:1.2">{{
+                            cat['implication'] }}</div>
+                        {% if cat['link'] %}
+                        <a href="{{ cat['link'] }}" target="_blank" class="small text-decoration-none text-primary"><i
+                                class="bi bi-box-arrow-up-right"></i> SEC Source</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    {% if not all_catalysts %}
+                    <div class="text-center text-muted py-5 small">No signals active in this horizon.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modals moved to end of body -->
+
+    <!-- CONTEXT MENU (Keep here or move if needed, but absolute positioning usually handles it) -->
+    <div id="companyContextMenu" class="context-menu">
+        <div class="context-menu-header" id="ctxHeader">Company Actions</div>
+        <div class="context-menu-item" id="ctxOpenDossier">
+            <i class="bi bi-stars"></i> Open Company Dossier (AI)
+        </div>
+        <div class="context-menu-item" onclick="window.open(`https://finance.yahoo.com/quote/${ctxTicker}`, '_blank')">
+            <i class="bi bi-graph-up"></i> Yahoo Finance
+        </div>
+        <div class="context-menu-item"
+            onclick="window.open(`https://www.sec.gov/cgi-bin/browse-edgar?CIK=${ctxTicker}&action=getcompany`, '_blank')">
+            <i class="bi bi-file-text"></i> SEC Filings
+        </div>
+    </div>
+
+    <!-- Bootstrap & Chart.js -->
+    <!-- EVIDENCE DRAWER -->
+    <div class="offcanvas offcanvas-end bg-white text-dark border-start border-light" tabindex="-1" id="evidenceDrawer"
+        style="width: 400px;">
+        <div class="offcanvas-header border-bottom border-light">
+            <h5 class="offcanvas-title fw-bold"><i class="bi bi-search me-2"></i>Evidence Room</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="evidenceContent">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYBOOK MODAL -->
+    <div class="modal fade" id="playbookModal" tabindex="-1" style="z-index: 1060 !important;">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-white border border-light text-dark">
+                {% if playbook %}
+                <div class="modal-header border-bottom border-light">
+                    <h5 class="modal-title fw-bold">
+                        <i class="bi bi-journal-check me-2 text-warning"></i>Strategic Playbook: {{ playbook['regime']
+                        }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Context Bar -->
+                    <div class="alert alert-light border border-warning d-flex align-items-center mb-4">
+                        <i class="bi bi-lightbulb-fill text-warning fs-4 me-3"></i>
+                        <div>
+                            <div class="fw-bold text-dark">Theme: {{ playbook['theme'] }}</div>
+                            <div class="small text-muted">Thinking Driven by: VIX {{ playbook['stats']['vix']|round(1)
+                                }} | Financing {{ market_state['financing'] }} | SPI Breadth {{
+                                playbook['stats']['spi_breadth'] }}</div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- CEO Column -->
+                        <div class="col-md-4 border-end border-light">
+                            <h6 class="text-uppercase fw-bold text-dark mb-3 border-bottom border-light pb-2">
+                                <i class="bi bi-person-badge me-2"></i>CEO / Board
+                            </h6>
+                            <ul class="list-group list-group-flush">
+                                {% for action in playbook['actions']['CEO'] %}
+                                <li class="list-group-item bg-transparent text-dark border-0 ps-0">
+                                    <i class="bi bi-check2-circle text-success me-2"></i>{{ action }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Corp Dev Column -->
+                        <div class="col-md-4 border-end border-light">
+                            <h6 class="text-uppercase fw-bold text-dark mb-3 border-bottom border-light pb-2">
+                                <i class="bi bi-diagram-3 me-2"></i>Corp Dev
+                            </h6>
+                            <ul class="list-group list-group-flush">
+                                {% for action in playbook['actions']['CorpDev'] %}
+                                <li class="list-group-item bg-transparent text-dark border-0 ps-0">
+                                    <i class="bi bi-crosshair me-2 text-primary"></i>{{ action }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Banker Column -->
+                        <div class="col-md-4">
+                            <h6 class="text-uppercase fw-bold text-dark mb-3 border-bottom border-light pb-2">
+                                <i class="bi bi-briefcase me-2"></i>Banker
+                            </h6>
+                            <ul class="list-group list-group-flush">
+                                {% for action in playbook['actions']['Banker'] %}
+                                <li class="list-group-item bg-transparent text-dark border-0 ps-0">
+                                    <i class="bi bi-cash-coin me-2 text-warning"></i>{{ action }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="modal-header border-bottom border-light">
+                    <h5 class="modal-title fw-bold text-muted">Strategy Room</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-5 text-center">
+                    <div class="spinner-border text-primary mb-3" role="status"></div>
+                    <h5 class="text-muted fw-light">Analyzing Market Strategy...</h5>
+                    <p class="text-secondary small mb-0">The AI strategic playbook is being generated in the background.
+                        Please wait for the scan to complete.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- DOSSIER MODAL -->
+    <div class="modal fade" id="dossierModal" tabindex="-1" style="z-index: 1060 !important;">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-white border border-light text-dark">
+                <div class="modal-header border-bottom border-light">
+                    <div>
+                        <h5 class="modal-title fw-bold text-dark" id="dossierTitle">Company Dossier</h5>
+                        <div class="small text-muted" id="dossierSubtitle">AI-Generated Context</div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2"
+                            id="dossierRefreshBtn">Refresh</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                </div>
+                <div class="modal-body p-4" id="dossierBody">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Init Tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // ============================================
+        // BACKGROUND DATA LOADING (SSE)
+        // ============================================
+        const currentSector = '{{ sector }}';
+        let sseConnection = null;
+
+        function showLoadingBanner() {
+            const banner = document.getElementById('loadingBanner');
+            if (banner) banner.classList.remove('d-none');
+        }
+
+        function hideLoadingBanner() {
+            const banner = document.getElementById('loadingBanner');
+            if (banner) banner.classList.add('d-none');
+        }
+
+        function updateProgress(progress, status) {
+            const progressBar = document.getElementById('loadingProgress');
+            const statusText = document.getElementById('loadingStatus');
+            const messageText = document.getElementById('loadingMessage');
+
+            if (progressBar) progressBar.style.width = progress + '%';
+            if (statusText) statusText.textContent = progress + '%';
+            if (messageText && status) messageText.textContent = status;
+        }
+
+        function checkAndStartBackgroundLoad() {
+            // Only start SSE if we detect need for refresh (e.g., empty data)
+            // For now, always check via SSE to see if data is cached
+            console.log('[SSE] Starting background data check for sector:', currentSector);
+
+            if (sseConnection) {
+                sseConnection.close();
+            }
+
+            sseConnection = new EventSource('/api/deal-radar/stream?sector=' + encodeURIComponent(currentSector));
+
+            sseConnection.onmessage = function (event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    console.log('[SSE] Progress:', data);
+
+                    if (data.error) {
+                        console.error('[SSE] Error:', data.error);
+                        hideLoadingBanner();
+                        sseConnection.close();
+                        return;
+                    }
+
+                    // If data was cached, no need to show progress
+                    if (data.cached && data.complete) {
+                        console.log('[SSE] Data loaded from cache');
+                        hideLoadingBanner();
+                        sseConnection.close();
+                        return;
+                    }
+
+                    // Show progress banner for fresh data loading
+                    if (!data.cached && data.progress > 0) {
+                        showLoadingBanner();
+                        updateProgress(data.progress, data.status);
+                    }
+
+                    // Complete - reload page to show new data
+                    if (data.complete && !data.cached) {
+                        console.log('[SSE] Loading complete - refreshing page');
+                        hideLoadingBanner();
+                        sseConnection.close();
+                        // Reload page to show new data
+                        window.location.reload();
+                    }
+                } catch (e) {
+                    console.error('[SSE] Parse error:', e);
+                }
+            };
+
+            sseConnection.onerror = function (error) {
+                console.error('[SSE] Connection error:', error);
+                hideLoadingBanner();
+                if (sseConnection) sseConnection.close();
+            };
+        }
+
+        // Auto-start check on page load (only if data might be stale)
+        // The server will immediately return if cache is fresh
+        document.addEventListener('DOMContentLoaded', function () {
+            // Delay slightly to allow page render first
+            setTimeout(checkAndStartBackgroundLoad, 500);
+        });
+
+        // EVIDENCE DRAWER LOGIC
+        function openEvidence(ticker, type, headline, impl, link, conf, date) {
+            // 1. Highlight Row
+            document.querySelectorAll('.radar-row').forEach(r => r.classList.remove('row-highlight'));
+            const row = document.getElementById('row-' + ticker);
+            if (row) {
+                row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                row.classList.add('row-highlight');
+                // Flash effect
+                setTimeout(() => row.classList.remove('row-highlight'), 3000);
+            }
+
+            // 2. Populate Drawer
+            const html = `
+                <div class="badge bg-secondary mb-2">${date}</div>
+                <h4 class="fw-bold mb-3">${ticker}</h4>
+                
+                <div class="card bg-black border border-secondary mb-4">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                             <span class="badge bg-primary me-2">${type}</span>
+                             <span class="badge bg-light text-dark opacity-75">Conf: ${conf}</span>
+                        </div>
+                        <h5 class="card-title fw-bold text-active mb-3">${headline || type}</h5>
+                        <p class="card-text text-muted small border-start border-2 border-primary ps-3 fst-italic">
+                            "${impl}"
+                        </p>
+                    </div>
+                </div>
+
+                <h6 class="text-uppercase text-muted small fw-bold mb-2">Provenance</h6>
+                <div class="list-group list-group-flush border border-secondary rounded">
+                    <a href="${link}" target="_blank" class="list-group-item list-group-item-action bg-dark text-light border-secondary d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-file-earmark-text me-2"></i>Source Document</span>
+                        <i class="bi bi-box-arrow-up-right small"></i>
+                    </a>
+                </div>
+            `;
+            document.getElementById('evidenceContent').innerHTML = html;
+
+            // 3. Open Offcanvas
+            const bsOffcanvas = new bootstrap.Offcanvas(document.getElementById('evidenceDrawer'));
+            bsOffcanvas.show();
+        }
+
+        // Lens Logic (Removed/Simplified)
+
+        // --- CONTEXT MENU & DOSSIER LOGIC ---
+        let ctxTicker = '';
+        const contextMenu = document.getElementById('companyContextMenu');
+
+        document.addEventListener('contextmenu', function (e) {
+            const row = e.target.closest('.target-row');
+            if (row) {
+                e.preventDefault();
+                ctxTicker = row.getAttribute('data-ticker').toUpperCase();
+                const name = row.getAttribute('data-name');
+
+                document.getElementById('ctxHeader').innerText = `${ctxTicker} - ${name.substring(0, 15)}...`;
+
+                // Position
+                contextMenu.style.top = `${e.pageY}px`;
+                contextMenu.style.left = `${e.pageX}px`;
+                contextMenu.style.display = 'block';
+
+                // Setup Click Handler
+                document.getElementById('ctxOpenDossier').onclick = () => openDossier(ctxTicker);
+            } else {
+                contextMenu.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', () => contextMenu.style.display = 'none');
+
+        // Open Dossier
+        async function openDossier(ticker, forceRefresh = false) {
+            // Use getOrCreateInstance to check if it exists or use new
+            const modalEl = document.getElementById('dossierModal');
+            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+
+            const body = document.getElementById('dossierBody');
+            document.getElementById('dossierTitle').innerText = `${ticker} - Dossier`;
+            document.getElementById('dossierRefreshBtn').onclick = () => openDossier(ticker, true);
+
+            // Loading State
+            body.innerHTML = `
+                <div class="dossier-loader">
+                    <div class="spinner-border text-primary mb-3" role="status"></div>
+                    <div class="fw-bold text-dark pulse-text">Analyzing ${ticker}...</div>
+                    <div class="text-muted small mt-2">Retrieving SEC Filings, News, and CMD Signals</div>
+                </div>
+            `;
+
+            try {
+                const res = await fetch('/api/company-dossier', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ticker: ticker, force_refresh: forceRefresh })
+                });
+
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                renderDossier(data.dossier, data.metadata);
+            } catch (e) {
+                body.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i> Error: ${e.message}
+                    </div>
+                `;
+            }
+        }
+
+        function renderDossier(d, meta) {
+            const body = document.getElementById('dossierBody');
+
+            // Helper for sources
+            const renderRefs = (refs) => {
+                if (!refs) return '';
+                return refs.map(ref => `<sup class="text-primary fw-bold" style="cursor:help" title="${ref}">[${ref.substring(0, 6)}]</sup>`).join('');
+            };
+
+            const html = `
+                <div class="row mb-4">
+                    <div class="col-12">
+                         <div class="dossier-section-title">Why It Matters Now</div>
+                         <ul class="list-group list-group-flush">
+                            ${d.why_it_matters_now.map(i => `
+                                <li class="list-group-item px-0 py-2 border-light">
+                                    <i class="bi bi-arrow-right-short text-primary me-2"></i>
+                                    ${i.bullet} ${renderRefs(i.source_refs)}
+                                </li>
+                            `).join('')}
+                         </ul>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                     <div class="col-md-6 border-end border-light">
+                        <div class="dossier-section-title">M&A Posture</div>
+                        <div class="mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">${d.mna_posture.label}</span>
+                            <span class="small text-muted ms-2">Conf: ${d.mna_posture.confidence}</span>
+                        </div>
+                        <ul class="d-flex flex-column gap-2 p-0" style="list-style:none">
+                            ${d.mna_posture.why.map(w => `<li class="small text-secondary">• ${w.point} ${renderRefs(w.source_refs)}</li>`).join('')}
+                        </ul>
+                     </div>
+                     <div class="col-md-6 ps-4">
+                        <div class="dossier-section-title">Next 90 Days</div>
+                         <ul class="d-flex flex-column gap-2 p-0" style="list-style:none">
+                            ${d.signals_next_90d.map(s => `
+                                <li class="mb-1">
+                                    <span class="fw-bold text-dark small d-block">${s.trigger}</span>
+                                    <span class="small text-muted">${s.implication || ''} ${renderRefs(s.source_refs)}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                     </div>
+                </div>
+                
+                <div class="bg-light p-3 rounded mb-3">
+                     <div class="dossier-section-title mb-2">Deal Usage</div>
+                     <div class="row">
+                        <div class="col-6">
+                            <i class="bi bi-check-circle text-success me-1"></i> <span class="fw-bold small">Recommended</span>
+                            <ul class="small text-muted mt-1 ps-3 mb-0">
+                                ${d.deal_fit.recommended.map(r => `<li><span class="fw-bold">${r.type}</span>: ${r.why}</li>`).join('')}
+                            </ul>
+                        </div>
+                         <div class="col-6">
+                            <i class="bi bi-x-circle text-danger me-1"></i> <span class="fw-bold small">Avoid</span>
+                             <ul class="small text-muted mt-1 ps-3 mb-0">
+                                ${d.deal_fit.avoid.map(r => `<li><span class="fw-bold">${r.type}</span>: ${r.why}</li>`).join('')}
+                            </ul>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="text-end text-muted small fst-italic mt-3 border-top border-light pt-2">
+                    Generated by ${meta.model || 'Gemini 3.0 Flash'} • Cached: ${meta.created_at}
+                </div>
+            `;
+
+            body.innerHTML = html;
+        }
+
+    </script>
+
+    <!-- Filter & Diagnostics Logic -->
+    <script>
+        // --- SEARCH FUNCTIONALITY ---
+        let searchTimeout;
+        let currentSearchQuery = '';
+
+        const searchAliases = {
+            'google': 'goog',
+            'alphabet': 'goog',
+            'facebook': 'meta',
+            'fb': 'meta'
+        };
+
+        function handleSearch(query) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => filterBySearch(query), 250); // 250ms debounce
+        }
+
+        function filterBySearch(query) {
+            let rawQuery = query.toLowerCase().trim();
+            // Map aliases (e.g. 'google' -> 'goog')
+            currentSearchQuery = searchAliases[rawQuery] || rawQuery;
+
+            const rows = document.querySelectorAll('.target-row');
+
+            // Show/hide clear button
+            const clearBtn = document.getElementById('searchClear');
+            if (clearBtn) {
+                clearBtn.classList.toggle('d-none', !currentSearchQuery);
+            }
+
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                // Get data attributes
+                const ticker = row.getAttribute('data-ticker') || '';
+                const name = row.getAttribute('data-name') || '';
+                const subIndustry = row.getAttribute('data-sub-industry') || '';
+
+                // Check if row matches search
+                const matchesSearch = !currentSearchQuery ||
+                    ticker.includes(currentSearchQuery) ||
+                    name.includes(currentSearchQuery);
+
+                // Check if row matches active sub-sector filter
+                const activeFilter = document.getElementById('active-filter-label');
+                const activeSubSector = activeFilter && !document.getElementById('active-filter-container').classList.contains('d-none')
+                    ? activeFilter.innerText
+                    : null;
+                const matchesSubSector = !activeSubSector || subIndustry === activeSubSector;
+
+                // Show row if matches both
+                if (matchesSearch && matchesSubSector) {
+                    row.style.display = 'table-row';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('target-count').innerText = visibleCount;
+        }
+
+        function clearSearch() {
+            document.getElementById('companySearch').value = '';
+            currentSearchQuery = '';
+            filterBySearch('');
+        }
+
+        // --- SUB-SECTOR FILTERING ---
+        function applySubSectorFilter(subSector) {
+            const rows = document.querySelectorAll('.target-row');
+            let visibleCount = 0;
+
+            // Update Filter UI
+            const label = document.getElementById('active-filter-label');
+            if (label) label.innerText = subSector;
+
+            const filterContainer = document.getElementById('active-filter-container');
+            if (filterContainer) filterContainer.classList.remove('d-none');
+
+            rows.forEach(row => {
+                const rowSub = row.getAttribute('data-sub-industry');
+                const ticker = row.getAttribute('data-ticker') || '';
+                const name = row.getAttribute('data-name') || '';
+
+                // Also respect search query if active
+                const matchesSearch = !currentSearchQuery ||
+                    ticker.includes(currentSearchQuery) ||
+                    name.includes(currentSearchQuery);
+
+                if (rowSub === subSector && matchesSearch) {
+                    row.style.display = 'table-row';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const countBadge = document.getElementById('target-count');
+            if (countBadge) countBadge.innerText = visibleCount;
+        }
+
+        function clearSubSectorFilter() {
+            const rows = document.querySelectorAll('.target-row');
+
+            const filterContainer = document.getElementById('active-filter-container');
+            if (filterContainer) filterContainer.classList.add('d-none');
+
+            // Re-apply search filter only
+            filterBySearch(currentSearchQuery);
+        }
+    </script>
+
+    <!-- Diagnostics Panel (Toggleable) -->
+    <div class="container-fluid mt-5 pt-3 border-top border-secondary border-opacity-25 pb-4 px-3">
+        <button class="btn btn-sm btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#diagnosticsPanel">
+            🔧 Show Diagnostics
+        </button>
+        <div class="collapse" id="diagnosticsPanel">
+            <div class="card card-body bg-dark border-secondary">
+                <h6 class="text-uppercase text-muted small fw-bold">Data Universe Health</h6>
+                <div class="row">
+                    <!-- Universe Stats -->
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <span class="display-6 text-light">{{ diagnostics.total_count if diagnostics else
+                                targets|length }}</span>
+                            <p class="text-muted small mb-0">Total Universe</p>
+                        </div>
+
+                        {% if diagnostics and diagnostics.unknown_pct > 5 %}
+                        <div class="alert alert-warning py-1 px-2 small mb-2">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            Unknown: {{ "%.1f"|format(diagnostics.unknown_pct) }}%
+                        </div>
+                        {% elif diagnostics %}
+                        <div class="text-success small">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Classification: {{ "%.1f"|format(100 - diagnostics.unknown_pct) }}% covered
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Tech Sub-Sector Breakdown (New) -->
+                    <div class="col-md-5">
+                        <h6 class="text-muted small fw-bold mb-2">Tech Sub-Sector Health</h6>
+                        {% if diagnostics and diagnostics.tech_breakdown %}
+                        <table class="table table-sm table-dark table-bordered w-auto">
+                            <thead>
+                                <tr class="text-muted small">
+                                    <th>Sub-Sector</th>
+                                    <th>Count</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for sub, count in diagnostics.tech_breakdown.items() %}
+                                <tr>
+                                    <td>{{ sub }}</td>
+                                    <td>{{ count }}</td>
+                                    <td>
+                                        {% if count < 10 %} <span class="text-danger small"><i
+                                                class="bi bi-exclamation-circle"></i> Low</span>
+                                            {% else %}
+                                            <span class="text-success small"><i class="bi bi-check"></i> OK</span>
+                                            {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-muted small fst-italic">No Tech data available.</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Confidence & Global Stats -->
+                    <div class="col-md-4">
+                        <h6 class="text-muted small fw-bold mb-2">Classification Confidence</h6>
+                        {% if diagnostics and diagnostics.classification_confidence %}
+                        <div class="d-flex gap-2 mb-3">
+                            <span class="badge bg-success bg-opacity-25 text-success border border-success">
+                                High (SIC): {{ diagnostics.classification_confidence.get('High', 0) }}
+                            </span>
+                            <span class="badge bg-warning bg-opacity-25 text-warning border border-warning">
+                                Med (Kw): {{ diagnostics.classification_confidence.get('Medium', 0) }}
+                            </span>
+                            <span class="badge bg-danger bg-opacity-25 text-danger border border-danger">
+                                Low: {{ diagnostics.classification_confidence.get('Low', 0) }}
+                            </span>
+                        </div>
+                        {% endif %}
+
+                        <h6 class="text-muted small fw-bold mb-2">Global Sector Counts</h6>
+                        {% if diagnostics and diagnostics.sectors %}
+                        <table class="table table-sm table-dark table-bordered w-auto">
+                            <thead>
+                                <tr class="text-muted small">
+                                    <th>Sector</th>
+                                    <th>Count</th>
+                                    <th>Names</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for sec, data in diagnostics.sectors.items() %}
+                                {% if sec.lower() != 'unknown' %}
+                                <tr>
+                                    <td>{{ sec }}</td>
+                                    <td>{{ data.count }}</td>
+                                    <td>{{ "%.0f"|format(data.name_pct) }}%</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="alert alert-info mt-2 py-1 small">
+                    <strong>Config:</strong> <code>config/taxonomy.yaml</code> |
+                    <strong>Sector:</strong> {{ sector }}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal Removed -->
+
+    <script>
+        // Default View
+        document.querySelector('tbody').classList.add('mode-banker');
+
+        // Sub-Industry Filter
+        let activeSubIndustry = 'All';
+
+        function applySubSectorFilter(sub) {
+            activeSubIndustry = sub;
+            // ... rest of logic
+            document.getElementById('active-filter-label').innerText = sub;
+            document.getElementById('active-filter-container').classList.remove('d-none');
+
+            filterTable(sub);
+        }
+
+        function clearSubSectorFilter() {
+            activeSubIndustry = 'All';
+            document.getElementById('active-filter-container').classList.add('d-none');
+            filterTable('All');
+        }
+
+        function filterTable(sub, el) {
+            if (sub === 'All') {
+                document.querySelectorAll('.heatmap-tile').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('#radarTable tbody tr').forEach(r => r.style.display = '');
+                updateCount();
+                return;
+            }
+            // ... existing logic adaptation ...
+            // UI State
+            if (el) {
+                document.querySelectorAll('.heatmap-tile').forEach(t => t.classList.remove('active'));
+                el.classList.add('active');
+            }
+
+            const rows = document.querySelectorAll('#radarTable tbody tr');
+            let visibleify = 0;
+            rows.forEach(r => {
+                const rowSub = r.getAttribute('data-sub-industry');
+                if (!rowSub || rowSub === sub) { // Loose match for now? No, strict.
+                    r.style.display = '';
+                    visibleify++;
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+
+            // Update count
+            document.getElementById('target-count').innerText = visibleify;
+        }
+
+        function updateCount() {
+            const visible = Array.from(document.querySelectorAll('#radarTable tbody tr')).filter(r => r.style.display !==
+                'none').length;
+            document.getElementById('target-count').innerText = visible;
+        }
+
+        // AI Brief Logic
+
+        async function generateBrief(force = false) {
+            console.log("[Client] Generating Brief. SubIndustry:", activeSubIndustry, "Force:", force);
+            const container = document.getElementById('briefContainer');
+            const meta = document.getElementById('briefMeta');
+
+            // Smooth scroll
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            container.innerHTML = `
+        <div class="text-center py-4">
+            <div class="spinner-border text-primary mb-3" role="status"></div>
+            <p class="text-muted">Analyzing Market Regime & ${activeSubIndustry} Drivers...</p>
+        </div>
+    `;
+
+            try {
+                const response = await fetch('/api/industry-brief', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sector: "{{ sector }}", // Jinja injected
+                        sub_industry: activeSubIndustry,
+                        force_refresh: force
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    container.innerHTML = `<div class="alert alert-danger">AI Service Error: ${result.error}</div>`;
+                    return;
+                }
+
+                const data = result.brief;
+                const isCached = result.cached;
+
+                // Update Trend Narrative (if available in AI response)
+                if (data.trend_narrative) {
+                    const narrativeList = document.getElementById('trendNarrativeList');
+                    if (narrativeList) {
+                        let navHtml = '';
+                        // 1. Headline
+                        if (data.trend_narrative.headline) {
+                            navHtml += `<li class="mb-2 text-info fw-bold" style="list-style:none; margin-left:-1rem;">
+                                <i class="bi bi-lightning-charge-fill me-1"></i>${data.trend_narrative.headline}
+                            </li>`;
+                        }
+                        // 2. Bullets
+                        if (data.trend_narrative.bullets) {
+                            data.trend_narrative.bullets.forEach(b => {
+                                navHtml += `<li class="mb-1 text-dark small">${b.bullet}</li>`;
+                            });
+                        }
+                        // 3. Next Steps
+                        if (data.trend_narrative.where_to_look_next) {
+                            const actions = data.trend_narrative.where_to_look_next.map(n => n.action).join('; ');
+                            navHtml += `<li class="mt-2 text-muted fst-italic small" style="font-size:0.75rem; list-style:none; margin-left:-1rem;">
+                                <i class="bi bi-search me-1"></i>Next: ${actions}
+                             </li>`;
+                        }
+                        narrativeList.innerHTML = navHtml;
+
+                        // Highlight the box to show it updated
+                        const narrCard = narrativeList.closest('.card');
+                        if (narrCard) {
+                            narrCard.classList.add('border-info');
+                            setTimeout(() => narrCard.classList.remove('border-info'), 2000);
+                        }
+                    }
+                }
+
+                // Render Brief Body
+                let html = `<div class="row">
+            <div class="col-md-6 border-end border-secondary border-opacity-25">`;
+
+                // Col 1: Takeaways & Guidance
+                if (data.executive_takeaways) {
+                    html += `<h6 class="text-uppercase text-warning fw-bold mb-2 small">Executive Takeaways</h6>
+                      <ul class="mb-3 text-dark small">
+                        ${data.executive_takeaways.map(t => `<li>${t}</li>`).join('')}
+                     </ul>`;
+                }
+
+                if (data.regime_guidance) {
+                    html += `<div class="bg-secondary bg-opacity-10 p-2 rounded mb-3">
+                        <h6 class="fw-bold mb-1 small text-dark">Regime Guidance</h6>
+                        <p class="mb-0 small text-secondary">${data.regime_guidance}</p>
+                     </div>`;
+                }
+
+                html += `</div><div class="col-md-6 ps-md-3">`;
+
+                // Col 2: Dynamics & Playbook
+                if (data.industry_dynamics) {
+                    html += `<h6 class="text-uppercase text-info fw-bold mb-2 small">Industry Dynamics</h6>
+                     <p class="small text-muted mb-3">${data.industry_dynamics}</p>`;
+                }
+
+                if (data.playbook) {
+                    html += `<h6 class="text-uppercase text-muted fw-bold mb-2 small">Strategic Playbook</h6>
+                      <div class="d-flex gap-2">
+                            <div class="border border-secondary border-opacity-25 p-2 rounded flex-fill">
+                                <span class="badge bg-secondary mb-1" style="font-size:0.6rem">CEO</span>
+                                <p class="small mb-0 text-secondary" style="font-size:0.75rem">${data.playbook.ceo}</p>
+                            </div>
+                            <div class="border border-secondary border-opacity-25 p-2 rounded flex-fill">
+                                <span class="badge bg-primary mb-1" style="font-size:0.6rem">Banker</span>
+                                <p class="small mb-0 text-secondary" style="font-size:0.75rem">${data.playbook.banker}</p>
+                            </div>
+                     </div>`;
+                }
+
+                html += `</div></div>`;
+
+                container.innerHTML = html;
+
+                // Meta
+                const timestamp = new Date(result.metadata.created_at).toLocaleTimeString();
+                meta.innerHTML = isCached
+                    ? `<i class="bi bi-hdd-network me-1"></i>Loaded from cache (${timestamp})`
+                    : `<i class="bi bi-lightning-charge me-1"></i>Generated live (${timestamp})`;
+
+            } catch (e) {
+                container.innerHTML = `<div class="alert alert-danger">Network Error: ${e.message}</div>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T03:03:58.844936",
+    "hash": "65304cfeacc3e62630c08337c89fc52c4f494c0c4f032e319b752a31013502bc",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "name": "0001402436",
+    "ticker": "SSNC",
+    "retrieved_items": [
+      {
+        "id": "sec_3a4e5832",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Entry into Material Definitive Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001402436/000119312525238996/ssnc-20251014.htm",
+        "published_at": "2025-10-14",
+        "snippet": "Commercial Trigger / Partnership",
+        "tags": [
+          "\ud83e\udd1d Material Agreement",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      }
+    ]
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "SSNC",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "The entry into a Material Definitive Agreement in Q4 2025 signals a significant strategic pivot or a major commercial partnership that could redefine their service capabilities.",
+        "source_refs": [
+          "sec_3a4e5832"
+        ]
+      },
+      {
+        "bullet": "As a dominant player in alternative investment administration, SS&C's operational performance serves as a leading indicator for the broader private equity and hedge fund sectors.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "bullet": "Focus is intensifying on the integration of Blue Prism (RPA) and GenAI into their 'SS&C Blue' platform to drive margin expansion in labor-intensive fund administration.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Buyer / Consolidator",
+      "confidence": "High",
+      "why": [
+        {
+          "point": "Historical strategy is built on serial acquisitions; SS&C has acquired and integrated over 50 companies since its IPO, focusing on vertical-specific software.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "point": "Strong free cash flow generation is typically directed toward de-leveraging to create capacity for the next multi-billion dollar platform acquisition.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Commercial Partnership Implementation",
+        "implication": "Clarification on the 'Commercial Trigger' referenced in the October 2025 filing may reveal a new revenue-sharing model or a major new enterprise client win.",
+        "source_refs": [
+          "sec_3a4e5832"
+        ]
+      },
+      {
+        "trigger": "De-leveraging Progress",
+        "implication": "Success in reducing debt-to-EBITDA ratios will signal readiness for another significant 'elephant' acquisition in the fintech or healthcare space.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "Bolt-on AI/RPA Technology",
+          "why": "To further automate the back-office functions of their fund administration business and defend against low-cost digital-native competitors.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "type": "Take-Private (LBO)",
+          "why": "SS&C's consistent cash flows and high recurring revenue make it a perennial target for Tier-1 PE firms if the public market valuation dips below historical multiples.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Pure Hardware or Consumer Plays",
+          "why": "The firm\u2019s expertise is strictly in mission-critical B2B financial and healthcare software; moving away from this core increases integration risk.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "What are the specific terms of the October 2025 Material Definitive Agreement?",
+        "why_unclear": "The initial filing snippet mentions a commercial trigger but lacks granular details on financial impact or duration.",
+        "source_refs": [
+          "sec_3a4e5832"
+        ]
+      },
+      {
+        "q": "Is the company preparing for a major divestiture of non-core assets?",
+        "why_unclear": "While a consolidator, the company occasionally prunes legacy assets to streamline the portfolio for higher growth.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ]
+  }
+}

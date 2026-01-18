@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T16:05:34.956775",
+    "payload_hash": "f858b6c72e80f358b1720739b2ad9360d276b0da55980c0d028b7aabc7758eca",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {
+      "hy_spread": 3.8,
+      "ig_spread": 1.1,
+      "lbo_idx": 78,
+      "lev_range": "5.0x - 6.0x"
+    },
+    "sellers_hash": "95c8eea4",
+    "buyers_hash": "222ff31d"
+  },
+  "brief": {
+    "environment_status": "High-Conviction Financing Window for Strategic Consolidation",
+    "executive_summary": "The Tech sector is currently defined by a sharp bifurcation between 'Firepower Giants' with low leverage (SONY, WIT, ACN) and over-leveraged 'Stalled Growth' entities (DDOG, DAY, CWAN). With an LBO Feasibility Index of 78/100 and tight IG spreads at 1.1%, the environment is ripe for large-scale take-privates and strategic rescues of high-leverage software firms. Current supply is driven by strategic reviews and debt pressure, while demand is focused on AI infrastructure and cybersecurity to reignite growth.",
+    "key_themes": [
+      {
+        "theme": "De-leveraging Take-Privates",
+        "desc": "High leverage ratios across mid-to-large cap software (DDOG at 205.5x, DAY at 11.0x) combined with high LBO feasibility (78/100) suggest a wave of private equity take-privates to restructure balance sheets.",
+        "tickers": [
+          "DDOG",
+          "DAY",
+          "CWAN",
+          "QTWO"
+        ],
+        "deal_type": "LBO"
+      },
+      {
+        "theme": "Platform Scale-Out",
+        "desc": "Cash-rich legacy giants needing to pivot to AI and cloud infrastructure are targeting 'Strategic Review' candidates to bolster ecosystem depth.",
+        "tickers": [
+          "SONY",
+          "ACN",
+          "WIT",
+          "XYZ"
+        ],
+        "deal_type": "Strategic M&A"
+      },
+      {
+        "theme": "Fintech Consolidation",
+        "desc": "Payments and financial software players with high firepower (PAGS) are looking to consolidate over-leveraged peers (FOUR, WEX) facing growth stalls.",
+        "tickers": [
+          "PAGS",
+          "FOUR",
+          "WEX"
+        ],
+        "deal_type": "Strategic M&A"
+      }
+    ],
+    "top_opportunities": [
+      "SONY -> XYZ: Sony utilizes its $5.8T firepower to acquire a $40.2B leader currently in strategic review to solve growth stall (Strategic M&A, Est. $45B+)",
+      "WIT -> DOCN: Wipro deploys its $881B firepower to absorb DigitalOcean's high-leverage cloud platform for developer-centric AI growth (Strategic M&A, Est. $5.5B)",
+      "ACN -> BOX: Accenture targets Box's $3.7B enterprise footprint to integrate AI-driven content management into its consulting stack (Strategic M&A, Est. $4.2B)",
+      "PAGS -> FOUR: PagSeguro consolidates Shift4 to gain market share in the payment processing space amid FOUR's high-leverage pressure (Strategic M&A, Est. $6.5B)",
+      "LPL -> KLAR: LPL Financial targets Klaviyo to enhance its AI infrastructure and data-driven marketing capabilities (Strategic M&A, Est. $12.5B)"
+    ],
+    "risks": [
+      "Leverage Mismatch: Targets like DDOG (205.5x) exceed the sector's current 6.0x leverage capacity, complicating debt roll-overs in a take-private scenario.",
+      "Valuation Floors: Despite 'Valuation Distress' tags for LPL and SONY (as sellers), management may resist premiums that do not reflect 5-year growth averages."
+    ],
+    "action_items": [
+      "Initiate outreach to SONY regarding the acquisition of XYZ to stabilize their portfolio growth profile.",
+      "Structure financing packages for LBO sponsors targeting DAY and CWAN, leveraging the 3.8% HY spread environment.",
+      "Brief the ACN and INFY corporate development teams on the current valuation distress in high-quality SaaS wholecos like BOX and QTWO."
+    ]
+  }
+}

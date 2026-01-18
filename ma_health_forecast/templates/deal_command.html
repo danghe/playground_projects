@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>INTRALINKS Deal Command v2.1</title>
+    <!-- Tailwind CSS (CDN for prototype) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            },
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body
+    class="min-h-screen md:h-screen flex flex-col overflow-y-auto md:overflow-hidden text-sm bg-gray-50 dark:bg-slate-900"
+    x-data="commandCenter()">
+    <!-- Shared Header -->
+    <div class="flex-none z-50 relative bg-white dark:bg-slate-900 border-b border-secondary/20">
+        {% with active_page='command' %}
+        {% include 'header_partial.html' %}
+        {% endwith %}
+    </div>
+
+    <!-- Top Bar: Diagnostics & Controls -->
+    <div class="glass-header px-4 py-2 flex flex-col md:flex-row justify-between items-center z-20 gap-2 md:gap-0">
+        <div class="flex items-center gap-4">
+            <h1 class="uppercase font-bold text-base tracking-wider text-theme-base m-0">Deal Command <span
+                    class="text-xs text-muted font-normal">v2.1</span></h1>
+
+            <div class="h-6 w-px bg-secondary/20"></div>
+
+            <!-- Global Search -->
+            <div class="relative">
+                <i class="bi bi-search absolute left-2 top-1.5 text-muted text-xs"></i>
+                <input type="text" x-model="searchQuery" placeholder="Search Ticker, Company..."
+                    class="pl-7 pr-3 py-1 text-xs rounded border border-secondary/30 bg-transparent focus:outline-none focus:border-blue-500 w-64 text-theme-base">
+            </div>
+
+            <!-- Sector Selector -->
+            <select x-model="sector" @change="refreshData()"
+                class="form-select form-select-sm border-secondary rounded text-xs text-theme-base focus:ring-1 focus:ring-blue-500 py-1"
+                style="width: auto;">
+                <option value="Tech">Technology</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Financials">Financials</option>
+                <option value="Consumer">Consumer</option>
+                <option value="Energy">Energy</option>
+                <option value="Industrials">Industrials</option>
+                <option value="Real Estate">Real Estate</option>
+            </select>
+
+            <!-- AI Brief Button -->
+            <button class="btn btn-sm btn-outline-primary text-xs flex items-center gap-1 ml-2" :disabled="loadingBrief"
+                @click="generateBrief()">
+                <i class="bi" :class="loadingBrief ? 'bi-arrow-repeat animate-spin' : 'bi-stars'"></i>
+                <span x-text="loadingBrief ? 'Generating...' : 'AI Brief'"></span>
+            </button>
+        </div>
+
+        <!-- Right: Diagnostics Strip -->
+        <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-2 text-muted" title="Data Coverage">
+                <i class="bi bi-database-check"></i>
+                <span>Coverage: <span class="font-mono text-theme-base">98%</span></span>
+            </div>
+            <div class="flex items-center gap-2 text-muted" title="Last Scan">
+                <i class="bi bi-clock-history"></i>
+                <span
+                    x-text="'Updated: ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})"></span>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary text-xs px-2 py-1"
+                @click="toggleDiagnostics()">Diagnostics</button>
+            <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse" title="System Live"></div>
+        </div>
+    </div>
+
+    <!-- Diagnostics Modal -->
+    <div x-show="showDiagnostics" class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+        <div class="bg-white dark:bg-slate-800 border border-light shadow-2xl rounded-lg p-4 w-96 pointer-events-auto"
+            @click.away="showDiagnostics = false" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+
+            <div class="flex justify-between items-center mb-4 border-b border-light pb-2">
+                <h3 class="font-bold text-theme-base"><i class="bi bi-activity"></i> System Diagnostics</h3>
+                <button @click="showDiagnostics = false" class="text-muted hover:text-red-500"><i
+                        class="bi bi-x"></i></button>
+            </div>
+
+            <template x-if="diagStats">
+                <div class="space-y-3 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-muted">Total Companies</span>
+                        <span class="font-mono font-bold" x-text="diagStats.total_companies"></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-muted">Missing Financials</span>
+                        <span class="text-orange-500 font-bold" x-text="diagStats.unknown_pct + '%'"></span>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/20 p-2 rounded border border-red-100 dark:border-red-900">
+                        <div class="font-bold text-red-600 mb-1">Anomalies Detected</div>
+                        <div class="flex justify-between">
+                            <span>Firepower Outliers (>2x Cap)</span>
+                            <span class="font-mono">12</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Leverage Spikes (>10x)</span>
+                            <span class="font-mono">8</span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template x-if="!diagStats">
+                <div class="text-center py-4 text-muted"><span class="spinner-border spinner-border-sm"></span>
+                    Loading...</div>
+            </template>
+        </div>
+    </div>
+    </div>
+
+    <!-- AI Brief Modal -->
+    <div x-show="briefRaw" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100">
+        <div class="bg-white dark:bg-slate-800 border border-light shadow-2xl rounded-lg w-[600px] max-h-[80vh] flex flex-col pointer-events-auto"
+            @click.away="briefRaw = ''">
+
+            <div class="p-4 border-b border-light flex justify-between items-center">
+                <h3 class="font-bold text-theme-base flex items-center gap-2">
+                    <i class="bi bi-stars text-purple-600"></i> AI Sector Brief: <span x-text="sector"></span>
+                </h3>
+                <button @click="briefRaw = ''" class="text-muted hover:text-red-500"><i class="bi bi-x-lg"></i></button>
+            </div>
+
+            <div class="p-6 overflow-y-auto prose dark:prose-invert text-xs leading-relaxed" x-html="briefRaw">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Grid -->
+    <main
+        class="flex-none md:flex-1 grid grid-cols-1 md:grid-cols-12 gap-1 p-2 min-h-0 bg-slate-50/50 dark:bg-slate-900/50 relative md:overflow-hidden">
+
+        <!-- LEFT: Supply (Sellers) -->
+        <section
+            class="col-span-1 md:col-span-7 flex flex-col glass-panel rounded-lg shadow-sm h-[600px] md:h-full min-h-0">
+            <div class="p-3 border-b border-light flex justify-between items-center bg-white/50 dark:bg-slate-800/50">
+                <div class="flex items-center gap-2">
+                    <h2 class="font-bold text-red-500 text-sm flex items-center gap-2">
+                        <i class="bi bi-box-arrow-up"></i> SUPPLY: Top Sellers
+                    </h2>
+                    <span class="text-xs text-light bg-secondary/10 px-2 py-0.5 rounded-full"
+                        x-text="filteredSellers.length"></span>
+                </div>
+                <!-- Filters -->
+                <div class="flex gap-2 text-xs">
+                    <button @click="filterSellers='All'"
+                        :class="filterSellers==='All' ? 'text-theme-base font-bold' : 'text-muted'">All</button>
+
+                    <div class="glass-tooltip">
+                        <button @click="filterSellers='Forced'"
+                            :class="filterSellers==='Forced' ? 'text-red-500 font-bold' : 'text-muted'">Forced</button>
+                        <div class="glass-tooltip-content fixed-tooltip">
+                            <strong>Forced Seller Logic:</strong><br>
+                            Includes: 'Bankruptcy', 'Distress', 'LBO Stalled', 'Restructuring'.<br>
+                            <em>Identified via Driver keywords.</em>
+                        </div>
+                    </div>
+
+                    <button @click="filterSellers='Strategic'"
+                        :class="filterSellers==='Strategic' ? 'text-blue-500 font-bold' : 'text-muted'">Strategic</button>
+                </div>
+
+            </div>
+            </div>
+
+
+            <!-- SELLER PLAYBOOK PANEL -->
+            <template x-if="playbook && playbook.top_archetypes">
+                <div class="bg-slate-50 border-b border-light p-2 flex gap-4 overflow-x-auto">
+                    <div class="flex-shrink-0 flex items-center gap-2 pl-2 border-r border-light">
+                        <i class="bi bi-journal-bookmark-fill text-blue-600"></i>
+                        <div class="leading-tight">
+                            <div class="text-[10px] uppercase font-bold text-muted">Playbook</div>
+                            <div class="text-xs font-bold" x-text="sector"></div>
+                        </div>
+                    </div>
+
+                    <template x-for="arch in playbook.top_archetypes" :key="arch.name">
+                        <div class="flex-shrink-0 bg-white border border-light rounded p-1.5 min-w-[140px]">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-bold text-theme-base truncate" x-text="arch.name"></span>
+                                <span class="text-[10px] bg-secondary/10 px-1.5 rounded-full text-muted"
+                                    x-text="arch.count"></span>
+                            </div>
+                            <div class="text-[9px] text-muted leading-tight truncate" x-text="arch.desc"></div>
+                        </div>
+                    </template>
+
+                    <div class="flex-shrink-0 flex items-center gap-2 pl-2 border-l border-light">
+                        <div class="leading-tight">
+                            <div class="text-[10px] uppercase font-bold text-green-600">Action</div>
+                            <div class="text-[10px] text-theme-base w-48 truncate"
+                                x-text="playbook.actions && playbook.actions.length ? playbook.actions[0] : ''">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <div class="flex-1 overflow-y-auto scrollbar-hide">
+                <table class="w-full text-left text-xs">
+                    <thead
+                        class="sticky top-0 bg-white dark:bg-slate-900 border-b border-light text-muted font-medium z-10 shadow-sm">
+                        <tr>
+                            <th class="p-2 w-28 sortable-header" @click="sort('ticker')">Ticker / Co. <i class="bi"
+                                    :class="getSortIcon('ticker')"></i></th>
+                            <th class="p-2 w-16 text-center sortable-header text-red-600 glass-tooltip"
+                                @click="sort('spi')">
+                                SPI
+                                <div class="glass-tooltip-content">
+                                    <strong>Seller Pressure Index (0-100)</strong><br>
+                                    Urgency to transact.<br>
+                                    Driven by: Leverage, Coverage, Dislocation.
+                                </div>
+                                <i class="bi" :class="getSortIcon('spi')"></i>
+                            </th>
+                            <th class="p-2 sortable-header" @click="sort('seller_type')">Context / Drivers <i class="bi"
+                                    :class="getSortIcon('seller_type')"></i></th>
+                            <th class="p-2 w-20 text-right sortable-header">Asset / Cat.</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-light">
+                        <template x-for="s in sortedSellers" :key="s.ticker">
+                            <tr class="audit-row cursor-pointer transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                                :class="selectedRow?.ticker === s.ticker ? 'bg-blue-50 dark:bg-blue-900/20' : ''"
+                                @click="openDrawer(s)">
+                                <td class="p-2">
+                                    <div class="font-mono text-theme-accent font-bold text-sm" x-text="s.ticker">
+                                    </div>
+                                    <div class="text-[10px] text-muted truncate w-20" x-text="s.name"></div>
+                                    <span class="text-[9px] bg-secondary/10 px-1 rounded text-muted"
+                                        x-text="s.sub_sector"></span>
+                                </td>
+                                <td class="p-2 text-center">
+                                    <div class="font-bold text-sm" :class="getSPIColor(s.spi)" x-text="s.spi">
+                                    </div>
+                                    <!-- Mini SPI Decomp Visual -->
+                                    <div class="flex gap-px h-1 w-full mt-1 bg-secondary/10 rounded overflow-hidden">
+                                        <div class="bg-red-500 h-full" :style="'width: ' + (s.spi * 0.4) + '%'">
+                                        </div>
+                                        <div class="bg-blue-500 h-full" :style="'width: ' + (s.spi * 0.3) + '%'">
+                                        </div>
+                                        <div class="bg-green-500 h-full" :style="'width: ' + (s.spi * 0.3) + '%'">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="flex items-center gap-1 mb-1">
+                                        <span x-text="s.seller_emoji"></span>
+                                        <span class="font-bold text-theme-base text-xs" x-text="s.seller_type"></span>
+                                        <!-- Confidence Badge -->
+                                        <span class="text-[9px] px-1 py-0.5 rounded border ml-1"
+                                            :class="s.confidence === 'High' ? 'bg-red-50 border-red-200 text-red-700' : 'bg-gray-50 border-gray-200 text-muted'"
+                                            x-text="s.confidence"></span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-1">
+                                        <template x-for="d in s.drivers" :key="d">
+                                            <span
+                                                class="px-1.5 py-0.5 rounded bg-secondary/10 text-theme-base border border-secondary/20 text-[10px] font-mono"
+                                                x-text="d"></span>
+                                        </template>
+                                    </div>
+                                </td>
+                                <td class="p-2 text-right">
+                                    <div class="mb-1">
+                                        <span
+                                            class="badge-il bg-blue-50 text-blue-700 border border-blue-100 text-[9px]"
+                                            x-text="s.likely_asset_type"></span>
+                                    </div>
+                                    <div x-show="s.catalyst_badge">
+                                        <span class="text-[9px] text-orange-600 font-medium"
+                                            x-text="s.catalyst_badge"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CENTER: Demand (Buyers) -->
+        <section
+            class="col-span-1 md:col-span-5 flex flex-col glass-panel rounded-lg shadow-sm h-[600px] md:h-full min-h-0">
+            <div class="p-3 border-b border-light flex justify-between items-center bg-white/50 dark:bg-slate-800/50">
+                <div class="flex items-center gap-2">
+                    <h2 class="font-bold text-green-500 text-sm flex items-center gap-2">
+                        <i class="bi bi-box-arrow-in-down"></i> DEMAND: Top Acquirers
+                    </h2>
+                </div>
+                <div class="flex bg-slate-200 dark:bg-slate-900 rounded p-0.5 text-xs">
+                    <button class="px-3 py-0.5 rounded transition-all"
+                        :class="demandView==='Strategics' ? 'bg-white dark:bg-slate-700 shadow text-theme-base' : 'text-muted'"
+                        @click="demandView='Strategics'">Strategics</button>
+                    <button class="px-3 py-0.5 rounded transition-all"
+                        :class="demandView==='Sponsors' ? 'bg-white dark:bg-slate-700 shadow text-theme-base' : 'text-muted'"
+                        @click="demandView='Sponsors'">Sponsors</button>
+                </div>
+            </div>
+
+            <!-- Strategics View -->
+            <div x-show="demandView==='Strategics'" class="flex-1 overflow-y-auto scrollbar-hide">
+                <table class="w-full text-left text-xs">
+                    <thead
+                        class="sticky top-0 bg-white dark:bg-slate-900 border-b border-light text-muted font-medium z-10 shadow-sm">
+                        <tr>
+                            <th class="p-2 w-16">Ticker</th>
+                            <th class="p-2 w-12 text-center text-green-600 font-bold glass-tooltip">
+                                BR
+                                <div class="glass-tooltip-content">
+                                    <strong>Buyer Readiness (0-100)</strong><br>
+                                    Calculated from Balance Sheet Capacity + Strategic Intent signals.
+                                </div>
+                            </th>
+                            <th class="p-2">Mandate</th>
+                            <th class="p-2 w-20 text-right glass-tooltip">
+                                Firepower
+                                <div class="glass-tooltip-content">
+                                    Est. Capacity in $B.<br>
+                                    (Cash + 3x EBITDA - Current Debt)
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-light">
+                        <template x-for="b in filteredBuyers" :key="b.ticker">
+                            <tr class="audit-row cursor-pointer transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                                :class="selectedRow?.ticker === b.ticker ? 'bg-green-50 dark:bg-green-900/20' : ''"
+                                @click="openDrawer(b, 'buyer')">
+                                <td class="p-2">
+                                    <div class="font-mono text-theme-accent" x-text="b.ticker"></div>
+                                    <div class="text-[9px] text-muted truncate w-16" x-text="b.name"></div>
+                                </td>
+                                <td class="p-2 text-center">
+                                    <div class="px-2 py-0.5 rounded-full text-xs font-bold"
+                                        :class="b.br > 80 ? 'bg-green-100 text-green-800' : 'bg-secondary/10 text-theme-base'"
+                                        x-text="b.br"></div>
+                                </td>
+                                <td class="p-2">
+                                    <div class="text-[10px] font-bold text-theme-base" x-text="b.mandate || 'Growth'">
+                                    </div>
+                                    <div class="flex flex-wrap gap-1 mt-0.5">
+                                        <template x-for="d in b.drivers.slice(0,2)" :key="d">
+                                            <span class="text-[9px] text-muted italic" x-text="d"></span>
+                                        </template>
+                                    </div>
+                                </td>
+                                <td class="p-2 text-right font-mono text-theme-base text-sm">
+                                    $<span x-text="formatMoneyB(b.firepower)"></span>B
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Sponsors View -->
+            <div x-show="demandView==='Sponsors'" class="flex-1 overflow-y-auto scrollbar-hide" style="display: none;">
+                <table class="w-full text-left text-xs">
+                    <thead
+                        class="sticky top-0 bg-white dark:bg-slate-900 border-b border-light text-muted font-medium z-10">
+                        <tr>
+                            <th class="p-2">Firm</th>
+                            <th class="p-2 text-right">Est. Dry Powder</th>
+                            <th class="p-2">Source</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-light">
+                        <template x-for="s in sponsors" :key="s.name">
+                            <tr class="audit-row">
+                                <td class="p-2 font-bold text-theme-base" x-text="s.name"></td>
+                                <td class="p-2 text-right font-mono text-green-500" x-text="formatMoneyB(s.powder)">
+                                </td>
+                                <td class="p-2 text-muted italic text-[10px]" x-text="s.note"></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Right Drawer for Details -->
+    <div class="right-drawer flex flex-col shadow-2xl" :class="drawerOpen ? 'open' : ''">
+        <template x-if="selectedRow">
+            <div class="h-full flex flex-col">
+                <div class="p-4 border-b border-light flex justify-between items-start bg-slate-50 dark:bg-slate-800">
+                    <div>
+                        <div class="text-xs text-muted uppercase tracking-wider mb-1">
+                            <span x-text="selectedType === 'buyer' ? 'Acquirer Profile' : 'Target Dossier'"></span>
+                        </div>
+                        <h2 class="text-xl font-bold text-theme-base" x-text="selectedRow.name"></h2>
+                        <div class="flex gap-2 items-center mt-1">
+                            <span class="font-mono font-bold"
+                                :class="selectedType === 'buyer' ? 'text-green-500' : 'text-blue-500'"
+                                x-text="selectedRow.ticker"></span>
+                            <span class="badge-il bg-secondary/10 text-muted text-xs"
+                                x-text="selectedRow.sub_sector || 'General'"></span>
+                        </div>
+                    </div>
+                    <button @click="drawerOpen=false" class="text-muted hover:text-red-500"><i
+                            class="bi bi-x-lg"></i></button>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4 space-y-6">
+                    <!-- Score Card -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-3 rounded bg-secondary/5 border border-light text-center"
+                            x-show="selectedType==='seller'">
+                            <div class="text-xs text-muted">SPI Score</div>
+                            <div class="text-3xl font-bold" :class="getSPIColor(selectedRow.spi)"
+                                x-text="selectedRow.spi"></div>
+                            <div class="h-1.5 w-full mt-2 bg-gray-200 rounded-full overflow-hidden flex">
+                                <div class="bg-red-500" :style="'width:' + (selectedRow.spi * 0.4) + '%'"></div>
+                                <div class="bg-blue-500" :style="'width:' + (selectedRow.spi * 0.3) + '%'"></div>
+                                <div class="bg-green-500" :style="'width:' + (selectedRow.spi * 0.3) + '%'"></div>
+                            </div>
+                            <div class="text-[9px] text-muted mt-1 flex justify-between px-1">
+                                <span>Lev</span><span>Vol</span><span>Cat</span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded bg-secondary/5 border border-light text-center"
+                            x-show="selectedType==='buyer'">
+                            <div class="text-xs text-muted">Buyer Readiness</div>
+                            <div class="text-3xl font-bold text-green-600" x-text="selectedRow.br"></div>
+                            <div class="text-[10px] text-muted mt-1">Capacity: <span class="font-mono text-theme-base"
+                                    x-text="'$' + formatMoneyB(selectedRow.firepower) + 'B'"></span></div>
+                        </div>
+                        <div class="p-3 rounded bg-secondary/5 border border-light text-center">
+                            <div class="text-xs text-muted">Seller Context</div>
+                            <div class="text-sm font-bold mt-1" x-text="selectedRow.seller_type"></div>
+                            <div class="text-[10px] text-muted" x-text="'Conf: ' + selectedRow.confidence"></div>
+                        </div>
+                    </div>
+
+                    <!-- Financials -->
+                    <div>
+                        <h4 class="text-sm border-b border-light pb-2 mb-3">Key Financials</h4>
+                        <div class="grid grid-cols-2 gap-y-3 text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-muted">Market Cap</span>
+                                <span class="font-mono font-bold" x-text="formatCap(selectedRow.market_cap)"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-muted">Net Leverage</span>
+                                <span class="font-mono font-bold"
+                                    x-text="selectedRow.metrics?.net_leverage || '--'"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-muted">Price Dislocation</span>
+                                <span class="font-mono text-red-500"
+                                    x-text="selectedRow.metrics?.price_dislocation || '--'"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-muted">Interest Coverage</span>
+                                <span class="font-mono" x-text="selectedRow.metrics?.interest_coverage || '--'"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drivers -->
+                    <div>
+                        <h4 class="text-sm border-b border-light pb-2 mb-3">Strategic Drivers</h4>
+                        <ul class="space-y-2">
+                            <template x-for="d in selectedRow.all_drivers" :key="d">
+                                <li class="text-xs flex gap-2 items-start">
+                                    <i class="bi bi-chevron-right text-[10px] text-blue-500 mt-1"></i>
+                                    <span class="text-theme-base" x-text="d"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <!-- Actions -->
+                    <div>
+                        <h4 class="text-sm border-b border-light pb-2 mb-3">Actions</h4>
+                        <div class="flex gap-2">
+                            <a :href="'https://finance.yahoo.com/quote/' + selectedRow.ticker" target="_blank"
+                                class="btn btn-sm btn-outline-secondary flex-1">
+                                <i class="bi bi-bar-chart-fill mr-1"></i> Market Data
+                            </a>
+                            <button class="btn btn-sm btn-primary flex-1" :disabled="loadingDeepDive"
+                                @click="runDeepDive()">
+                                <span x-show="!loadingDeepDive"><i class="bi bi-lightning-fill mr-1"></i> Deep
+                                    Dive</span>
+                                <span x-show="loadingDeepDive"><span class="spinner-border spinner-border-sm"
+                                        role="status" aria-hidden="true"></span> Thinking...</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Deep Dive Result -->
+                    <div x-show="deepDiveResult"
+                        class="bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded border border-blue-100 dark:border-blue-900 mt-4">
+                        <h4 class="text-xs font-bold text-blue-600 mb-2 items-center flex gap-2">
+                            <i class="bi bi-stars"></i> Gemini Expert Analysis
+                        </h4>
+                        <div class="text-xs leading-relaxed text-theme-base markdown-body" x-html="deepDiveResult">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </template>
+    </div>
+
+    <!-- Overlay backdroph -->
+    <div x-show="drawerOpen" @click="drawerOpen=false" class="fixed inset-0 bg-black/20 z-30 transition-opacity"></div>
+
+    <script>
+        function commandCenter() {
+            return {
+                sector: 'Tech',
+                sellers: [],
+                buyers: [],
+                tape: [],
+                matches: [],
+                matches: [],
+                sponsors: [],
+                playbook: null,
+
+                // UX States
+                filterSellers: 'All', // All, Forced, Strategic
+                demandView: 'Strategics', // Strategics, Sponsors
+                drawerOpen: false,
+                selectedRow: null,
+                searchQuery: '',
+
+                // Sorting
+                sortKey: 'spi',
+                sortDesc: true,
+
+                // Intel Tab
+                intelTab: 'Brief',
+                loadingBrief: false,
+                briefRaw: '',
+                deepDiveResult: '',
+                loadingDeepDive: false,
+                deepDiveResult: '',
+                loadingDeepDive: false,
+                selectedType: 'seller',
+                showDiagnostics: false,
+                diagStats: null,
+
+                init() {
+                    this.refreshData();
+                    // Auto-refresh every 30s
+                    setInterval(() => this.refreshData(), 30000);
+                },
+
+                async refreshData() {
+                    // Fetch Market Map
+                    const res = await fetch(`/api/v2/market-map?sector=${this.sector}`);
+                    const data = await res.json();
+                    this.sellers = data.sellers;
+                    this.buyers = data.buyers;
+                    this.playbook = data.playbook;
+
+                    // Fetch Sponsors
+                    const res2 = await fetch('/api/v2/sponsors');
+                    this.sponsors = await res2.json();
+
+                    // Tape
+                    const r2 = await fetch('/api/v2/deal-tape');
+                    this.tape = await r2.json();
+
+                    // Matches
+                    const r4 = await fetch('/api/v2/matches');
+                    this.matches = await r4.json();
+
+                    // if (!this.briefRaw) this.generateBrief();
+                },
+
+                // Logic
+                get filteredSellers() {
+                    let list = this.sellers;
+
+                    // Filter Type
+                    if (this.filterSellers === 'Forced') {
+                        list = list.filter(s => s.seller_type.includes('Forced') || s.seller_emoji === '🔥');
+                    } else if (this.filterSellers === 'Strategic') {
+                        list = list.filter(s => s.seller_type.includes('Strategic') || s.seller_type.includes('Review'));
+                    }
+
+                    // Filter Search
+                    if (this.searchQuery) {
+                        const q = this.searchQuery.toLowerCase();
+                        list = list.filter(s =>
+                            s.ticker.toLowerCase().includes(q) ||
+                            s.name.toLowerCase().includes(q)
+                        );
+                    }
+
+                    return list;
+                },
+
+                get sortedSellers() {
+                    return this.filteredSellers.sort((a, b) => {
+                        let valA = this.getNested(a, this.sortKey);
+                        let valB = this.getNested(b, this.sortKey);
+
+                        // Handle numeric string suffixes like 'x' or '%'
+                        if (typeof valA === 'string') valA = parseFloat(valA.replace(/[^0-9.-]/g, '')) || valA;
+                        if (typeof valB === 'string') valB = parseFloat(valB.replace(/[^0-9.-]/g, '')) || valB;
+
+                        if (valA < valB) return this.sortDesc ? 1 : -1;
+                        if (valA > valB) return this.sortDesc ? -1 : 1;
+                        return 0;
+                    });
+                },
+
+                get filteredBuyers() {
+                    let list = this.buyers;
+                    // Filter Search
+                    if (this.searchQuery) {
+                        const q = this.searchQuery.toLowerCase();
+                        list = list.filter(b =>
+                            b.ticker.toLowerCase().includes(q) ||
+                            b.name.toLowerCase().includes(q)
+                        );
+                    }
+                    return list;
+                },
+
+                // Actions
+                sort(key) {
+                    if (this.sortKey === key) {
+                        this.sortDesc = !this.sortDesc;
+                    } else {
+                        this.sortKey = key;
+                        this.sortDesc = true;
+                    }
+                },
+
+                openDrawer(row, type = 'seller') {
+                    this.selectedRow = row;
+                    this.selectedType = type;
+                    this.deepDiveResult = '';
+                    this.drawerOpen = true;
+                },
+
+                async runDeepDive() {
+                    if (!this.selectedRow) return;
+                    this.loadingDeepDive = true;
+                    this.deepDiveResult = '';
+                    try {
+                        const res = await fetch('/api/v2/deep-dive', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                ticker: this.selectedRow.ticker,
+                                type: this.selectedType,
+                                context: this.selectedRow
+                            })
+                        });
+                        const data = await res.json();
+                        this.deepDiveResult = data.html;
+                    } catch (e) {
+                        this.deepDiveResult = '<p class=\"text-red-500\">Analysis failed.</p>';
+                        console.error(e);
+                    }
+                    this.loadingDeepDive = false;
+                },
+
+                // Helpers
+                getNested(obj, path) {
+                    return path.split('.').reduce((o, i) => o?.[i], obj);
+                },
+
+                getSortIcon(key) {
+                    if (this.sortKey !== key) return 'bi-arrow-down-up text-muted opacity-50';
+                    return this.sortDesc ? 'bi-caret-down-fill text-theme-base' : 'bi-caret-up-fill text-theme-base';
+                },
+
+                formatCap(val) {
+                    if (!val) return '--';
+                    if (val > 1e9) return (val / 1e9).toFixed(1) + 'B';
+                    if (val > 1e6) return (val / 1e6).toFixed(1) + 'M';
+                    return val.toLocaleString();
+                },
+
+                formatMoneyB(val) {
+                    if (!val) return '0.0';
+                    if (val > 1000000) return (val / 1e9).toFixed(1); // Assuming raw input is absolute
+                    return val.toFixed(1); // If already in B, just format
+                },
+
+                getSPIColor(score) {
+                    if (score >= 80) return 'text-red-600';
+                    if (score >= 60) return 'text-orange-500';
+                    return 'text-yellow-600';
+                },
+
+                async toggleDiagnostics() {
+                    this.showDiagnostics = !this.showDiagnostics;
+                    if (this.showDiagnostics && !this.diagStats) {
+                        const res = await fetch('/api/v2/diagnostics');
+                        this.diagStats = await res.json();
+                    }
+                },
+
+                async generateBrief() {
+                    this.loadingBrief = true;
+                    try {
+                        const res = await fetch('/api/v2/sector-brief', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                sector: this.sector,
+                                top_sellers: this.sellers.slice(0, 5),
+                                top_buyers: this.buyers.slice(0, 5),
+                                financing: {} // Mock
+                            })
+                        });
+                        const data = await res.json();
+
+                        // Parse JSON response into HTML
+                        if (data.executive_summary) {
+                            let html = `
+                                <div class="space-y-4">
+                                    <section>
+                                        <h4 class="text-sm font-bold text-blue-600 dark:text-blue-400 mb-1">EXECUTIVE SUMMARY</h4>
+                                        <p class="text-xs text-theme-base">${data.executive_summary}</p>
+                                    </section>
+                                    
+                                    <section>
+                                        <h4 class="text-sm font-bold text-blue-600 dark:text-blue-400 mb-1">ENVIRONMENT STATUS</h4>
+                                        <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800">
+                                            <p class="text-xs font-medium text-blue-800 dark:text-blue-300">${data.environment_status}</p>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <h4 class="text-sm font-bold text-purple-600 dark:text-purple-400 mb-1">KEY THEMES</h4>
+                                        <ul class="list-disc pl-4 space-y-2">
+                                            ${data.key_themes.map(t => `
+                                                <li class="text-xs">
+                                                    <span class="font-bold text-theme-base">${t.theme}:</span> 
+                                                    <span class="text-muted">${t.desc}</span>
+                                                    <div class="mt-1 flex gap-1">
+                                                        ${t.tickers.map(tic => `<span class="px-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-mono">${tic}</span>`).join('')}
+                                                    </div>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </section>
+
+                                    <section>
+                                        <h4 class="text-sm font-bold text-green-600 dark:text-green-400 mb-1">TOP OPPORTUNITIES</h4>
+                                        <ul class="space-y-2">
+                                            ${data.top_opportunities.map(o => `
+                                                <li class="p-2 bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800 text-[11px] text-green-900 dark:text-green-200">
+                                                    ${o}
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </section>
+
+                                    <section>
+                                        <h4 class="text-sm font-bold text-orange-600 dark:text-orange-400 mb-1">ACTION ITEMS</h4>
+                                        <ul class="list-decimal pl-4 space-y-1">
+                                            ${data.action_items.map(a => `<li class="text-xs text-theme-base font-medium">${a}</li>`).join('')}
+                                        </ul>
+                                    </section>
+                                </div>
+                            `;
+                            this.briefRaw = html;
+                        } else {
+                            this.briefRaw = data.html || '<p class="text-red-500">Brief generation failed: No content.</p>';
+                        }
+
+                    } catch (e) { console.error(e); }
+                    this.loadingBrief = false;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

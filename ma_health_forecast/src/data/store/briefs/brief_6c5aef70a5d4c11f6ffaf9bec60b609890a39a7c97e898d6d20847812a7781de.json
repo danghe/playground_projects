@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T20:53:29.323119",
+    "payload_hash": "6c5aef70a5d4c11f6ffaf9bec60b609890a39a7c97e898d6d20847812a7781de",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {},
+    "sellers_hash": "f48b7d81",
+    "buyers_hash": "6eaaa6d6"
+  },
+  "brief": {
+    "environment_status": "Selective Strategic Realignment and Portfolio Rationalization",
+    "executive_summary": "The Tech sector is currently defined by a supply/demand imbalance where high-firepower strategics (SONY, WIT, UMC) are hunting for growth to offset stalling organic momentum, while legacy giants (ORCL, SSNC) are pressured by high leverage and activists to divest. Although financing is constrained with a 4-5x leverage cap, buyers with significant cash reserves are positioned to exploit 'forced seller' situations and high-SPI carve-outs. We anticipate a surge in divestitures as firms seek to optimize balance sheets in a high-rate environment.",
+    "key_themes": [
+      {
+        "theme": "FinTech Divestiture & Activist-Driven Carve-outs",
+        "desc": "Activists are targeting legacy FinTech and software aggregators to improve margins and simplify portfolios through asset sales.",
+        "tickers": [
+          "SSNC",
+          "WEX"
+        ],
+        "deal_type": "Carve-out"
+      },
+      {
+        "theme": "Strategic De-leveraging through Asset Disposal",
+        "desc": "Highly levered firms (reaching 4.9x-5.7x) are initiating strategic reviews to dispose of non-core assets and reduce debt to fit within the current 4-5x leverage capacity.",
+        "tickers": [
+          "XYZ",
+          "ORCL",
+          "WEX"
+        ],
+        "deal_type": "Strategic M&A"
+      },
+      {
+        "theme": "Cash-Rich Consolidation of Distressed Assets",
+        "desc": "Strategic buyers with low leverage (<2x) and massive firepower are targeting firms with valuation distress and forced-seller profiles.",
+        "tickers": [
+          "SONY",
+          "WIT",
+          "LPL"
+        ],
+        "deal_type": "Take-private / Strategic M&A"
+      }
+    ],
+    "top_opportunities": [
+      "SONY -> SSNC: Acquisition of high-FCF FinTech carve-out to solve Sony's growth stall using its massive firepower (Carve-out, Est. Value $5.0B - $8.0B)",
+      "WIT -> LPL: Wipro utilizes $881B firepower to acquire LPL at distressed valuation (<5x) to bolster AI Infrastructure and Cybersecurity (WholeCo, Est. Value $4.3B)",
+      "UMC -> ORCL: UMC leverages $323B firepower to acquire a non-core business unit from Oracle to assist Oracle's de-leveraging from 5.0x (Carve-out, Est. Value $15.0B+)",
+      "SSNC -> WEX: Strategic consolidation of FinTech assets where SSNC acts as a consolidator for WEX's carve-out assets despite its own activist pressure (Carve-out, Est. Value $1.5B)",
+      "LPL -> XYZ: Distressed LPL utilizes its readiness to pivot toward AI by acquiring carve-outs from the highly levered XYZ (Carve-out, Est. Value $2.0B - $4.0B)"
+    ],
+    "risks": [
+      "Refinancing Risk: Several targets (WEX, LPL) have leverage exceeding current market capacity (4-5x), complicating deal financing.",
+      "Activist Friction: The 13D presence in SSNC may lead to valuation standoffs or contested deal structures during carve-outs."
+    ],
+    "action_items": [
+      "Initiate immediate outreach to SONY and WIT corporate development teams regarding LPL and SSNC assets.",
+      "Develop a deleveraging model for ORCL to identify which specific business units maximize value as carve-outs.",
+      "Perform a deep-dive analysis on SSNC's activist demands to structure a 'clean' divestiture process for their FinTech assets."
+    ]
+  }
+}

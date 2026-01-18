@@ -1,0 +1,210 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T16:04:39.160108",
+    "hash": "eab8154f385f07f5bcba66d9539ded1059ae8c76e3df9d30e5d8090b669f8920",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "name": "MSGS",
+    "items": [
+      {
+        "id": "sec_b647b791",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001636519/000119312525291372/d94454d8k.htm",
+        "published_at": "2025-11-21",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_636179c2",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Entry into Material Definitive Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001636519/000119312525272394/d55498d8k.htm",
+        "published_at": "2025-11-07",
+        "snippet": "Commercial Trigger / Partnership",
+        "tags": [
+          "\ud83e\udd1d Material Agreement",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      }
+    ],
+    "ticker": "MSGS"
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "MSGS",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "Concurrent executive turnover and new material commercial agreements suggest a period of strategic realignment or operational restructuring.",
+        "source_refs": [
+          "sec_b647b791",
+          "sec_636179c2"
+        ]
+      },
+      {
+        "bullet": "Record-high valuations in the NBA and NHL (Knicks/Rangers) create significant NAV (Net Asset Value) arbitrage opportunities relative to current public trading price.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "bullet": "The 'Dolan Discount' remains a focal point for activist pressure, potentially intensified by recent governance instability.",
+        "source_refs": [
+          "sec_b647b791",
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Selective Seller (Minority Stakes)",
+      "confidence": "High",
+      "why": [
+        {
+          "point": "The Dolan family maintains tight control via super-voting shares, making a full sale unlikely without a massive premium, but recent material agreements may signal a path toward minority equity monetization.",
+          "source_refs": [
+            "sec_636179c2",
+            "Market Context"
+          ]
+        },
+        {
+          "point": "NBA and NHL rule changes allowing private equity and sovereign wealth funds to hold minority positions have increased the liquidity pool for MSGS assets.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Clarification of Material Agreement",
+        "implication": "If the agreement involves media rights or a local TV deal (RSN), it will redefine the company's long-term cash flow profile.",
+        "source_refs": [
+          "sec_636179c2"
+        ]
+      },
+      {
+        "trigger": "Appointment of Successor",
+        "implication": "Filling the director/officer vacancies will signal whether the company is pivoting toward aggressive growth or defensive consolidation.",
+        "source_refs": [
+          "sec_b647b791"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "Minority Stake Divestiture",
+          "why": "Monetizing 10-15% of the Knicks or Rangers at private-market multiples would provide capital to deleverage or buy back undervalued public shares.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "type": "Take-Private",
+          "why": "The discrepancy between the market cap and the private value of the underlying sports assets makes MSGS a persistent candidate for a family-led buy-out.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Hostile Takeover",
+          "why": "Dual-class share structure renders external hostile bids impossible without Dolan family consent.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "What was the specific nature of the 'Material Definitive Agreement' signed in November?",
+        "why_unclear": "The snippet indicates a partnership trigger but specific counterparty and financial terms remain opaque in early filings.",
+        "source_refs": [
+          "sec_636179c2"
+        ]
+      },
+      {
+        "q": "Are the recent management departures voluntary or part of a board-led purge?",
+        "why_unclear": "SEC forms for departures often mask underlying governance friction or strategic disagreements.",
+        "source_refs": [
+          "sec_b647b791"
+        ]
+      }
+    ]
+  }
+}

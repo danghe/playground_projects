@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T03:02:41.109469",
+    "hash": "527186dc5c3e4ca86ffcde5a11a4a20a2fe78d911cdd99f1b87071d2c60d6a18",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "ticker": "ADBE",
+    "name": "Adobe Inc.",
+    "retrieved_items": []
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "ADBE",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "Post-Figma Strategic Reorientation: Following the $20B deal termination, Adobe has pivoted toward organic AI development and aggressive capital return programs.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "bullet": "Generative AI Monetization: The market is hyper-focused on Firefly\u2019s ability to drive 'Generative Credits' consumption and higher-tier Creative Cloud upsells.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "bullet": "Competitive Pressure from OpenAI/Canva: Increased volatility in the stock price reflects investor anxiety over Sora (video AI) and Canva's enterprise expansion.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Active Strategic Buyer (Selective)",
+      "confidence": "High",
+      "why": [
+        {
+          "point": "Adobe possesses a significant cash surplus intended for Figma that is now being redeployed into smaller, 'bolt-on' AI acquisitions that avoid regulatory scrutiny.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "point": "Regulatory constraints make mega-mergers (>$10B) nearly impossible in the current anti-trust environment, limiting Adobe to niche technology grabs.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Quarterly Earnings Release",
+        "implication": "Critical look at Net New Digital Media ARR to see if AI tools are actually expanding the TAM or just retaining existing users.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "trigger": "Adobe Summit (Marketing Focus)",
+        "implication": "Expect announcements regarding Experience Cloud and AI-driven personalization which could signal M&A interest in marketing automation/data clean rooms.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "AI Video/3D Tuck-ins",
+          "why": "Acquiring specialized startups in high-end video generation and 3D modeling to stay ahead of OpenAI\u2019s Sora and Luma AI.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "type": "Content Provenance/Security",
+          "why": "Buying firms focused on AI watermarking and 'Content Credentials' to solidify its status as the 'safe' enterprise choice for GenAI.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Direct Horizontal Competitor",
+          "why": "Any attempt to acquire a direct design competitor (like Canva or Serif) would face immediate blocking from the DOJ and EC.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "How will Adobe defend against Canva's enterprise penetration?",
+        "why_unclear": "Canva's user-friendly interface is winning over non-professional corporate users, a segment Adobe needs for growth.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "q": "Is a dividend initiation imminent?",
+        "why_unclear": "With $20B+ in freed-up capital, the debate continues between perpetual buybacks or a structural dividend to attract value-oriented investors.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ]
+  }
+}

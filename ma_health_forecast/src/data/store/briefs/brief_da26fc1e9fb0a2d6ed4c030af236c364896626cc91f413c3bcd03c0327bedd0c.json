@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T20:54:31.857207",
+    "payload_hash": "da26fc1e9fb0a2d6ed4c030af236c364896626cc91f413c3bcd03c0327bedd0c",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {},
+    "sellers_hash": "8dbdc2a7",
+    "buyers_hash": "6eaaa6d6"
+  },
+  "brief": {
+    "environment_status": "Portfolio Rationalization Era: High-Firepower Buyers Targeting Distressed Carve-outs",
+    "executive_summary": "The tech M&A landscape is currently defined by a stark contrast between high-leverage forced sellers (LPL, WEX) and cash-rich strategic buyers facing growth stalls (SONY, WIT). With leverage capacity capped at 4-5x, assets with 5x+ leverage are under intense pressure to divest non-core segments, creating a fertile environment for strategic carve-outs. We are seeing a unique 'Fix and Grow' dynamic where consolidators like SSNC are simultaneously divesting underperforming units while seeking high-FCF recurring revenue assets.",
+    "key_themes": [
+      {
+        "theme": "Deleveraging Divestiture Wave",
+        "desc": "Companies with leverage exceeding the 4-5x market capacity (WEX at 5.7x, LPL at 5.9x) are being forced to explore strategic reviews and carve-outs to stabilize balance sheets.",
+        "tickers": [
+          "WEX",
+          "LPL",
+          "XYZ"
+        ],
+        "deal_type": "Carve-out"
+      },
+      {
+        "theme": "Activist-Driven Portfolio Simplification",
+        "desc": "High SPI scores for mature giants like SSNC and ORCL indicate 13D pressure to unlock value through the disposal of non-core assets to combat margin pressure.",
+        "tickers": [
+          "SSNC",
+          "ORCL"
+        ],
+        "deal_type": "Strategic Review / Carve-out"
+      },
+      {
+        "theme": "Growth Stall Arbitrage",
+        "desc": "Strategic buyers with massive firepower but stalling organic growth are aggressively targeting AI infrastructure and cybersecurity assets held by distressed sellers.",
+        "tickers": [
+          "SONY",
+          "WIT",
+          "UMC"
+        ],
+        "deal_type": "Strategic M&A"
+      }
+    ],
+    "top_opportunities": [
+      "SONY -> SSNC: Acquisition of FinTech Carve-out to deploy massive $5.8T firepower into high-FCF recurring revenue (Carve-out, Est. $2.0B - $4.0B)",
+      "WIT -> LPL: Buy-side play for WholeCo assets in AI Infrastructure/Cybersecurity from a distressed seller at <5x valuation (Strategic M&A, Est. $4.3B)",
+      "UMC -> ORCL: Strategic carve-out of mature software segments to fix UMC's growth stall (Carve-out, Est. $10.0B+)",
+      "SSNC -> WEX: SSNC acts as a sector consolidator, acquiring WEX's non-core assets as WEX seeks to de-lever from 5.7x (Carve-out, Est. $1.5B)",
+      "WIT -> XYZ: Strategic acquisition of XYZ's carve-out assets to utilize WIT's $881B firepower amidst XYZ's high leverage (Carve-out, Est. $5.0B)"
+    ],
+    "risks": [
+      "Refinancing Cliff: High-leverage sellers (LPL, WEX) may face liquidity crises if carve-outs aren't executed before debt maturities.",
+      "Valuation Gap: Distressed sellers may resist the current <5x valuation environment, leading to deal fatigue and failed auctions."
+    ],
+    "action_items": [
+      "Initiate immediate outreach to SONY's corporate development team regarding the SSNC FinTech carve-out opportunity.",
+      "Perform a deep-dive credit analysis on LPL to evaluate 'Take-Private' feasibility versus a piecemeal asset sale.",
+      "Draft a 'Sum-of-the-parts' (SOTP) analysis for ORCL to identify the most accretive carve-out candidates for WIT and UMC."
+    ]
+  }
+}

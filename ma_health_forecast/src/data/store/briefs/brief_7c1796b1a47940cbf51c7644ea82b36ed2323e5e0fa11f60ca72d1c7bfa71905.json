@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T20:40:36.511248",
+    "payload_hash": "7c1796b1a47940cbf51c7644ea82b36ed2323e5e0fa11f60ca72d1c7bfa71905",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {},
+    "sellers_hash": "d38c30bf",
+    "buyers_hash": "6eaaa6d6"
+  },
+  "brief": {
+    "environment_status": "Deleveraging-Driven Carve-out Window",
+    "executive_summary": "The Tech M&A market is currently dominated by a 'Deleverage-or-Divest' mandate, as major players like WEX and LPL face leverage levels (5.7x-5.8x) that exceed current financing capacity (4-5x). This supply-side pressure is met by massive buyer firepower from global strategics like SONY and WIT, who are seeking to offset growth stalls with inorganic acquisitions. High-margin carve-outs and whole-company acquisitions of distressed targets are the most feasible deal structures in the current environment.",
+    "key_themes": [
+      {
+        "theme": "Portfolio Rationalization & Carve-outs",
+        "desc": "Legacy tech giants are divesting non-core assets to improve margins and reduce debt burdens amidst activist pressure.",
+        "tickers": [
+          "SSNC",
+          "ORCL",
+          "XYZ"
+        ],
+        "deal_type": "Carve-out"
+      },
+      {
+        "theme": "Distressed Deleveraging",
+        "desc": "High-leverage entities are being forced into strategic reviews as their debt multiples (5.8x) outpace market financing limits (5x).",
+        "tickers": [
+          "LPL",
+          "WEX"
+        ],
+        "deal_type": "Strategic M&A / Take-private"
+      },
+      {
+        "theme": "Cash-Rich Growth Hunting",
+        "desc": "Buyers with low leverage (<2x) and significant firepower are aggressively targeting AI infrastructure and recurring revenue streams to fix growth stalls.",
+        "tickers": [
+          "SONY",
+          "WIT",
+          "UMC"
+        ],
+        "deal_type": "Strategic M&A"
+      }
+    ],
+    "top_opportunities": [
+      "SONY -> SSNC: Acquisition of high-margin FinTech carve-out to deploy excess cash into recurring revenue (Carve-out, Est. Value $4-6B)",
+      "WIT -> ORCL: Strategic acquisition of Oracle carve-out assets to bolster cloud/IT services footprint (Carve-out, Est. Value $10-15B)",
+      "SSNC -> WEX: Consolidator SSNC acquiring WEX assets to capitalize on WEX's high leverage (5.7x) and strategic review (Carve-out, Est. Value $1.5-2.5B)",
+      "UMC -> XYZ: Deployment of $323B firepower to acquire XYZ carve-out assets at a valuation floor (Carve-out, Est. Value $5-8B)",
+      "WIT -> LPL: WholeCo acquisition of LPL to resolve their valuation distress (<5x) and leverage issues while providing WIT growth in AI infrastructure (Strategic M&A, Est. Value $4.3B)"
+    ],
+    "risks": [
+      "Refinancing Gap: Current leverage capacity (4-5x) is significantly lower than target debt loads (5.8x), requiring heavy equity checks.",
+      "Activist Friction: High SPI on SSNC suggests 13D filers may block deals that don't maximize immediate per-share value.",
+      "Integration Complexity: Carve-outs from legacy systems (ORCL, XYZ) carry significant operational separation risks."
+    ],
+    "action_items": [
+      "Initiate outreach to SONY and WIT corporate development teams regarding SSNC and ORCL carve-out opportunities.",
+      "Draft 'Fix-the-Balance-Sheet' pitch decks for WEX and LPL highlighting divestiture as a path to deleveraging.",
+      "Analyze SSNC activist (13D) positions to determine the minimum clearing price for a FinTech carve-out."
+    ]
+  }
+}

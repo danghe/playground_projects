@@ -1,0 +1,285 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T15:01:59.928410",
+    "payload_hash": "bcf54ade45c7f58ea6e188030af4edb596c8d6219ef7bb047e70cfe3998db592",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief",
+    "sector": "Tech",
+    "financing": {
+      "hy_spread": 3.8,
+      "ig_spread": 1.1,
+      "lbo_idx": 78,
+      "lev_range": "5.0x - 6.0x"
+    },
+    "top_sellers": [
+      {
+        "drivers": [
+          "High Leverage (4.9x)",
+          "Growth Stall"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 40202063872,
+        "name": "Block, Inc.",
+        "seller_type": "Opportunistic",
+        "spi": 31.25,
+        "ticker": "XYZ"
+      },
+      {
+        "drivers": [
+          "High Leverage (5.7x)",
+          "Growth Stall"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 5406957568,
+        "name": "WEX Inc.",
+        "seller_type": "Opportunistic",
+        "spi": 31.25,
+        "ticker": "WEX"
+      },
+      {
+        "drivers": [
+          "Valuation Distress (<5x)",
+          "Growth Stall"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 4329999872,
+        "name": "LG Display Co., Ltd.",
+        "seller_type": "Opportunistic",
+        "spi": 28,
+        "ticker": "LPL"
+      },
+      {
+        "drivers": [
+          "High Leverage (5.0x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 549026398208,
+        "name": "ORACLE CORP",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "ORCL"
+      },
+      {
+        "drivers": [
+          "High Leverage (205.5x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 41736830976,
+        "name": "Datadog, Inc.",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "DDOG"
+      },
+      {
+        "drivers": [
+          "High Leverage (5.4x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 28612390912,
+        "name": "Hewlett Packard Enterprise Co",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "HPE"
+      },
+      {
+        "drivers": [
+          "High Leverage (9.3x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 13517199360,
+        "name": "Guidewire Software, Inc.",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "GWRE"
+      },
+      {
+        "drivers": [
+          "High Leverage (6.9x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 10940396544,
+        "name": "Klarna Group plc",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "KLAR"
+      },
+      {
+        "drivers": [
+          "High Leverage (11.0x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 11068018688,
+        "name": "Dayforce, Inc.",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "DAY"
+      },
+      {
+        "drivers": [
+          "High Leverage (11.5x)"
+        ],
+        "likely_asset_type": "Wholeco",
+        "market_cap": 7223848960,
+        "name": "Clearwater Analytics Holdings, Inc.",
+        "seller_type": "Opportunistic",
+        "spi": 26,
+        "ticker": "CWAN"
+      }
+    ],
+    "top_buyers": [
+      {
+        "br": 88,
+        "drivers": [
+          "High Firepower ($5889.7B)",
+          "Low Leverage (<2x)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 5889699086336,
+        "market_cap": 144474128384,
+        "name": "Sony Group Corp",
+        "ticker": "SONY"
+      },
+      {
+        "br": 88,
+        "drivers": [
+          "High Firepower ($25.7B)",
+          "Low Leverage (<2x)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 25706504960,
+        "market_cap": 2942065152,
+        "name": "PagSeguro Digital Ltd.",
+        "ticker": "PAGS"
+      },
+      {
+        "br": 88,
+        "drivers": [
+          "High Firepower ($323.8B)",
+          "Low Leverage (<2x)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 323755253760,
+        "market_cap": 23413970944,
+        "name": "UNITED MICROELECTRONICS CORP",
+        "ticker": "UMC"
+      },
+      {
+        "br": 88,
+        "drivers": [
+          "High Firepower ($881.3B)",
+          "Low Leverage (<2x)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 881253007360,
+        "market_cap": 28808183808,
+        "name": "WIPRO LTD",
+        "ticker": "WIT"
+      },
+      {
+        "br": 76,
+        "drivers": [
+          "High Firepower ($897.2B)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 897244987392,
+        "market_cap": 4329999872,
+        "name": "LG Display Co., Ltd.",
+        "ticker": "LPL"
+      },
+      {
+        "br": 76,
+        "drivers": [
+          "High Firepower ($115.5B)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 115522633728,
+        "market_cap": 42344865792,
+        "name": "ASE Technology Holding Co., Ltd.",
+        "ticker": "ASX"
+      },
+      {
+        "br": 72,
+        "drivers": [
+          "High Firepower ($27.5B)",
+          "Low Leverage (<2x)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 27536369864,
+        "market_cap": 10312516608,
+        "name": "Full Truck Alliance Co. Ltd.",
+        "ticker": "YMM"
+      },
+      {
+        "br": 49.749702046214175,
+        "drivers": [
+          "High Firepower ($2.9B)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 2935999872,
+        "market_cap": 2609800704,
+        "name": "DXC Technology Co",
+        "ticker": "DXC"
+      },
+      {
+        "br": 39.701797137040614,
+        "drivers": [
+          "High Firepower ($9.7B)",
+          "Low Leverage (<2x)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 9717000192,
+        "market_cap": 24911558656,
+        "name": "STMicroelectronics N.V.",
+        "ticker": "STM"
+      },
+      {
+        "br": 35.31951412533668,
+        "drivers": [
+          "Low Leverage (<2x)",
+          "Growth Stall (Needs M&A)",
+          "Targeting: AI Infrastructure, Cybersecurity"
+        ],
+        "firepower": 4877845760,
+        "market_cap": 19992498176,
+        "name": "CGI INC",
+        "ticker": "GIB"
+      }
+    ]
+  },
+  "brief": {
+    "environment_status": "Strategic Buyer Dominance / Valuation Standoff",
+    "executive_summary": "The market is currently defined by a massive capital overhang and high readiness among strategic giants like SONY and WIT, contrasted with sellers who are strictly opportunistic and under low immediate pressure. With LBO feasibility at zero, the environment excludes private equity sponsors, leaving the field open for well-capitalized corporate consolidators to pursue whole-company acquisitions.",
+    "key_themes": [
+      {
+        "theme": "Pure-Play Strategic Consolidation",
+        "desc": "The total absence of LBO feasibility (0/100) eliminates financial sponsor competition, allowing mega-cap strategics to dictate terms in horizontal and vertical tech integrations."
+      },
+      {
+        "theme": "Opportunistic Wholeco Exits",
+        "desc": "Sellers like ORCL and DDOG are signaling an interest in total exits rather than carve-outs, but their low Sell Pressure Indices (SPI) suggest they will only transact at premium valuations."
+      },
+      {
+        "theme": "Cross-Border Strategic Deployment",
+        "desc": "Highly ready international buyers (UMC, WIT, ASX) possess the capital and readiness to absorb opportunistic Western tech assets (HPE, GWRE) while domestic financing remains constrained."
+      }
+    ],
+    "action_items": [
+      "Prioritize strategic buy-side mandates for SONY and WIT targeting whole-company acquisitions of HPE and GWRE.",
+      "Discontinue all LBO-related pitch activity for financial sponsors due to zero feasibility in the current financing regime.",
+      "Advise opportunistic sellers (XYZ, WEX) to leverage the lack of sponsor competition by demanding high-certainty strategic bids.",
+      "Initiate outreach to LPL and ASX regarding their dual-status as both potential sellers and high-readiness buyers."
+    ]
+  }
+}

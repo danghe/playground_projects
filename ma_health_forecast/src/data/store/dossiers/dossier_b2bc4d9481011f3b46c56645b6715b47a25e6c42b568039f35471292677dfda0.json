@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T14:20:42.437562",
+    "hash": "b2bc4d9481011f3b46c56645b6715b47a25e6c42b568039f35471292677dfda0",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "name": "0001636519",
+    "ticker": "MSGS",
+    "retrieved_items": [
+      {
+        "id": "sec_b647b791",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001636519/000119312525291372/d94454d8k.htm",
+        "published_at": "2025-11-21",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_636179c2",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Entry into Material Definitive Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001636519/000119312525272394/d55498d8k.htm",
+        "published_at": "2025-11-07",
+        "snippet": "Commercial Trigger / Partnership",
+        "tags": [
+          "\ud83e\udd1d Material Agreement",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      }
+    ]
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "MSGS",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "Emergent governance instability following recent management/director departures (Nov 2025) suggests internal friction or a shift in board-level strategic direction.",
+        "source_refs": [
+          "sec_b647b791"
+        ]
+      },
+      {
+        "bullet": "Execution of a material definitive agreement indicates a significant commercial pivot or partnership, likely aimed at monetizing core franchise assets or media rights.",
+        "source_refs": [
+          "sec_636179c2"
+        ]
+      },
+      {
+        "bullet": "Widening 'Dolan Discount'\u2014the persistent gap between MSGS's public market capitalization and the aggregate private market valuation of the NY Knicks and NY Rangers franchises.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Hold / Selective Seller",
+      "confidence": "Medium",
+      "why": [
+        {
+          "point": "Control by the Dolan family via dual-class shares makes a hostile takeover impossible; however, governance changes often precede minority stake sales to private equity firms like Silver Lake or Arctos.",
+          "source_refs": [
+            "sec_b647b791",
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Appointment of Successor Directors",
+        "implication": "Will indicate if the company is leaning toward further professionalization or tightening family control.",
+        "source_refs": [
+          "sec_b647b791"
+        ]
+      },
+      {
+        "trigger": "Clarification of 'Material Agreement' Details",
+        "implication": "Expected to reveal terms of a new regional sports network (RSN) strategy or a major venue partnership.",
+        "source_refs": [
+          "sec_636179c2"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "Minority Equity Sale",
+          "why": "Selling a 10-15% stake in the Knicks or Rangers to institutional investors to provide liquidity without relinquishing control.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Large-Scale Acquisition",
+          "why": "Current leverage and focus on asset optimization make a 'Buyer' stance highly unlikely in the current rate environment.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "What specific friction caused the 'Governance Instability' mentioned in late 2025?",
+        "why_unclear": "SEC filings confirm the departure but do not detail the underlying disagreement between management and the Board.",
+        "source_refs": [
+          "sec_b647b791"
+        ]
+      },
+      {
+        "q": "Does the new material agreement involve a restructuring of the MSG Sphere relationship or the Knicks/Rangers media rights?",
+        "why_unclear": "The snippet indicates a commercial trigger but lacks full contractual disclosure.",
+        "source_refs": [
+          "sec_636179c2"
+        ]
+      }
+    ]
+  }
+}

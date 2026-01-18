@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.venv
+venv/
+
+# Data
+ma_health.db
+src/data/ma_health.db
+*.sqlite3
+
+# Output
+output/
+
+# OS
+.DS_Store
+
+# Large Files
+*.zip

@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T16:02:40.441303",
+    "hash": "96dddc712b973c8150e77fff2473a8b273906fb069e28524e0d15a27ce770012",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "name": "AAPL",
+    "items": [
+      {
+        "id": "sec_7c354850",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0000320193/000114036126000199/ef20060722_8k.htm",
+        "published_at": "2026-01-02",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_ce4e5831",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0000320193/000114036125044561/ef20060722_8k.htm",
+        "published_at": "2025-12-05",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_6cf7f9f6",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0000320193/000114036125027340/ef20052355_8k.htm",
+        "published_at": "2025-07-25",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      }
+    ],
+    "ticker": "AAPL"
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "AAPL",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "Elevated leadership turnover at the executive level indicates a potential shift in long-term strategic direction or the commencement of a formal CEO succession phase.",
+        "source_refs": [
+          "sec_7c354850",
+          "sec_ce4e5831",
+          "sec_6cf7f9f6"
+        ]
+      },
+      {
+        "bullet": "Intense pivot toward 'Apple Intelligence' integration across the hardware stack requires rapid acquisition of niche AI talent and specialized silicon IP.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "bullet": "Regulatory scrutiny in the EU and US (DOJ) is forcing a re-evaluation of the 'Walled Garden' Services model, potentially triggering divestitures of non-core assets.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Selective Strategic Buyer",
+      "confidence": "High",
+      "why": [
+        {
+          "point": "Massive cash reserves (estimated $160B+ gross cash) provide unparalleled dry powder for opportunistic tuck-ins despite management churn.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "point": "Governance instability suggests a defensive focus on internal restructuring rather than transformative mega-mergers.",
+          "source_refs": [
+            "sec_7c354850",
+            "sec_6cf7f9f6"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Form 8-K Executive Appointments",
+        "implication": "Clarification of the new leadership hierarchy will stabilize market sentiment and signal which business units (e.g., Services vs. Hardware) are being prioritized.",
+        "source_refs": [
+          "sec_7c354850"
+        ]
+      },
+      {
+        "trigger": "Spring Hardware Event",
+        "implication": "Confirmation of AI-on-device capabilities will dictate the urgency for further machine learning startup acquisitions.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "AI Vertical Integration",
+          "why": "Acquiring small-to-mid cap LLM optimization or computer vision firms to bolster local processing capabilities.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "type": "Health-Tech Sensing",
+          "why": "Tuck-ins for non-invasive glucose monitoring or advanced biometrics to maintain Watch dominance.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Large-Scale Media/Content",
+          "why": "Regulatory antitrust headwinds make a Disney or Netflix-scale acquisition virtually impossible under current DOJ/FTC scrutiny.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "Is the recent string of departures part of a planned multi-year transition or a response to internal friction?",
+        "why_unclear": "Repeated filings within a 6-month window suggest unplanned volatility.",
+        "source_refs": [
+          "sec_7c354850",
+          "sec_ce4e5831",
+          "sec_6cf7f9f6"
+        ]
+      },
+      {
+        "q": "How will the management 'instability' affect the execution of the Vision Pro 2 and spatial computing roadmap?",
+        "why_unclear": "Executive departures often disrupt long-cycle hardware R&D projects.",
+        "source_refs": [
+          "Market Context",
+          "sec_6cf7f9f6"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T20:43:34.094054",
+    "payload_hash": "4f7035c55dcf232a842db8084110fd2a35930c4e90f94c5b3cb491e4c2fead7a",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {},
+    "sellers_hash": "2aa1830c",
+    "buyers_hash": "6eaaa6d6"
+  },
+  "brief": {
+    "environment_status": "Strategic Carve-out Wave and Deleveraging Focus",
+    "executive_summary": "The Tech M&A market is currently driven by a surplus of supply from high-leverage incumbents (4.9x-5.7x) seeking to rationalize portfolios under activist pressure. While leverage capacity remains capped at 4-5x, preventing aggressive LBOs, massive 'firepower' from buyers like SONY, WIT, and UMC provides a deep liquidity pool for strategic divestitures. Activity is concentrated in non-core carve-outs and distressed consolidations rather than growth-at-any-cost acquisitions.",
+    "key_themes": [
+      {
+        "theme": "Portfolio Rationalization for Deleveraging",
+        "desc": "Incumbents like ORCL, WEX, and XYZ are facing leverage levels (up to 5.7x) that exceed current market capacity (4-5x), forcing strategic reviews and asset sales.",
+        "tickers": [
+          "ORCL",
+          "WEX",
+          "XYZ"
+        ],
+        "deal_type": "Carve-out"
+      },
+      {
+        "theme": "Activist-Driven FinTech Realignment",
+        "desc": "SS&C (SSNC) is facing 13D filings and margin pressure, forcing the divestiture of FinTech assets to appease shareholders while simultaneously acting as a consolidator for recurring revenue streams.",
+        "tickers": [
+          "SSNC"
+        ],
+        "deal_type": "Strategic M&A / Carve-out"
+      },
+      {
+        "theme": "Cash-Rich Strategic Pivot",
+        "desc": "Large-cap tech players with low leverage (<2x) and massive firepower are aggressively seeking AI and Cybersecurity assets to offset growth stalls.",
+        "tickers": [
+          "WIT",
+          "SONY",
+          "UMC"
+        ],
+        "deal_type": "Strategic M&A"
+      }
+    ],
+    "top_opportunities": [
+      "WIT -> SSNC (FinTech Carve-out): WIT utilizes its $881.3B firepower to acquire SSNC's high-margin FinTech assets during an activist-driven review. (Strategic M&A, Est. $2.0B - $4.0B)",
+      "SONY -> ORCL (Enterprise Carve-out): SONY acquires non-core software units from ORCL to solve growth stalls while ORCL reduces its 5.0x leverage. (Carve-out, Est. $10.0B+)",
+      "UMC -> LPL (Distressed WholeCo): UMC acquires LPL at a distressed valuation (<5x) to immediately pivot into AI Infrastructure and Cybersecurity. (Take-private/Strategic M&A, Est. $4.5B)",
+      "SSNC -> WEX (Consolidation): SSNC leverages its 92 Buyer Readiness to roll up WEX's carve-out assets, maintaining recurring revenue dominance. (Strategic M&A, Est. $1.5B)",
+      "WIT -> XYZ (Carve-out): WIT acquires XYZ's core divested assets to bolster its portfolio while XYZ addresses its 4.9x leverage ratio. (Carve-out, Est. $5.0B - $8.0B)"
+    ],
+    "risks": [
+      "Financing Gap: Existing leverage for sellers (up to 5.7x) exceeds current bank appetite (4-5x), requiring significant equity cushions or seller notes.",
+      "Valuation Standoff: Distressed sellers like LPL may resist low-multiple exits (<5x) despite high SPI scores.",
+      "Integration Complexity: Large-scale carve-outs from conglomerates like ORCL or XYZ involve high execution risk regarding tech stack separation."
+    ],
+    "action_items": [
+      "Initiate contact with SS&C's activist shareholders to gauge acceptable carve-out perimeters.",
+      "Prepare 'Firepower Deployment' decks for WIT and SONY specifically targeting the LPL and ORCL assets.",
+      "Model deleveraging scenarios for XYZ and WEX to identify the specific EBITDA-contributing assets most likely to be divested.",
+      "Draft a cross-border regulatory feasibility study for UMC's potential acquisition of US-based AI infrastructure."
+    ]
+  }
+}

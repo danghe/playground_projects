@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T15:00:05.470033",
+    "hash": "a0a32ee54e774dea5b73379a1a04a2012586be9a7479dcf51a42178a6d154f4f",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "name": "ADBE",
+    "items": [
+      {
+        "id": "sec_e722bf88",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Strong Insider Confidence (8 buys)",
+        "url": "https://www.sec.gov/edgar/browse/?CIK=0000796343",
+        "published_at": "2026-01-18",
+        "snippet": "Insiders buying dip before news?",
+        "tags": [
+          "\ud83d\udfe2 Insider Cluster",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      }
+    ],
+    "ticker": "ADBE"
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "ADBE",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "Significant cluster of insider buying (8 buys) suggests internal conviction in the current valuation or upcoming product catalysts.",
+        "source_refs": [
+          "sec_e722bf88"
+        ]
+      },
+      {
+        "bullet": "Adobe is in a critical transition phase, aggressively integrating Generative AI (Firefly) across its Creative Cloud suite to defend its moat against AI-native disruptors.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "bullet": "Post-Figma termination, Adobe has significant dry powder and a strategic mandate to deploy capital through organic R&D or smaller tech-focused acquisitions.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Strategic Buyer (Tuck-ins)",
+      "confidence": "High",
+      "why": [
+        {
+          "point": "The failed $20B Figma deal signaled a high regulatory hurdle for large-scale horizontal mergers, shifting focus to smaller, deep-tech acquisitions.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "point": "Insider confidence suggests management sees the current market price as an attractive entry point or a stable base for future growth initiatives.",
+          "source_refs": [
+            "sec_e722bf88"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Generative AI Monetization Data",
+        "implication": "Evidence of Firefly driving ARR (Annual Recurring Revenue) growth will determine the stock's premium valuation.",
+        "source_refs": [
+          "Market Context"
+        ]
+      },
+      {
+        "trigger": "Potential Small-Cap AI Acquisitions",
+        "implication": "Movements to acquire niche LLM or video-generative startups to bolster the Firefly ecosystem.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "Technology Tuck-in",
+          "why": "Acquiring specialized AI agents or 3D/Video generation assets enhances the existing Creative Cloud ecosystem with lower regulatory friction.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Mega-Cap Platform Mergers",
+          "why": "High probability of DOJ/FTC intervention and long-term integration drag, as seen with the Figma attempt.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "What specific catalysts are driving the current insider buying cluster?",
+        "why_unclear": "While SEC filings show the buys, the specific internal milestone (e.g., a breakthrough in AI video or a new enterprise deal) remains non-public.",
+        "source_refs": [
+          "sec_e722bf88"
+        ]
+      },
+      {
+        "q": "Can Adobe maintain pricing power in a landscape where AI-enabled tools are becoming commoditized?",
+        "why_unclear": "Increasing competition from open-source models and lower-cost platforms like Canva and Midjourney.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ]
+  }
+}

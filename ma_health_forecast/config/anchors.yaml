@@ -1,0 +1,21 @@
+sponsors:
+  "Blackstone":
+    est_dry_powder_usd: 200000000000
+    source_note: "Q4 Earnings Call"
+    last_updated: "2025-12-31"
+  "KKR":
+    est_dry_powder_usd: 115000000000
+    source_note: "Investor Day 2025"
+    last_updated: "2025-11-15"
+  "Thoma Bravo":
+    est_dry_powder_usd: 35000000000
+    source_note: "Fund XV Close"
+    last_updated: "2025-10-01"
+  "Vista Equity Partners":
+    est_dry_powder_usd: 28000000000
+    source_note: "TechCrunch"
+    last_updated: "2025-09-20"
+  "Silver Lake":
+    est_dry_powder_usd: 25000000000
+    source_note: "Press Release"
+    last_updated: "2025-08-15"

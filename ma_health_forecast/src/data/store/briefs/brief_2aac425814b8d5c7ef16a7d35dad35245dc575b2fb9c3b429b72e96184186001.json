@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T21:05:12.782641",
+    "payload_hash": "2aac425814b8d5c7ef16a7d35dad35245dc575b2fb9c3b429b72e96184186001",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {},
+    "sellers_hash": "dd460258",
+    "buyers_hash": "6eaaa6d6"
+  },
+  "brief": {
+    "environment_status": "Leverage-Driven Strategic Divestiture Window",
+    "executive_summary": "The tech sector is currently defined by a divergence between highly-leveraged sellers (4.7x-5.7x) and mega-cap buyers with massive firepower seeking to offset growth stalls. While financing capacity is capped at 4-5x, inhibiting massive LBOs, the environment is ripe for strategic carve-outs and whole-company acquisitions of distressed targets. Activist pressure on names like SS&C is further accelerating the supply of high-quality FinTech and infrastructure assets.",
+    "key_themes": [
+      {
+        "theme": "De-leveraging Carve-out Surge",
+        "desc": "High leverage ratios (4.9x-5.7x) at ORCL, XYZ, and WEX are forcing strategic reviews and asset sales to repair balance sheets and maintain investment grade status.",
+        "tickers": [
+          "ORCL",
+          "XYZ",
+          "WEX"
+        ],
+        "deal_type": "Carve-out"
+      },
+      {
+        "theme": "Mega-Cap Growth Acquisition",
+        "desc": "Buyers like SONY, WIT, and UMC are sitting on significant firepower but facing growth stalls, making them aggressive bidders for AI and cloud infrastructure assets.",
+        "tickers": [
+          "SONY",
+          "WIT",
+          "UMC"
+        ],
+        "deal_type": "Strategic M&A"
+      },
+      {
+        "theme": "Activist-Driven Portfolio Optimization",
+        "desc": "Activists (13D) are pressuring management teams to spin off non-core segments to address margin compression and valuation discounts, particularly in the FinTech space.",
+        "tickers": [
+          "SSNC"
+        ],
+        "deal_type": "Strategic Review / Spin-off"
+      }
+    ],
+    "top_opportunities": [
+      "WIT -> SSNC: Leveraging WIT's $881B firepower to acquire SSNC's high-margin FinTech carve-out assets (Strategic M&A, Est. Value $16.0B)",
+      "SONY -> ORCL: SONY utilizes low leverage and immense firepower to acquire non-core infrastructure assets from high-leverage ORCL (Carve-out, Est. Value TBD)",
+      "UMC -> WEX: UMC addresses growth stall by acquiring WEX's carve-out assets to mitigate WEX's 5.7x leverage (Strategic M&A, Est. Value $5.4B)",
+      "SSNC -> LPL: SSNC acts as a consolidator for LPL's WholeCo at valuation distress levels below 5x (Take-private, Est. Value $4.3B)",
+      "LPL -> XYZ: LPL utilizes its reported firepower to target XYZ's AI or Cybersecurity-related carve-outs during their strategic review (Carve-out, Est. Value $40.2B)"
+    ],
+    "risks": [
+      "Valuation Standoff: Disconnect between sellers' historical valuations and buyers' opportunistic bids in a high-leverage environment.",
+      "Regulatory Headwinds: Potential antitrust scrutiny for mega-cap consolidators like SONY and ORCL in cross-border tech deals."
+    ],
+    "action_items": [
+      "Initiate outreach to SS&C's board regarding activist-led divestiture of FinTech assets.",
+      "Draft confidential information memorandum (CIM) for LPL's WholeCo sale targeting high-FCF consolidators.",
+      "Model de-leveraging scenarios for WEX and ORCL to identify the most accretive carve-out perimeters."
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+# Intralinks-like Style
+axes.titlesize : 16
+axes.labelsize : 12
+lines.linewidth : 2
+lines.markersize : 8
+xtick.labelsize : 10
+ytick.labelsize : 10
+axes.grid : True
+grid.alpha : 0.3
+grid.linestyle : --
+axes.prop_cycle : cycler('color', ['005587', '97999B', 'FFB81C', '00A3E0', '4B4B4B'])
+font.family : sans-serif
+font.sans-serif : Arial, Helvetica, DejaVu Sans
+figure.figsize : 10, 6
+figure.dpi : 150
+axes.spines.top : False
+axes.spines.right : False

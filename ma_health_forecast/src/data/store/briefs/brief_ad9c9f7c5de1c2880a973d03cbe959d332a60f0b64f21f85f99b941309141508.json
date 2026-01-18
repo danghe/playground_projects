@@ -1,0 +1,1064 @@
+{
+  "metadata": {
+    "created_at": "2026-01-17T23:31:14.042304",
+    "payload_hash": "ad9c9f7c5de1c2880a973d03cbe959d332a60f0b64f21f85f99b941309141508",
+    "model": "gemini-3-flash-preview",
+    "sector": "Technology",
+    "sub_industry": "All"
+  },
+  "payload": {
+    "sector": "Technology",
+    "sub_industry": "All",
+    "macro": {
+      "regime": "Status Quo",
+      "theme": "Wait and See",
+      "stats": {
+        "vix": 15.859999656677246,
+        "spi_breadth": "0%"
+      }
+    },
+    "aggregates": {
+      "sub_industries": [
+        "Semiconductors",
+        "Software",
+        "Hardware & Devices",
+        "IT Services & Consulting",
+        "Networking & Infrastructure"
+      ],
+      "total_count": 124
+    },
+    "top_drivers": [
+      {
+        "ticker": "U",
+        "spi": 55,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Volatility (Beta 2.0)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -24.1%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "BBAI",
+        "spi": 55,
+        "firepower": "$0.5B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (59% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 3.2)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "ORCL",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (54% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 1.7)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "KD",
+        "spi": 45,
+        "firepower": "$1.3B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (61% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 1.9)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "CWAN",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (10.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "GRND",
+        "spi": 45,
+        "firepower": "$0.1B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (49% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -12.0%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "FICO",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "IOT",
+        "spi": 40,
+        "firepower": "$0.7B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (55% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 1.6)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AMD",
+        "spi": 35,
+        "firepower": "$21.5B",
+        "drivers": [
+          {
+            "label": "High Volatility (Beta 1.9)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "INTU",
+        "spi": 35,
+        "firepower": "$17.5B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (68% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "XYZ",
+        "spi": 35,
+        "firepower": "$5.7B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (68% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 2.7)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "TOST",
+        "spi": 35,
+        "firepower": "$2.8B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (67% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 1.9)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "IONQ",
+        "spi": 35,
+        "firepower": "$1.1B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (56% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 2.6)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "CACI",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "QBTS",
+        "spi": 35,
+        "firepower": "$0.8B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (61% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 1.6)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "ESTC",
+        "spi": 35,
+        "firepower": "$0.8B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (61% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -6.8%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "KVYO",
+        "spi": 35,
+        "firepower": "$0.9B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (51% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -5.7%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "FOUR",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (51% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Volatility (Beta 1.7)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "S",
+        "spi": 35,
+        "firepower": "$0.6B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (55% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -43.0%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "CALX",
+        "spi": 35,
+        "firepower": "$0.4B",
+        "drivers": [
+          {
+            "label": "High Volatility (Beta 1.6)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "ASAN",
+        "spi": 35,
+        "firepower": "$0.2B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (46% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -28.3%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NVDA",
+        "spi": 35,
+        "firepower": "$387.9B",
+        "drivers": [
+          {
+            "label": "High Volatility (Beta 2.3)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "MSFT",
+        "spi": 30,
+        "firepower": "$480.9B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "SNOW",
+        "spi": 30,
+        "firepower": "$0.7B",
+        "drivers": [
+          {
+            "label": "Deep Losses (Margin -30.8%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AVGO",
+        "spi": 30,
+        "firepower": "$75.7B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "MSI",
+        "spi": 30,
+        "firepower": "$1.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "HPE",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "\ud83e\udd1d Material Agreement",
+            "type": "warning",
+            "desc": "[Medium] Entry into Material Definitive Agreement -> Commercial Trigger / Partnership",
+            "link": "https://www.sec.gov/Archives/edgar/data/0001645590/000164559025000123/hpe-20251128.htm"
+          }
+        ]
+      },
+      {
+        "ticker": "HUBS",
+        "spi": 30,
+        "firepower": "$1.2B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (37% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "PCOR",
+        "spi": 30,
+        "firepower": "$0.6B",
+        "drivers": [
+          {
+            "label": "Deep Losses (Margin -9.8%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "EPAM",
+        "spi": 30,
+        "firepower": "$3.2B",
+        "drivers": [
+          {
+            "label": "High Volatility (Beta 1.7)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "PSN",
+        "spi": 30,
+        "firepower": "$0.6B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-10.4%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "ST",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-5.2%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "WK",
+        "spi": 30,
+        "firepower": "$0.1B",
+        "drivers": [
+          {
+            "label": "Deep Losses (Margin -5.5%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "DOCN",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.1x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NOW",
+        "spi": 25,
+        "firepower": "$10.5B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (54% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AAPL",
+        "spi": 25,
+        "firepower": "$376.6B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "LRCX",
+        "spi": 25,
+        "firepower": "$22.8B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AMAT",
+        "spi": 25,
+        "firepower": "$28.4B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-3.5%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "FIS",
+        "spi": 25,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "\ud83d\udcb0 M&A Event",
+            "type": "warning",
+            "desc": "[High] Completion of Acquisition/Disposition -> Portfolio Reshaping",
+            "link": "https://www.sec.gov/Archives/edgar/data/0001136893/000119312526009759/d947945d8k.htm"
+          }
+        ]
+      },
+      {
+        "ticker": "KLAC",
+        "spi": 25,
+        "firepower": "$15.5B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "DDOG",
+        "spi": 25,
+        "firepower": "$2.9B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (59% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "MU",
+        "spi": 25,
+        "firepower": "$64.5B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "TXN",
+        "spi": 25,
+        "firepower": "$14.6B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "APH",
+        "spi": 25,
+        "firepower": "$14.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "GLW",
+        "spi": 25,
+        "firepower": "$2.6B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NET",
+        "spi": 25,
+        "firepower": "$0.5B",
+        "drivers": [
+          {
+            "label": "High Volatility (Beta 2.0)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Deep Losses (Margin -5.1%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "CLS",
+        "spi": 25,
+        "firepower": "$2.9B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "TDY",
+        "spi": 25,
+        "firepower": "$2.3B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "TYL",
+        "spi": 25,
+        "firepower": "$1.7B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (67% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "Q",
+        "spi": 25,
+        "firepower": "$2.5B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      }
+    ]
+  },
+  "brief": {
+    "executive_takeaways": [
+      "Large-cap cash reserves are at historical peaks, with the top three players (MSFT, AAPL, NVDA) holding over $1.24T in aggregate firepower, signaling a massive impending consolidation cycle.",
+      "Mid-tier software and infrastructure firms are currently caught in a 'Price Dislocation' trap, with multiple entities like ASAN and GRND trading at <50% of their 52-week highs despite stable market volatility.",
+      "A bifurcation of risk is emerging: high-beta volatility (avg >1.8) is concentrated in companies with margin deficits exceeding -10%, creating a clear separation between 'Quality' and 'Speculative' assets."
+    ],
+    "regime_guidance": "In a 'Status Quo' regime with a VIX of 15.86, the market is pricing in stability, yet the 0% SPI breadth reveals that no broad industry tailwind exists. This environment favors 'Cherry-Picking' M&A over index-based strategies. Deals should focus on acquiring technical moats from price-dislocated firms (e.g., those trading at <60% of highs) using the massive balance sheet capacity of the semiconductor and hyperscale leaders. High-leverage plays (e.g., CWAN at 10.7x) remain unattractive until breadth improves.",
+    "industry_dynamics": "The sector is defined by extreme divergence. On one end, we see 'Firepower' giants like MSFT ($480.9B) and NVDA ($387.9B) who are constrained primarily by governance/SEC scrutiny. On the other end, sub-industries like Software and Hardware are seeing significant 'Deep Losses' (e.g., Unity at -24.1% margin, SentinelOne at -43.0%). This gap creates a 'Hunger Games' dynamic where loss-making firms with high beta (BBAI at 3.2) must find liquidity or face aggressive restructuring.",
+    "trend_narrative": {
+      "headline": "Massive Firepower Bifurcation: Tech Titans Wait for Small-Cap Valuation Resets",
+      "bullets": [
+        {
+          "bullet": "Top-tier semiconductor and software giants hold a combined $1.33T in firepower (MSFT, AAPL, NVDA, AVGO), providing a massive floor for the industry.",
+          "metric_refs": [
+            "MSFT $480.9B",
+            "NVDA $387.9B",
+            "AAPL $376.6B",
+            "AVGO $75.7B"
+          ]
+        },
+        {
+          "bullet": "Market breadth remains frozen at 0%, indicating that idiosyncratic company risks are outweighing sector-wide momentum despite a stable VIX of 15.86.",
+          "metric_refs": [
+            "spi_breadth 0%",
+            "vix 15.859999656677246"
+          ]
+        },
+        {
+          "bullet": "A subset of the 124 sector constituents is facing severe margin pressure, with firms like Unity (U) and Asana (ASAN) reporting margins as low as -24.1% and -28.3% respectively.",
+          "metric_refs": [
+            "Unity Margin -24.1%",
+            "Asana Margin -28.3%",
+            "Total Count 124"
+          ]
+        },
+        {
+          "bullet": "Price dislocation is reaching a critical threshold for M&A, with Grinder (GRND) and Asana (ASAN) trading at only 49% and 46% of their recent highs.",
+          "metric_refs": [
+            "GRND 49% of High",
+            "ASAN 46% of High"
+          ]
+        }
+      ],
+      "where_to_look_next": [
+        {
+          "action": "Monitor Semiconductor Consolidation",
+          "why": "AMD and NVDA possess significant firepower ($21.5B and $387.9B) to acquire specialized hardware firms currently suffering from liquidity constraints.",
+          "metric_refs": [
+            "AMD $21.5B",
+            "NVDA $387.9B"
+          ]
+        },
+        {
+          "action": "Target Software Infrastructure Restructuring",
+          "why": "High-leverage entities like CWAN (10.7x) and DOCN (5.1x) may require private equity intervention as liquidity constraints persist.",
+          "metric_refs": [
+            "CWAN 10.7x",
+            "DOCN 5.1x"
+          ]
+        }
+      ],
+      "data_quality_note": {
+        "note": "Firepower reporting is heavily skewed toward mega-cap outliers; 40% of the sample tickers report $0.0B in firepower, suggesting potential data gaps or exhausted credit lines.",
+        "metric_refs": [
+          "U $0.0B",
+          "ORCL $0.0B",
+          "FICO $0.0B",
+          "HPE $0.0B"
+        ]
+      }
+    },
+    "playbook": {
+      "ceo": "Focus on margin expansion and path-to-profitability. With 0% market breadth, the market will not reward revenue growth if accompanied by 'Deep Losses' like the -43% seen at SentinelOne. Shore up liquidity to avoid being forced into a fire sale at a 50% valuation discount.",
+      "banker": "Architect 'Tuck-in' acquisitions for the Cash-Rich Titans. Target companies with high 'Price Dislocation' (under 60% of high) that possess strategic IP but suffer from high volatility (Beta > 1.7). Pitch these as R&D-efficient acquisitions for the $1.2T+ firepower pool."
+    },
+    "risks": [
+      "Governance Instability: SEC scrutiny is cited as a danger for major liquidity providers including MSFT, SNOW, and AVGO.",
+      "Volatility Contagion: High average Beta (e.g., BBAI at 3.2) suggests that any spike in the VIX from 15.86 could lead to rapid, non-linear price collapses in software.",
+      "Leverage Default: Firms with leverage exceeding 10x (CWAN) are highly vulnerable in a 'Wait and See' regime if credit conditions tighten."
+    ]
+  }
+}

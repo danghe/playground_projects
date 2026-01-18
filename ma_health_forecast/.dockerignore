@@ -1,0 +1,15 @@
+.git
+.gitignore
+__pycache__
+.venv
+.env
+Dockerfile
+README.md
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+
+# Exclude local caches to ensure fresh cloud state
+src/data/cache/
+src/data/store/radar/

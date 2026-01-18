@@ -1,0 +1,30 @@
+buckets:
+buckets:
+  credit:
+    weight: 0.25
+    series:
+      - {id: BAMLH0A0HYM2, name: HY_OAS, source: fred, freq: M, agg: mean, direction: negative}
+      - {id: DRTSCILM,    name: SLOOS_TIGHTENING, source: fred, freq: M, agg: mean, direction: negative}
+      - {id: T10Y2Y,      name: YIELD_CURVE, source: fred, freq: M, agg: mean, direction: positive}
+  sentiment:
+    weight: 0.25
+    series:
+      - {id: BUSINESS_CONFIDENCE, name: BUSINESS_CONFIDENCE, source: sentiment, freq: M, agg: last, direction: positive}
+      - {id: USEPUINDXD,  name: EPU_INDEX, source: fred, freq: M, agg: mean, direction: negative}
+  valuation:
+    weight: 0.20
+    series:
+      - {id: SP500,       name: SP500, source: valuation, freq: M, agg: last, direction: positive}
+  volatility:
+    weight: 0.20
+    series:
+      - {id: VIXCLS,      name: VIX, source: fred, freq: M, agg: mean, direction: negative}
+  liquidity:
+    weight: 0.10
+    series:
+      - {id: BUSLOANS,    name: CI_LOANS, source: fred, freq: M, agg: last, direction: positive}
+
+normalize: {method: zscore, window: expanding, clip_z: 3.0}
+scale: {method: minmax_rolling, window_months: 240, neutral: 50.0}
+target_frequency: M
+start_date: 2010-01-01

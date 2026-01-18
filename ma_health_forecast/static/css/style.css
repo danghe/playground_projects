@@ -1,0 +1,681 @@
+/* Intralinks Executive Theme */
+:root {
+    --il-navy: #003366;
+    /* Deep Blue */
+    --il-blue: #005587;
+    /* Standard Blue */
+    --il-gold: #FFB81C;
+    /* Gold/Accent */
+    --il-gray-bg: #f8f9fa;
+    /* Soft Gray Background */
+    --il-text: #333333;
+    --il-text-muted: #666666;
+    --il-card-bg: #ffffff;
+    --il-border: #dee2e6;
+    --il-navbar-bg: #ffffff;
+    --il-hover-bg: #f8f9fa;
+    --bs-font-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="dark"] {
+    --il-gray-bg: #0f172a;
+    /* Slate 900 */
+    --il-card-bg: #1e293b;
+    /* Slate 800 */
+    --il-text: #f8fafc;
+    /* Slate 50 */
+    --il-text-muted: #94a3b8;
+    /* Slate 400 */
+    --il-border: #334155;
+    /* Slate 700 */
+    --il-navbar-bg: rgba(30, 41, 59, 0.8);
+    --il-hover-bg: #334155;
+
+    /* Overrides for text visibility in dark mode */
+    --il-navy: #60a5fa;
+    /* Blue 400 */
+    --il-blue: #38bdf8;
+    /* Sky 400 */
+}
+
+body {
+    background-color: var(--il-gray-bg);
+    color: var(--il-text);
+    font-family: var(--bs-font-sans-serif);
+}
+
+/* Glass Navbar */
+.glass-header {
+    background-color: var(--il-navbar-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--il-border);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.text-theme-base {
+    color: var(--il-navy);
+}
+
+.text-theme-accent {
+    color: var(--il-blue);
+}
+
+/* Base Overrides */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--il-text) !important;
+}
+
+.text-dark {
+    color: var(--il-text) !important;
+}
+
+.text-muted {
+    color: var(--il-text-muted) !important;
+}
+
+.bg-white {
+    background-color: var(--il-card-bg) !important;
+    transition: background-color 0.3s;
+}
+
+.border-light,
+.border-secondary {
+    border-color: var(--il-border) !important;
+}
+
+/* Navbar */
+.navbar {
+    /* Removed specific background to use glass-header */
+    /* border-bottom: 3px solid var(--il-navy); Remove old border */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); */
+    padding: 0.75rem 2rem;
+}
+
+.nav-link {
+    color: var(--il-text-muted);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--il-blue);
+    background-color: var(--il-hover-bg);
+}
+
+.btn-icon {
+    color: var(--il-text-muted);
+    transition: color 0.2s;
+}
+
+.btn-icon:hover {
+    color: var(--il-text);
+    background-color: var(--il-hover-bg);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--il-navy) !important;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    color: #555;
+    font-weight: 600;
+    margin-left: 1.5rem;
+    position: relative;
+    padding-bottom: 0.25rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--il-blue);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--il-blue);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 8px;
+    background-color: var(--il-card-bg);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    color: var(--il-navy);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Typography & Metrics */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--il-navy);
+    font-weight: 700;
+}
+
+.metric-card {
+    text-align: center;
+    padding: 1rem;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--il-blue);
+    line-height: 1.2;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Badges & Pills */
+.badge-il {
+    font-weight: 600;
+    padding: 0.5em 0.8em;
+    border-radius: 50rem;
+}
+
+.badge-success-soft {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.badge-danger-soft {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.badge-warning-soft {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--il-blue);
+    border-color: var(--il-blue);
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: var(--il-navy);
+    border-color: var(--il-navy);
+}
+
+/* Loading Effects */
+.spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    border-radius: 8px;
+}
+
+.loading .spinner-overlay {
+    display: flex;
+}
+
+.shimmer {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 100%;
+    animation: placeholderShimmer 1s linear infinite;
+}
+
+@keyframes placeholderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+/* Table Enhancements (Deal Radar) */
+.table-responsive {
+    border-radius: 0 0 8px 8px;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: var(--il-navy);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border-top: none;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 85, 135, 0.05);
+}
+
+.activist-alert {
+    background-color: #fff8e1 !important;
+    /* Soft yellow hint */
+}
+
+/* Deal Radar Specifics (Light Mode Adaptation) */
+
+/* Radar Table Overrides for Executive Theme */
+.radar-table {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.radar-table th {
+    background-color: #f8f9fa;
+    color: var(--il-navy);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 1rem;
+    border-bottom: 2px solid #dee2e6;
+    border-top: none;
+    letter-spacing: 0.5px;
+}
+
+.radar-table td {
+    background-color: white;
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+}
+
+.radar-table tr:last-child td {
+    border-bottom: none;
+}
+
+.radar-table tr:hover td {
+    background-color: #f1f8ff;
+    /* Soft Blue Highlight */
+}
+
+/* Sparklines */
+.sparkline-svg {
+    stroke: var(--il-blue);
+    stroke-width: 1.5;
+    fill: none;
+}
+
+/* Heatmap Containers */
+.heatmap-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.heatmap-tile {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.75rem;
+    min-width: 160px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.heatmap-tile:hover,
+.heatmap-tile.active {
+    border-color: var(--il-blue);
+    box-shadow: 0 4px 6px rgba(0, 85, 135, 0.15);
+    background-color: #f8fbff;
+}
+
+/* Lens Navigation */
+.lens-nav {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    margin-bottom: 1.5rem;
+}
+
+.lens-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #6c757d;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.lens-btn:hover {
+    color: var(--il-navy);
+    background-color: #f8f9fa;
+}
+
+.lens-btn.active {
+    background-color: var(--il-navy);
+    color: white;
+    border-color: var(--il-navy);
+}
+
+.lens-btn.active.active-banker {
+    background-color: #dc3545;
+    /* Red */
+    border-color: #dc3545;
+}
+
+.lens-btn.active.active-corpdev {
+    background-color: #198754;
+    /* Green */
+    border-color: #198754;
+}
+
+/* Feed Cards */
+.feed-container {
+    height: calc(100vh - 180px);
+    /* Adjusted for layout */
+    overflow-y: auto;
+    padding-left: 1rem;
+    border-left: 1px solid #eee;
+}
+
+.feed-card {
+    background: white;
+    border: 1px solid #eee;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    position: relative;
+    border-left: 3px solid #ccc;
+}
+
+.feed-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.feed-card.fc-danger {
+    border-left-color: #dc3545;
+}
+
+.feed-card.fc-primary {
+    border-left-color: var(--il-blue);
+}
+
+.feed-card.fc-success {
+    border-left-color: #198754;
+}
+
+/* Control Panel (Market State Bar Replacement) */
+.market-state-bar {
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.num-font {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Unified Badge Styles for Deal Radar */
+.badge-light-mode {
+    font-weight: 500;
+    font-size: 0.7rem;
+}
+
+/* Highlighting Modes (Lens Logic for Light Mode) */
+.mode-banker .cell-buyer,
+.mode-banker .cell-fit {
+    opacity: 0.3;
+}
+
+.mode-banker .cell-seller {
+    font-weight: 800;
+    color: #dc3545;
+}
+
+.mode-corpdev .cell-seller,
+.mode-corpdev .cell-fit {
+    opacity: 0.3;
+}
+
+.mode-corpdev .cell-corpdev,
+
+/* Context Menu */
+.context-menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1050;
+    min-width: 200px;
+    padding: 0.5rem 0;
+    display: none;
+    animation: fadeIn 0.1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.context-menu-header {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--il-navy);
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+
+.context-menu-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    color: var(--il-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background 0.1s;
+}
+
+.context-menu-item:hover {
+    background-color: #f1f8ff;
+    color: var(--il-blue);
+}
+
+.context-menu-item i {
+    width: 20px;
+    margin-right: 8px;
+    color: var(--il-blue);
+}
+
+/* Dossier Modal Tweaks */
+.dossier-section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--il-navy);
+    font-weight: 700;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.dossier-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}
+
+.pulse-text {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Right Drawer */
+.right-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    background-color: var(--il-card-bg);
+    /* Use theme variable */
+    color: var(--il-text);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1040;
+    /* Below tooltip (1050) but above nav (1030) */
+    overflow-y: auto;
+}
+
+[data-theme="dark"] .right-drawer {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.right-drawer.open {
+    transform: translateX(0);
+}
+
+/* Glass Box Tooltip */
+.glass-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.glass-tooltip-content {
+    visibility: hidden;
+    width: 250px;
+    background-color: var(--il-card-bg);
+    color: var(--il-text);
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1060;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--il-border);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+
+/* Arrow */
+.glass-tooltip-content::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--il-border) transparent transparent transparent;
+}
+
+.glass-tooltip:hover .glass-tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Sortable Headers */
+.sortable-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sortable-header:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .sortable-header:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}

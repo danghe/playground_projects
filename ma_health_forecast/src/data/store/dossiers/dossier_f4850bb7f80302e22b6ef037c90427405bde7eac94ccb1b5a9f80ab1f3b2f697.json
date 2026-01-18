@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T14:29:53.758636",
+    "hash": "f4850bb7f80302e22b6ef037c90427405bde7eac94ccb1b5a9f80ab1f3b2f697",
+    "model": "gemini-3-flash-preview"
+  },
+  "payload": {
+    "name": "0001341439",
+    "ticker": "ORCL",
+    "retrieved_items": [
+      {
+        "id": "sec_2589f9de",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Strong Insider Confidence (5 buys)",
+        "url": "https://www.sec.gov/edgar/browse/?CIK=0001341439",
+        "published_at": "2026-01-18",
+        "snippet": "Insiders buying dip before news?",
+        "tags": [
+          "\ud83d\udfe2 Insider Cluster",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_a902bd92",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000119312526009002/d34442d8k.htm",
+        "published_at": "2026-01-09",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_49ee9674",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000119312525291441/d43173d8k.htm",
+        "published_at": "2025-11-21",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "sec_e9f17369",
+        "source_type": "SEC",
+        "source_name": "SEC EDGAR",
+        "title": "Departure of Directors/Officers",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000119312525210089/d921500d8k.htm",
+        "published_at": "2025-09-22",
+        "snippet": "Governance Instability",
+        "tags": [
+          "\ud83d\udc4b Mgmt Departure",
+          "Regulatory"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      },
+      {
+        "id": "news_0",
+        "source_type": "News",
+        "source_name": "Financial News",
+        "title": "",
+        "url": "",
+        "published_at": "1970-01-01",
+        "snippet": "Publisher: None. Type: None.",
+        "tags": [
+          "News",
+          "General"
+        ]
+      }
+    ]
+  },
+  "dossier": {
+    "meta": {
+      "ticker": "ORCL",
+      "as_of": "2026-01-18"
+    },
+    "why_it_matters_now": [
+      {
+        "bullet": "A significant insider buying cluster (5 separate buys) suggests high confidence in valuation or an imminent positive catalyst despite broader market volatility.",
+        "source_refs": [
+          "sec_2589f9de"
+        ]
+      },
+      {
+        "bullet": "Aggressive executive and director turnover throughout late 2025 and early 2026 indicates a potentially radical restructuring or shift in corporate governance.",
+        "source_refs": [
+          "sec_a902bd92",
+          "sec_49ee9674",
+          "sec_e9f17369"
+        ]
+      },
+      {
+        "bullet": "Oracle's rapid pivot to OCI (Oracle Cloud Infrastructure) and AI-driven data centers makes it a pivotal player in the current infrastructure race, often necessitating tactical acquisitions.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "mna_posture": {
+      "label": "Strategic Buyer",
+      "confidence": "High",
+      "why": [
+        {
+          "point": "Oracle historically utilizes M&A to acquire market share in lagging sectors (e.g., Cerner for Healthcare) and to bolster its SaaS portfolio.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "point": "The 'insider dip buying' suggests leadership believes the stock is a currency for deals or currently undervalued relative to its cloud growth trajectory.",
+          "source_refs": [
+            "sec_2589f9de"
+          ]
+        }
+      ]
+    },
+    "signals_next_90d": [
+      {
+        "trigger": "Board Reconstitution",
+        "implication": "Following multiple departures, new board appointments will signal whether the company is leaning towards aggressive growth or fiscal consolidation.",
+        "source_refs": [
+          "sec_a902bd92",
+          "sec_49ee9674"
+        ]
+      },
+      {
+        "trigger": "OCI Revenue Growth Acceleration",
+        "implication": "If cloud growth exceeds 25-30% YoY, expect Oracle to use its balance sheet for high-multiple AI software acquisitions.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ],
+    "deal_fit": {
+      "recommended": [
+        {
+          "type": "Vertical SaaS Bolt-on",
+          "why": "Oracle thrives on acquiring industry-specific software (Healthcare, ERP) to integrate into its OCI ecosystem.",
+          "source_refs": [
+            "Market Context"
+          ]
+        },
+        {
+          "type": "AI Infrastructure/Tooling",
+          "why": "Critical for maintaining OCI's competitive edge against AWS and Azure in the generative AI space.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ],
+      "avoid": [
+        {
+          "type": "Mega-Cap Hardware",
+          "why": "High leverage from the Cerner acquisition and a focus on high-margin software/cloud services make capital-intensive hardware deals unattractive.",
+          "source_refs": [
+            "Market Context"
+          ]
+        }
+      ]
+    },
+    "open_questions": [
+      {
+        "q": "What is the primary driver behind the cluster of executive departures?",
+        "why_unclear": "The SEC filings note departures but do not specify if they are related to retirement, performance, or internal strategic disagreements.",
+        "source_refs": [
+          "sec_a902bd92",
+          "sec_49ee9674",
+          "sec_e9f17369"
+        ]
+      },
+      {
+        "q": "Is a major divestiture of legacy business units planned?",
+        "why_unclear": "Management churn often precedes a spin-off or sale of non-core assets to focus on high-growth cloud segments.",
+        "source_refs": [
+          "Market Context"
+        ]
+      }
+    ]
+  }
+}

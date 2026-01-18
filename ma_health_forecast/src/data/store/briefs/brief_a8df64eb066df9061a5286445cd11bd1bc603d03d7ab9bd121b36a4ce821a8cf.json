@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T20:46:03.986693",
+    "payload_hash": "a8df64eb066df9061a5286445cd11bd1bc603d03d7ab9bd121b36a4ce821a8cf",
+    "model": "gemini-3-flash-preview",
+    "sector": "Tech",
+    "sub_industry": null
+  },
+  "payload": {
+    "type": "deal_command_brief_v2",
+    "sector": "Tech",
+    "financing": {},
+    "sellers_hash": "a7acc649",
+    "buyers_hash": "6eaaa6d6"
+  },
+  "brief": {
+    "environment_status": "Strategic Rationalization and Leverage-Driven Divestiture Window",
+    "executive_summary": "The tech M&A landscape is currently dominated by a supply-side surge in carve-out opportunities as highly leveraged players like Oracle and WEX seek to simplify portfolios. While leverage capacity is capped at 4-5x, preventing aggressive LBOs, massive cash reserves from buyers like Sony and Wipro ($1.4T+ combined firepower) create a strong bid for high-quality strategic assets. We see a unique window where 'Forced Sellers' like LPL and strategic divesters are meeting cash-rich consolidators looking to solve growth stalls.",
+    "key_themes": [
+      {
+        "theme": "Portfolio Optimization & De-leveraging",
+        "desc": "High-leverage entities (ORCL at 5.0x, WEX at 5.7x) are initiating strategic reviews to carve out non-core assets and repair balance sheets.",
+        "tickers": [
+          "ORCL",
+          "WEX",
+          "XYZ"
+        ],
+        "deal_type": "Carve-out"
+      },
+      {
+        "theme": "Growth Stall Arbitrage",
+        "desc": "Strategic consolidators with low leverage (<2x) and massive firepower are targeting distressed valuations to pivot into AI and Recurring Revenue models.",
+        "tickers": [
+          "SONY",
+          "WIT",
+          "UMC"
+        ],
+        "deal_type": "Strategic M&A"
+      },
+      {
+        "theme": "Activist-Driven FinTech Consolidation",
+        "desc": "SS&C is facing 13D pressure and margin compression, forcing a dual-track process of selling non-core FinTech units while simultaneously acting as a consolidator.",
+        "tickers": [
+          "SSNC"
+        ],
+        "deal_type": "Carve-out / Strategic M&A"
+      }
+    ],
+    "top_opportunities": [
+      "SONY -> SSNC (FinTech Asset): Utilizing Sony's $5.8T firepower to acquire high-margin FinTech carve-outs to solve Sony's growth stall. (Carve-out, Est. $2.5B-$4.0B)",
+      "WIT -> ORCL (Carve-out): Wipro leveraging its $881B firepower to acquire enterprise assets from a de-leveraging Oracle. (Strategic M&A, Est. $15.0B+)",
+      "UMC -> LPL: Cash-rich UMC acquiring a forced-seller in valuation distress (<5x) to bolster infrastructure. (Take-private, Est. $4.3B)",
+      "SSNC -> WEX (Carve-out): SSNC acting as a consolidator for WEX's high-leverage (5.7x) divestitures to bolster recurring revenue. (Carve-out, Est. $1.5B)",
+      "LPL (Buyer) -> XYZ (Carve-out): LPL targeting XYZ's strategic review assets to pivot into AI Infrastructure. (Strategic M&A, Est. $5.0B)"
+    ],
+    "risks": [
+      "Leverage Ceiling: With capacity capped at 4-5x, buyers with existing high leverage (WEX, ORCL) face limited flexibility for all-cash bids.",
+      "Valuation Gap: Distressed sellers like LPL may resist low-multiple offers despite forced-seller status, creating execution friction."
+    ],
+    "action_items": [
+      "Prepare 'Project Alpha' pitch for SONY regarding SS&C's FinTech carve-out opportunities.",
+      "Conduct a deep-dive debt audit on LPL to determine the feasibility of a credit-bid or distressed take-private.",
+      "Engage Oracle's corporate development team to identify specific perimeters for the $549B entity's strategic review."
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+sifma:
+  ig_issuance:
+    url: sample
+    expect: {type: xls_or_xlsx, sheet_like: Corporate Bond Issuance, date_column_like: Date, value_column_like: Investment Grade}
+    cache_file: data_external/sifma_corp_issuance.xlsx
+  hy_issuance:
+    url: sample
+    expect: {type: xls_or_xlsx, sheet_like: Corporate Bond Issuance, date_column_like: Date, value_column_like: High Yield}
+    cache_file: data_external/sifma_corp_issuance.xlsx
+renaissance:
+  ipo_counts:
+    url: sample
+    cache_file: data_external/renaissance_ipo_counts.csv
+imaa:
+  deal_counts:
+    url: sample
+    cache_file: data_external/imaa_deal_counts.csv

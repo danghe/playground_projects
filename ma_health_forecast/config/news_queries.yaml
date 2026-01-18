@@ -1,0 +1,25 @@
+keywords:
+  mna:
+    - "acquisition"
+    - "merger"
+    - "take-private"
+    - "buyout"
+    - "strategic review"
+    - "divestiture"
+    - "carve-out"
+    - "hired bankers"
+    - "tender offer"
+    - "exploring options"
+    - "strategic alternatives"
+
+sector_hints:
+  Tech:
+    - "software"
+    - "cloud"
+    - "SaaS"
+    - "semiconductor"
+  Healthcare:
+    - "biotech"
+    - "pharma"
+    - "drug"
+    - "clinical"

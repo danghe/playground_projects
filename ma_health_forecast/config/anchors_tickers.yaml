@@ -1,0 +1,10 @@
+Tech:
+  Semiconductors: ["NVDA", "AMD", "INTC", "QCOM", "AVGO"]
+  Software: ["MSFT", "CRM", "ADBE", "ORCL", "SAP"]
+  Internet: ["GOOGL", "META", "AMZN"]
+Healthcare:
+  Biotech: ["VRTX", "REGN", "AMGN"]
+  Pharma: ["LLY", "JNJ", "PFE", "MRK"]
+Financials:
+  Banks: ["JPM", "BAC", "C", "GS"]
+  Fintech: ["V", "MA", "PYPL", "SQ"]

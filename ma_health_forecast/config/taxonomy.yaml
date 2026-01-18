@@ -1,0 +1,207 @@
+sub_sectors:
+  # 1. Semiconductors
+  Semiconductors:
+    sic:
+      - 3674 # Semiconductors & Related Devices
+    keywords:
+      - "semiconductor"
+      - "chip"
+      - "foundry"
+      - "fab"
+      - "wafer"
+      - "GPU"
+      - "CPU"
+      - "DRAM"
+      - "NAND"
+      - "SoC"
+      - "integrated circuit"
+      - "mixed signal"
+      - "analog devices"
+
+  # 2. Semiconductor Equipment
+  Semiconductor Equipment:
+    sic:
+      - 3559 # Special Industry Machinery (Check keywords)
+      - 3825 # Instruments for Measuring Electrical Signals
+    keywords:
+      - "semiconductor equipment"
+      - "wafer fab equipment"
+      - "deposition"
+      - "lithography"
+      - "metrology"
+      - "etch"
+      - "inspection system"
+      - "ASML"
+      - "Applied Materials"
+      - "Lam Research"
+      - "KLA"
+
+  # 3. Hardware & Devices
+  Hardware & Devices:
+    sic:
+      - 3571 # Electronic Computers
+      - 3572 # Computer Storage Devices
+      - 3575 # Computer Terminals
+      - 3577 # Computer Peripheral Equipment
+      - 3661 # Telephone & Telegraph Apparatus
+      - 3663 # Radio & TV Broadcasting & Communications Equipment
+    keywords:
+      - "hardware"
+      - "device"
+      - "PC"
+      - "laptop"
+      - "smartphone"
+      - "handset"
+      - "wearable"
+      - "peripheral"
+      - "storage system"
+      - "consumer electronics"
+      - "server hardware"
+      - "personal computer"
+
+  # 4. Networking & Infrastructure
+  Networking & Infrastructure:
+    sic:
+      - 3669 # Communications Equipment, NEC
+    keywords:
+      - "networking"
+      - "router"
+      - "switch"
+      - "optical"
+      - "datacenter infrastructure"
+      - "network gear"
+      - "network equip"
+      - "Arista"
+      - "Juniper"
+      - "Cisco"
+
+  # 5. Software
+  Software:
+    sic:
+      - 7371 # Computer Programming Services
+      - 7372 # Prepackaged Software (Core SaaS)
+      - 7373 # Computer Integrated Systems Design
+    keywords:
+      - "software"
+      - "SaaS"
+      - "cloud platform"
+      - "application"
+      - "enterprise software"
+      - "ERP"
+      - "CRM"
+      - "database"
+      - "operating system"
+      - "devops"
+      - "middleware"
+
+  # 6. IT Services & Consulting
+  IT Services & Consulting:
+    sic:
+      - 7376 # Computer Facilities Management
+      - 7379 # Computer Related Services
+    keywords:
+      - "IT services"
+      - "consulting"
+      - "systems integration"
+      - "outsourcing"
+      - "managed services"
+      - "digital transformation"
+      - "professional services"
+      - "BPO"
+      - "technology services"
+
+  # 7. Internet & Platforms
+  Internet & Platforms:
+    sic: []
+    keywords:
+      - "internet"
+      - "online marketplace"
+      - "e-commerce"
+      - "digital advertising"
+      - "social media"
+      - "search engine"
+      - "interactive media"
+      - "streaming platform"
+      - "web platform"
+
+  # 8. Cybersecurity
+  Cybersecurity:
+    sic: []
+    keywords:
+      - "cybersecurity"
+      - "network security"
+      - "endpoint security"
+      - "information security"
+      - "identity management"
+      - "IAM"
+      - "SIEM"
+      - "XDR"
+      - "zero trust"
+      - "firewall"
+      - "threat detection"
+
+  # 9. Data & Analytics
+  Data & Analytics:
+    sic:
+      - 7374 # Computer Processing & Data Preparation
+    keywords:
+      - "data analytics"
+      - "big data"
+      - "business intelligence"
+      - "data platform"
+      - "information services"
+      - "data warehouse"
+      - "artificial intelligence platform"
+      - "Snowflake"
+      - "Palantir"
+
+  # 10. FinTech (Strict)
+  FinTech:
+    sic:
+      - 6199 # Finance Services
+    keywords:
+      - "fintech"
+      - "financial technology"
+      - "digital payment"
+      - "payment processing"
+      - "transaction processing"
+      - "financial software"
+      - "banking software"
+      - "digital wallet"
+      - "point of sale"
+
+  # 11. Electronic Gaming & Multimedia
+  Electronic Gaming & Multimedia:
+    sic:
+      - 7990 # Misc Amusement & Recreation
+      - 7372 # Prepackaged Software (often used for games)
+    keywords:
+      - "video game"
+      - "gaming"
+      - "esports"
+      - "mobile game"
+      - "interactive entertainment"
+      - "console"
+      - "game engine"
+      - "metaverse"
+      - "virtual world"
+      - "Roblox"
+      - "Electronic Arts"
+      - "Take-Two"
+      - "Nintendo"
+      - "Sony"
+      - "Unity"
+      - "Activision"
+
+priority:
+  - "Semiconductors"
+  - "Semiconductor Equipment"
+  - "Hardware & Devices"
+  - "Networking & Infrastructure"
+  - "Software"
+  - "Cybersecurity"
+  - "Data & Analytics"
+  - "Internet & Platforms"
+  - "FinTech"
+  - "Electronic Gaming & Multimedia"
+  - "IT Services & Consulting"

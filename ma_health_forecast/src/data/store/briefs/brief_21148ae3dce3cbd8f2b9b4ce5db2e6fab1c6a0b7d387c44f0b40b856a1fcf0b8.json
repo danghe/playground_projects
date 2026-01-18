@@ -1,0 +1,1067 @@
+{
+  "metadata": {
+    "created_at": "2026-01-18T14:29:11.924689",
+    "payload_hash": "21148ae3dce3cbd8f2b9b4ce5db2e6fab1c6a0b7d387c44f0b40b856a1fcf0b8",
+    "model": "gemini-3-flash-preview",
+    "sector": "Real Estate",
+    "sub_industry": "All"
+  },
+  "payload": {
+    "sector": "Real Estate",
+    "sub_industry": "All",
+    "macro": {
+      "regime": "Status Quo",
+      "theme": "Wait and See",
+      "stats": {
+        "vix": 15.859999656677246,
+        "spi_breadth": "0%"
+      }
+    },
+    "aggregates": {
+      "sub_industries": [
+        "REIT - Residential",
+        "REIT - Diversified",
+        "Real Estate Services",
+        "REIT - Specialty",
+        "REIT - Healthcare Facilities",
+        "REIT - Retail",
+        "REIT - Industrial",
+        "REIT - Mortgage",
+        "REIT - Office",
+        "REIT - Hotel & Motel",
+        "Real Estate - Development",
+        "Real Estate - Diversified"
+      ],
+      "total_count": 82
+    },
+    "top_drivers": [
+      {
+        "ticker": "COLD",
+        "spi": 60,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (57% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Rev. Contraction (-1.4%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "CCI",
+        "spi": 55,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-4.3%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (7.6x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AKR",
+        "spi": 55,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-2.4%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (8.4x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "ARE",
+        "spi": 50,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (54% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Rev. Contraction (-5.0%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "HR",
+        "spi": 50,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-5.6%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (6.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "KRG",
+        "spi": 50,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-1.1%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (5.8x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "HPP",
+        "spi": 50,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Price Dislocation (40% of High)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Rev. Contraction (-5.7%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NHI",
+        "spi": 50,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-11.7%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (5.2x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "WY",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "IRM",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (8.3x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AMT",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.4x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AVB",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (4.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "EQR",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (4.6x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "INVH",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.5x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "UDR",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.9x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "KRC",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-3.5%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (6.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "IRT",
+        "spi": 45,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.1x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "SPG",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.4x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "EXR",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "VTR",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "O",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "PLD",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.4x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NLY",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (99.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "WPC",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.1x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "REXR",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (4.5x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "FRT",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.9x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "COMP",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (49.3x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NNN",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "EPRT",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.5x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "OUT",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (10.2x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "EPR",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.4x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "HIW",
+        "spi": 40,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-1.5%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "High Leverage (7.2x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "BXP",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (8.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "EGP",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "TRNO",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "SLG",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (39.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "APLE",
+        "spi": 35,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Rev. Contraction (-1.3%)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "VICI",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (4.7x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "ESS",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.4x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "DLR",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.2x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "AMH",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.1x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "DOC",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (6.2x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "BRX",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.9x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "RHP",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "HHH",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (4.8x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "NSA",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (7.5x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "BXMT",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (99.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "LXP",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.0x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Governance Instab. (SEC)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "FCPT",
+        "spi": 30,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "High Leverage (5.6x)",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          }
+        ]
+      },
+      {
+        "ticker": "MAA",
+        "spi": 25,
+        "firepower": "$0.0B",
+        "drivers": [
+          {
+            "label": "Liquidity Constraints",
+            "type": "danger",
+            "desc": "High SPI Component",
+            "link": null
+          },
+          {
+            "label": "\ud83e\udd1d Material Agreement",
+            "type": "warning",
+            "desc": "[Medium] Entry into Material Definitive Agreement -> Commercial Trigger / Partnership",
+            "link": "https://www.sec.gov/Archives/edgar/data/0000912595/000119312525248770/maa-20251021.htm"
+          }
+        ]
+      }
+    ]
+  },
+  "brief": {
+    "executive_takeaways": [
+      "The sector is in a state of 'frozen distress' where 0% SPI breadth indicates no companies are currently outperforming the market despite a stable VIX of 15.86.",
+      "Revenue contraction is the primary operational headwind, with sub-industries like Healthcare (NHI at -11.7%) and Office (HPP at -5.7%) leading the decline.",
+      "Capital structure risks have reached a critical threshold, with mortgage and office REITs displaying extreme leverage (NLY at 99.0x, SLG at 39.0x) necessitating urgent balance sheet restructuring."
+    ],
+    "regime_guidance": "In a 'Status Quo' regime with the VIX at 15.85, the lack of volatility is deceiving. For Real Estate, this environment encourages a 'Wait and See' approach that is dangerous given the 0% SPI breadth. Investors should avoid growth-oriented 'buy-and-build' strategies and instead focus on 'Balance Sheet Arbitrage'\u2014targeting companies with price dislocations (like HPP at 40% of high) where debt can be restructured before a potential volatility spike.",
+    "industry_dynamics": "The industry is bifurcated between 'standard' high leverage (6-8x) and 'structural' distress (>30x). While Residential REITs like AVB (4.7x) and EQR (4.6x) maintain manageable leverage, they are plagued by liquidity constraints. Meanwhile, the Office and Specialty segments are facing a double-tap of revenue contraction (ARE at -5.0%, BXP at 8.7x leverage) and SEC-related governance instability, suggesting that the 'Status Quo' theme is actually a period of quiet erosion for traditional commercial assets.",
+    "trend_narrative": {
+      "headline": "Real Estate Stagnation: Revenue Contraction and Extreme Leverage Freeze Market Activity",
+      "bullets": [
+        {
+          "bullet": "Systemic revenue contraction is visible across 82 sub-industry constituents, with NHI declining -11.7% and ARE dropping -5.0%.",
+          "metric_refs": [
+            "NHI -11.7%",
+            "ARE -5.0%",
+            "82 constituents"
+          ]
+        },
+        {
+          "bullet": "Leverage ratios in the mortgage and office sectors have disconnected from historical norms, specifically NLY at 99.0x and SLG at 39.0x.",
+          "metric_refs": [
+            "NLY 99.0x",
+            "SLG 39.0x"
+          ]
+        },
+        {
+          "bullet": "Market sentiment remains depressed as HPP trades at only 40% of its high and ARE at 54%, reflecting significant price dislocation.",
+          "metric_refs": [
+            "HPP 40% of High",
+            "ARE 54% of High"
+          ]
+        },
+        {
+          "bullet": "Market-wide momentum is non-existent with SPI breadth at 0%, despite a relatively calm VIX of 15.86.",
+          "metric_refs": [
+            "0% SPI breadth",
+            "VIX 15.86"
+          ]
+        }
+      ],
+      "where_to_look_next": [
+        {
+          "action": "Distressed Office Recapitalization",
+          "why": "Tickers like HPP and ARE show massive price dislocation (46-60% below highs) and revenue contraction, creating entry points for take-private maneuvers.",
+          "metric_refs": [
+            "HPP 40% of High",
+            "ARE -5.0%"
+          ]
+        },
+        {
+          "action": "Residential Liquidity Plays",
+          "why": "Large-cap residential (MAA, AVB) are signaling liquidity constraints despite lower leverage (4-5x), suggesting potential for asset divestitures.",
+          "metric_refs": [
+            "AVB 4.7x",
+            "MAA 25 SPI"
+          ]
+        }
+      ],
+      "data_quality_note": {
+        "note": "Reported 'Firepower' is at $0.0B across the entire sample of 82 companies, suggesting a sector-wide freeze in acquisition capacity or significant underreporting of dry powder.",
+        "metric_refs": [
+          "$0.0B Firepower",
+          "82 companies"
+        ]
+      }
+    },
+    "playbook": {
+      "ceo": "Pivot from acquisition-led growth to 'Survival Operations.' Prioritize debt maturity extensions immediately. In sub-sectors with revenue contraction (like the -11.7% seen at NHI), focus on disposing of non-core assets to alleviate liquidity constraints before the 'Status Quo' regime ends.",
+      "banker": "Focus on Liability Management Exercises (LMEs). Pitch restructuring mandates to highly levered entities (NLY, SLG) and secondary offerings for companies like MAA who have recently entered material definitive agreements but face liquidity hurdles."
+    },
+    "risks": [
+      "Sudden VIX expansion breaking the 'Status Quo' and triggering margin calls on 90x+ levered entities.",
+      "SEC-driven governance instability impacting valuation multiples for BXP and DLR.",
+      "Continued revenue contraction in healthcare and office assets leading to covenant breaches."
+    ]
+  }
+}

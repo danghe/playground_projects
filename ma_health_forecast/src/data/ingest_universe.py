@@ -15,41 +15,15 @@ STORE_DIR = os.path.join(os.path.dirname(__file__), 'store')
 
 # Target Sectors to build robust universe for (Scale: 200+ total)
 TARGET_SECTORS = ['Technology', 'Healthcare', 'Financial Services', 'Energy', 'Industrials'] # Broaden search
-TARGET_EXCHANGES = ['NASDAQ', 'NYSE']
+TARGET_EXCHANGES = ['NASDAQ', 'NYSE', 'NYSE American']
 
-# Priority tickers that MUST be included regardless of other filters
-# These represent major companies of strategic importance
-PRIORITY_TICKERS = [
-    # Major Tech
-    'NVDA', 'AAPL', 'MSFT', 'GOOGL', 'META', 'AMZN', 'TSLA',
-    # FinTech & Financial Data
-    'SSNC',  # SS&C Technologies Holdings Inc (User Priority)
-    'FIS',   # Fidelity National Information Services
-    'FISV',  # Fiserv
-    'ADP',   # Automatic Data Processing
-    'PAYX',  # Paychex
-    'SQ',    # Block (Square)
-    'PYPL',  # PayPal
-    'V',     # Visa
-    'MA',    # Mastercard
-    'INTU',  # Intuit
-    # Semiconductors  
-    'AMD', 'INTC', 'AVGO', 'QCOM', 'TXN', 'MU', 'AMAT', 'LRCX', 'KLAC',
-    # Enterprise Software
-    'CRM', 'ORCL', 'SAP', 'NOW', 'ADBE', 'WDAY', 'SNOW', 'DDOG', 'ZS',
-    # Electronic Gaming
-    'EA',    # Electronic Arts
-    'TTWO',  # Take-Two Interactive
-    'RBLX',  # Roblox
-    'U',     # Unity Software
-    'SONY',  # Sony Group
-    'APP',   # AppLovin (Mobile Gaming/AdTech)
-]
+# Priority tickers are now loaded from config/priority_universe.yaml
+PRIORITY_TICKERS = [] # Will be populated by load_priority_config()
 
 # SEC Setup
 SEC_URL = "https://www.sec.gov/files/company_tickers_exchange.json"
 HEADERS = {
-    "User-Agent": "Intralinks Analysis tool/2.0 (admin@maforecast.com)",
+    "User-Agent": "M&A-Health-Forecast/2.0 (admin@maforecast.com)",
     "Accept-Encoding": "gzip, deflate",
     "Host": "www.sec.gov"
 }
@@ -57,6 +31,35 @@ HEADERS = {
 def ensure_store():
     if not os.path.exists(STORE_DIR):
         os.makedirs(STORE_DIR)
+
+def load_priority_config():
+    config_path = os.path.join(BASE_DIR, 'config', 'priority_universe.yaml')
+    if not os.path.exists(config_path):
+        print(f"Warning: Priority Config not found at {config_path}")
+        return []
+    
+    try:
+        with open(config_path, 'r') as f:
+            data = yaml.safe_load(f)
+            
+        tickers = []
+        # Recursively extract all strings from the YAML structure
+        def extract_tickers(node):
+            if isinstance(node, str):
+                tickers.append(node)
+            elif isinstance(node, list):
+                for item in node:
+                    extract_tickers(item)
+            elif isinstance(node, dict):
+                for key, value in node.items():
+                    extract_tickers(value)
+                    
+        extract_tickers(data)
+        # Unique and sorted
+        return sorted(list(set(tickers)))
+    except Exception as e:
+        print(f"Error loading priority config: {e}")
+        return []
 
 def load_taxonomy():
     if not os.path.exists(TAXONOMY_FILE):
@@ -327,6 +330,11 @@ def run_ingestion(limit=300, force=False):
         print("--- Ingestion Skipped (Data is Fresh < 24h) ---")
         return
 
+    # 0.5 Load Priority Config
+    global PRIORITY_TICKERS
+    PRIORITY_TICKERS = load_priority_config()
+    print(f"Loaded {len(PRIORITY_TICKERS)} priority tickers from config.")
+
     # 1. Master List
     sec_data = fetch_sec_tickers()
     candidates = [c for c in sec_data if c.get('exchange') in TARGET_EXCHANGES]
@@ -432,7 +440,8 @@ def run_ingestion(limit=300, force=False):
             
             # Must have minimal data (Market Cap)
             # LOWER THRESHOLD for Tech to ensure breadth (200M vs 500M)
-            min_mcap = 200_000_000 # $200M
+            # UPDATE: Lowered to $10M per user request to capture micro-cap
+            min_mcap = 10_000_000 # $10M
             if data['market_cap'] < min_mcap:
                 continue
                 

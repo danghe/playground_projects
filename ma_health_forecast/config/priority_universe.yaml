@@ -1,0 +1,83 @@
+# Priority Universe Configuration
+# These companies are fetched FIRST and unconditionally included in the universe.
+# Organized by sector for readability, but flattened during ingestion.
+
+Technology:
+  Major_Tech:
+    - NVDA
+    - AAPL
+    - MSFT
+    - GOOGL
+    - META
+    - AMZN
+    - TSLA
+  
+  Semiconductors:
+    - AMD
+    - INTC
+    - AVGO
+    - QCOM
+    - TXN
+    - MU
+    - AMAT
+    - LRCX
+    - KLAC
+    - TSM   # [NEW] TSMC
+    - ARM   # [NEW] ARM Holdings
+
+  Enterprise_Software:
+    - CRM
+    - ORCL
+    - SAP
+    - NOW
+    - ADBE
+    - WDAY
+    - SNOW
+    - DDOG
+    - ZS
+
+  Cybersecurity: # [NEW]
+    - PANW
+    - FTNT
+    - CRWD
+  
+  Electronic_Gaming:
+    - EA
+    - TTWO
+    - RBLX
+    - U
+    - SONY
+    - APP
+
+Financial_Services:
+  Fintech_Data:
+    - SSNC
+    - FIS
+    - FISV
+    - ADP
+    - PAYX
+    - SQ
+    - PYPL
+    - V
+    - MA
+    - INTU
+
+Healthcare: # [NEW] Expanded MedTech coverage
+  MedTech_Devices:
+    - ISRG  # Intuitive Surgical
+    - ABT   # Abbott
+    - BSX   # Boston Scientific
+    - ZBH   # Zimmer Biomet
+    - GEHC  # GE HealthCare
+    - DXCM  # DexCom
+    - PODD  # Insulet
+    - ALGN  # Align Tech
+    - SYK   # Stryker (Added for completeness)
+    - MDT   # Medtronic (Added for completeness)
+
+Energy: # [NEW] Green Energy focus
+  Renewables:
+    - FSLR  # First Solar
+    - ENPH  # Enphase
+    - NEE   # NextEra Energy
+    - RUN   # Sunrun

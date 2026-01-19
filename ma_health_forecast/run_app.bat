@@ -10,7 +10,7 @@ REM 4. Runs the app
 cd /d "%~dp0"
 
 echo ===================================================
-echo    Intralinks M&A Health Forecast - Launcher
+echo    M&A Health Forecast - Launcher
 echo ===================================================
 
 REM 1. Check for Python

@@ -30,6 +30,7 @@ from src.data.schema import get_db_path
 load_dotenv()
 
 app = Flask(__name__)
+print("--- STARTING APP: v2.2 (Help Page + Deal Command Fixes) ---")
 
 # --- HELPERS ---
 
@@ -718,7 +719,11 @@ def company_dossier():
 
 @app.route('/deal-command')
 def deal_command():
-    return render_template('deal_command.html')
+    return render_template('deal_command.html', active_page='command')
+
+@app.route('/help')
+def help_page():
+    return render_template('help.html', active_page='help')
 
 @app.route('/api/v2/market-map')
 def v2_market_map():

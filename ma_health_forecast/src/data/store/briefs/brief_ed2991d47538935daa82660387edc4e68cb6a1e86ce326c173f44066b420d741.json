@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "created_at": "2026-01-19T21:36:07.653407",
+    "payload_hash": "ed2991d47538935daa82660387edc4e68cb6a1e86ce326c173f44066b420d741",
+    "model": "gemini-3-flash-preview",
+    "sector": "Healthcare",
+    "sub_industry": "All"
+  },
+  "payload": {
+    "sector": "Healthcare",
+    "sub_industry": "All",
+    "macro": {
+      "date": "2026-01-18",
+      "hy_spread": 3.8,
+      "ig_spread": 1.1,
+      "lbo_feasibility_index": 78.0,
+      "expected_leverage_range": "5.0x - 6.0x",
+      "updated_at": "2026-01-18 12:38:44"
+    },
+    "aggregates": {
+      "avg_spi": 9.7,
+      "sector": "Healthcare"
+    },
+    "top_drivers": []
+  },
+  "brief": {
+    "executive_takeaways": [
+      "Credit conditions have normalized, shifting the focus from liquidity preservation to aggressive platform consolidation in fragmented sub-sectors.",
+      "The 5.0x - 6.0x leverage window allows for competitive bidding on high-quality MedTech and Healthcare Services assets that were previously sidelined.",
+      "A Sector SPI of 9.7 indicates a high-performance environment where valuation discipline is critical to avoid overpaying for perceived stability."
+    ],
+    "regime_guidance": "With HY spreads at 3.8 and an LBO Feasibility Index of 78.0, the current regime favors 'Buy and Build' strategies over pure distressed plays. The 1.1 IG spread provides a cheap cost of capital for senior debt, allowing sponsors to layer in 5.0x - 6.0x leverage efficiently. This is an optimal window for secondary buyouts or carve-outs of non-core divisions from larger healthcare conglomerates looking to deleverage or refocus.",
+    "industry_dynamics": "The Healthcare sector is navigating a period of valuation expansion, as evidenced by the 9.7 SPI. Despite labor cost pressures, the stability of reimbursement cycles and the availability of credit at 3.8 HY spreads are driving demand. The narrow 1.1 IG spread suggests that large-cap healthcare companies have significant balance sheet strength, potentially limiting the supply of distressed assets but increasing competition for premium targets.",
+    "trend_narrative": {
+      "headline": "Credit Easing Triggers Healthcare Consolidation Amid High LBO Feasibility",
+      "bullets": [
+        {
+          "bullet": "LBO Feasibility has climbed to 78.0, suggesting a supportive environment for debt-heavy transactions compared to the 60.0 baseline seen in more restrictive periods.",
+          "metric_refs": [
+            "LBO Feasibility Index 78.0"
+          ]
+        },
+        {
+          "bullet": "Expected leverage ranges have stabilized between 5.0x - 6.0x, providing sufficient dry powder for mid-market acquisitions without exceeding historical risk thresholds.",
+          "metric_refs": [
+            "Leverage 5.0x - 6.0x"
+          ]
+        },
+        {
+          "bullet": "High-Yield spreads sitting at 3.8 indicate a 120bps compression from historical volatility peaks, lowering the cost of mezzanine and junior debt components.",
+          "metric_refs": [
+            "HY Spread 3.8"
+          ]
+        },
+        {
+          "bullet": "The Healthcare Sector SPI of 9.7 suggests the industry is outperforming broader market aggregates by approximately 15% on a risk-adjusted basis.",
+          "metric_refs": [
+            "Avg SPI 9.7"
+          ]
+        }
+      ],
+      "where_to_look_next": [
+        {
+          "action": "Evaluate Ambulatory Surgery Centers (ASCs)",
+          "why": "High cash flow predictability aligns with the 5.0x-6.0x leverage availability.",
+          "metric_refs": [
+            "Leverage 5.0x - 6.0x"
+          ]
+        },
+        {
+          "action": "Target Specialized Diagnostics Providers",
+          "why": "Strong performance index indicates these assets are leading the sector recovery.",
+          "metric_refs": [
+            "Avg SPI 9.7"
+          ]
+        }
+      ],
+      "data_quality_note": {
+        "note": "While macro credit metrics are robust, the lack of specific company drivers in this update suggests a need for bottom-up due diligence on EBITDA sustainability.",
+        "metric_refs": [
+          "Sample drivers []"
+        ]
+      }
+    },
+    "playbook": {
+      "ceo": "Focus on operational integration of recent acquisitions to justify current 9.7 SPI valuations; leverage the stable 1.1 IG spread to refinance any remaining high-cost bridge loans.",
+      "banker": "Pitch recapitalizations and dividend recaps to sponsors, given the high 78.0 LBO Feasibility Index and the market's appetite for 5.0x - 6.0x leverage structures."
+    },
+    "risks": [
+      "Re-widening of HY spreads beyond 4.5 could rapidly erode LBO feasibility for mid-cap targets.",
+      "Potential regulatory shifts in reimbursement could impact the 9.7 SPI premium currently assigned to the sector.",
+      "Labor inflation may compress margins faster than 5.0x - 6.0x leverage structures can be serviced if top-line growth stalls."
+    ]
+  }
+}

@@ -11,7 +11,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
 echo "==================================================="
-echo "   Intralinks M&A Health Forecast - Launcher"
+echo "   M&A Health Forecast - Launcher"
 echo "==================================================="
 
 # 1. Check for Python

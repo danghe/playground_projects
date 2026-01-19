@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>INTRALINKS Deal Command v2.1</title>
+    <title>M&A Deal Command v2.1</title>
     <!-- Tailwind CSS (CDN for prototype) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,8 +16,9 @@
                 extend: {
                     colors: {
                         slate: {
-                            800: '#1e293b',
-                            900: '#0f172a',
+                            50: '#f8fafc',
+                            800: '#151e32',  /* Custom Navy matching style.css */
+                            900: '#0b1120',  /* Deepest Navy/Black matching style.css */
                             950: '#020617',
                         }
                     }
@@ -36,6 +37,8 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Bootstrap Bundle (Required for Navbar Toggle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body
@@ -203,17 +206,18 @@
 
             <!-- SELLER PLAYBOOK PANEL -->
             <template x-if="playbook && playbook.top_archetypes">
-                <div class="bg-slate-50 border-b border-light p-2 flex gap-4 overflow-x-auto">
+                <div class="bg-slate-50 dark:bg-slate-900 border-b border-light p-2 flex gap-4 overflow-x-auto">
                     <div class="flex-shrink-0 flex items-center gap-2 pl-2 border-r border-light">
                         <i class="bi bi-journal-bookmark-fill text-blue-600"></i>
                         <div class="leading-tight">
                             <div class="text-[10px] uppercase font-bold text-muted">Playbook</div>
-                            <div class="text-xs font-bold" x-text="sector"></div>
+                            <div class="text-xs font-bold text-theme-base" x-text="sector"></div>
                         </div>
                     </div>
 
                     <template x-for="arch in playbook.top_archetypes" :key="arch.name">
-                        <div class="flex-shrink-0 bg-white border border-light rounded p-1.5 min-w-[140px]">
+                        <div
+                            class="flex-shrink-0 bg-white dark:bg-slate-800 border border-light rounded p-1.5 min-w-[140px]">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-[10px] font-bold text-theme-base truncate" x-text="arch.name"></span>
                                 <span class="text-[10px] bg-secondary/10 px-1.5 rounded-full text-muted"
@@ -287,7 +291,7 @@
                                         <span class="font-bold text-theme-base text-xs" x-text="s.seller_type"></span>
                                         <!-- Confidence Badge -->
                                         <span class="text-[9px] px-1 py-0.5 rounded border ml-1"
-                                            :class="s.confidence === 'High' ? 'bg-red-50 border-red-200 text-red-700' : 'bg-gray-50 border-gray-200 text-muted'"
+                                            :class="s.confidence === 'High' ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900 text-red-700 dark:text-red-400' : 'bg-gray-50 dark:bg-slate-800 border-gray-200 dark:border-slate-700 text-muted'"
                                             x-text="s.confidence"></span>
                                     </div>
                                     <div class="flex flex-wrap gap-1">
@@ -301,11 +305,11 @@
                                 <td class="p-2 text-right">
                                     <div class="mb-1">
                                         <span
-                                            class="badge-il bg-blue-50 text-blue-700 border border-blue-100 text-[9px]"
+                                            class="badge-il bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 border border-blue-100 dark:border-blue-900 text-[9px]"
                                             x-text="s.likely_asset_type"></span>
                                     </div>
                                     <div x-show="s.catalyst_badge">
-                                        <span class="text-[9px] text-orange-600 font-medium"
+                                        <span class="text-[9px] text-orange-600 dark:text-orange-400 font-medium"
                                             x-text="s.catalyst_badge"></span>
                                     </div>
                                 </td>

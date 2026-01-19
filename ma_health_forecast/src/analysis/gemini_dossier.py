@@ -10,11 +10,19 @@ from google.genai import types
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'store', 'dossiers')
+import tempfile
+
+# Use system temp directory for caching on Cloud Run (ephemeral but safe)
+CACHE_DIR = os.path.join(tempfile.gettempdir(), 'ma_health_dossiers')
 
 def ensure_cache_dir():
-    if not os.path.exists(CACHE_DIR):
-        os.makedirs(CACHE_DIR)
+    try:
+        if not os.path.exists(CACHE_DIR):
+            os.makedirs(CACHE_DIR)
+    except OSError:
+        # Fail silently if we can't write (e.g. strict permissions)
+        # Caching will simply be disabled for this session
+        pass
 
 class GeminiDossierService:
     """
@@ -23,7 +31,7 @@ class GeminiDossierService:
     - Output: JSON Executive Summary with Citations
     - Policy: Aggressive Caching (SHA256)
     """
-    MODEL_NAME = 'gemini-3-flash-preview' # User requested latest 3.0 flash
+    MODEL_NAME = 'gemini-2.0-flash-exp' # Updated to 2.0 Flash for speed/quality balance
 
     def __init__(self):
         self.api_key = os.getenv("GEMINI_API_KEY")
@@ -38,20 +46,21 @@ class GeminiDossierService:
         return hashlib.sha256(canonical_json.encode()).hexdigest()
 
     def _get_cache(self, payload_hash: str):
-        ensure_cache_dir()
-        filepath = os.path.join(CACHE_DIR, f"dossier_{payload_hash}.json")
-        if os.path.exists(filepath):
-            try:
+        try:
+            ensure_cache_dir()
+            filepath = os.path.join(CACHE_DIR, f"dossier_{payload_hash}.json")
+            if os.path.exists(filepath):
                 with open(filepath, 'r') as f:
                     data = json.load(f)
                 return data
-            except: pass
+        except Exception: 
+            return None
         return None
 
     def _save_cache(self, payload_hash: str, response_data: dict, payload: dict):
-        ensure_cache_dir()
-        filepath = os.path.join(CACHE_DIR, f"dossier_{payload_hash}.json")
         try:
+            ensure_cache_dir()
+            filepath = os.path.join(CACHE_DIR, f"dossier_{payload_hash}.json")
             with open(filepath, 'w') as f:
                 json.dump({
                     "metadata": {
@@ -63,7 +72,7 @@ class GeminiDossierService:
                     "dossier": response_data
                 }, f, indent=2)
         except Exception as e:
-            logger.error(f"Dossier Cache Write Error: {e}")
+            logger.warning(f"Dossier Cache Write Skipped: {e}")
 
     def generate_dossier(self, ticker: str, payload: dict, force_refresh: bool = False):
         if not self.client:

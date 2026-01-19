@@ -23,7 +23,7 @@ class StrategicSECMonitor:
     
     # Audit requirement: Valid User-Agent
     HEADERS = {
-        "User-Agent": "Intralinks Analysis tool/1.0 (admin@intralinks.com)",
+        "User-Agent": "M&A-Health-Forecast/1.0 (admin@maforecast.com)",
         "Accept-Encoding": "gzip, deflate",
         "Host": "data.sec.gov"
     }

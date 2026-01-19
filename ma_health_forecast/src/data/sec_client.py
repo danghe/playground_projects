@@ -11,7 +11,7 @@ class SECClient:
     TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
     
     HEADERS = {
-        "User-Agent": "Intralinks Analysis tool/2.0 (admin@maforecast.com)",
+        "User-Agent": "M&A-Health-Forecast/2.0 (admin@maforecast.com)",
         "Accept-Encoding": "gzip, deflate",
         "Host": "www.sec.gov"
     }

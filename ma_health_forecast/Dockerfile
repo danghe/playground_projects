@@ -13,6 +13,12 @@ COPY . ./
 # Install production dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
 
+# --- BAKED STORE STRATEGY ---
+# Initialize and populate the database during build time
+# ensuring a predictable data state in the container.
+RUN python src/data/update_db_v2_1.py
+RUN python src/data/sync_store_to_db.py
+
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
 # For environments with multiple CPU cores, increase the number of workers

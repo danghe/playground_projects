@@ -60,6 +60,11 @@ def gemini_forecast(history: pd.Series, steps: int = 12, rate_shock: int = 0, co
     - **CEO Confidence**: {confidence_shock} pts (Positive = Optimism, Negative = Pessimism).
     - **Market Volatility**: {volatility_shock} pts (Positive = High VIX/Fear, Negative = Stability).
     
+    **CURRENT DATE**: January 2026 (Treat 2024/2025 data as historical).
+    **TASK ENRICHMENT**:
+    - **Search & Enrich**: Search for the latest available market data (news, macro trends) to enrich this forecast.
+    - **Contextualize**: Synthesize the "latest real-world data" (2024/2025) as the most current available context for this 2026 simulation.
+    
     **Instructions**:
     1. **Analyze First (Chain of Thought)**: 
        - Explicitly calculate the "Net Impulse" of the provided shocks.

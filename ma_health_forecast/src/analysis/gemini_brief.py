@@ -137,6 +137,11 @@ class GeminiBriefService:
         {json.dumps(payload['top_drivers'], indent=2)}
         
         **Instructions**:
+        **CURRENT DATE**: January 2026 (Treat 2024/2025 data as historical).
+        **TASK ENRICHMENT**:
+        - Search for and incorporate the latest available market data (news, filings, macro trends) to enrich this analysis.
+        - Synthesize the "latest real-world data" (2024/2025) as the most current available context for this 2026 simulation.
+
         Analyze the provided data to identify clear strategic themes.
         - **Executive Takeaways**: 3 bullet points on the "Now" vs "Next".
         - **Regime Guidance**: What deals work in this specific regime (e.g. Rate/VIX)?
@@ -301,6 +306,11 @@ class GeminiBriefService:
         {json.dumps(buyer_context, indent=2)}
         
         **YOUR TASK**:
+        **CURRENT DATE**: January 2026 (Treat 2024/2025 data as historical).
+        **TASK ENRICHMENT**:
+        - Search for and incorporate the latest available market data (news, filings, macro trends) to enrich this analysis.
+        - Synthesize the "latest real-world data" (2024/2025) as the most current available context for this 2026 simulation.
+
         Synthesize this data into an actionable "Deal Environment Brief" covering:
         
         1. **Environment Status**: One-line market characterization (e.g., "Buyer's Market", "Valuation Standoff", "Financing Window Open")

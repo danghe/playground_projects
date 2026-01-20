@@ -72,6 +72,10 @@ def build_deep_dive_prompt(ticker: str, role_type: str, context: dict) -> str:
 
     {role_instruction}
 
+    **TASK ENRICHMENT**:
+    - **Search & Enrich**: Search for the latest available market data (news, filings, macro trends) to enrich this analysis.
+    - **Contextualize**: Synthesize the "latest real-world data" (2024/2025) as the most current available context for this Jan 2026 simulation.
+
     **STRICT OUTPUT RULES**:
     1. **No Definitions**: Do not explain what the company does. Assume the CEO knows.
     2. **Evidence-Based**: You MUST cite the Firepower/Leverage metrics in your text.
@@ -131,6 +135,10 @@ def build_radar_dossier_prompt(ticker: str, context: dict) -> str:
     **TASK**:
     Generate a data-heavy, executive summary covering the following 4 distinct sections.
     Use your internal knowledge to augment the provided context.
+    
+    **TASK ENRICHMENT**:
+    - **Search & Enrich**: Search for the latest available market data (news, filings, macro trends) to enrich this analysis.
+    - **Contextualize**: Synthesize the "latest real-world data" (2024/2025) as the most current available context for this Jan 2026 simulation.
 
     **REQUIRED HTML STRUCTURE**:
     <div style="font-family: 'Segoe UI', sans-serif; color: #333;">

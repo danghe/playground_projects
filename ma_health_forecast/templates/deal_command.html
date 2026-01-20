@@ -423,7 +423,7 @@
     </main>
 
     <!-- Right Drawer for Details -->
-    <div class="right-drawer flex flex-col shadow-2xl" :class="drawerOpen ? 'open' : ''">
+    <div class="right-drawer flex flex-col shadow-2xl" :class="[drawerOpen ? 'open' : '', drawerWide ? 'wide' : '']">
         <template x-if="selectedRow">
             <div class="h-full flex flex-col">
                 <div class="p-4 border-b border-light flex justify-between items-start bg-slate-50 dark:bg-slate-800">
@@ -440,8 +440,15 @@
                                 x-text="selectedRow.sub_sector || 'General'"></span>
                         </div>
                     </div>
-                    <button @click="drawerOpen=false" class="text-muted hover:text-red-500"><i
-                            class="bi bi-x-lg"></i></button>
+                    <div class="flex gap-2">
+                        <button @click="toggleDrawerWidth()" class="text-muted hover:text-blue-500"
+                            title="Expand/Collapse">
+                            <i class="bi"
+                                :class="drawerWide ? 'bi-arrows-angle-contract' : 'bi-arrows-angle-expand'"></i>
+                        </button>
+                        <button @click="drawerOpen=false" class="text-muted hover:text-red-500"><i
+                                class="bi bi-x-lg"></i></button>
+                    </div>
                 </div>
 
                 <div class="flex-1 overflow-y-auto p-4 space-y-6">
@@ -565,6 +572,7 @@
                 filterSellers: 'All', // All, Forced, Strategic
                 demandView: 'Strategics', // Strategics, Sponsors
                 drawerOpen: false,
+                drawerWide: false,
                 selectedRow: null,
                 searchQuery: '',
 
@@ -739,6 +747,10 @@
                         const res = await fetch('/api/v2/diagnostics');
                         this.diagStats = await res.json();
                     }
+                },
+
+                toggleDrawerWidth() {
+                    this.drawerWide = !this.drawerWide;
                 },
 
                 async generateBrief() {

@@ -711,6 +711,10 @@ h6 {
     transform: translateX(0);
 }
 
+.right-drawer.wide {
+    width: 800px;
+}
+
 /* Glass Box Tooltip */
 .glass-tooltip {
     position: relative;

@@ -412,34 +412,10 @@
 
                                 <!-- ACTIONS COLUMN -->
                                 <td class="text-center">
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary border-0" type="button"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bi bi-three-dots-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-light">
-                                            <li>
-                                                <h6 class="dropdown-header text-uppercase small fw-bold">Analysis</h6>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    onclick="openDossier('{{ t['ticker'] }}'); return false;">
-                                                    <i class="bi bi-stars text-primary me-2"></i>AI Dossier
-                                                </a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item small"
-                                                    href="https://finance.yahoo.com/quote/{{ t['ticker'] }}"
-                                                    target="_blank">
-                                                    <i class="bi bi-graph-up me-2"></i>Yahoo Finance
-                                                </a></li>
-                                            <li><a class="dropdown-item small"
-                                                    href="https://www.sec.gov/cgi-bin/browse-edgar?CIK={{ t['ticker'] }}&action=getcompany"
-                                                    target="_blank">
-                                                    <i class="bi bi-file-text me-2"></i>SEC Filings
-                                                </a></li>
-                                        </ul>
-                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary" type="button"
+                                        onclick="openRadarDrawer('{{ t.ticker }}')">
+                                        <i class="bi bi-layout-sidebar-inset-reverse me-1"></i>View
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -512,6 +488,10 @@
 
     <!-- Bootstrap & Chart.js -->
     <!-- EVIDENCE DRAWER -->
+    <!-- (Existing Evidence Drawer kept as is, repurposed or separate?) -->
+    <!-- Note: The user wanted to replace Actions with Side Panel from Deal Command. -->
+    <!-- We will keep Evidence Drawer for the feed, and add a NEW Radar Drawer for the actions. -->
+
     <div class="offcanvas offcanvas-end bg-white text-dark border-start border-light" tabindex="-1" id="evidenceDrawer"
         style="width: 400px;">
         <div class="offcanvas-header border-bottom border-light">
@@ -521,6 +501,104 @@
         <div class="offcanvas-body">
             <div id="evidenceContent">
                 <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- RADAR DETAILS DRAWER (Replica of Deal Command Drawer) -->
+    <div class="right-drawer shadow-lg" id="radarDrawer" style="z-index: 1045;">
+        <div class="d-flex flex-column h-100">
+            <!-- Header -->
+            <div class="p-4 border-bottom border-light d-flex justify-content-between align-items-start bg-light">
+                <div>
+                    <div class="text-uppercase text-muted small fw-bold mb-1">Target Dossier</div>
+                    <h2 class="h4 fw-bold mb-1" id="drawerName">Name</h2>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="font-monospace fw-bold text-primary" id="drawerTicker">TICKER</span>
+                        <span class="badge bg-secondary bg-opacity-10 text-muted" id="drawerSector">Sector</span>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary me-2"
+                        onclick="toggleRadarDrawerWidth()" title="Expand/Collapse">
+                        <i class="bi bi-arrows-angle-expand" id="drawerExpandIcon"></i>
+                    </button>
+                    <button type="button" class="btn-close" onclick="closeRadarDrawer()"></button>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="flex-grow-1 overflow-auto p-4">
+                <!-- Score Card -->
+                <div class="row g-3 mb-4 text-center">
+                    <div class="col-6">
+                        <div class="p-3 border rounded bg-light h-100">
+                            <div class="text-muted small text-uppercase fw-bold">Seller Pressure</div>
+                            <div class="display-6 fw-bold my-1" id="drawerSPI">0</div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-danger" id="barSPI" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 border rounded bg-light h-100">
+                            <div class="text-muted small text-uppercase fw-bold">Target Susceptibility</div>
+                            <div class="display-6 fw-bold text-warning my-1" id="drawerTGT">0</div>
+                            <div class="text-muted small">Imminence: <span class="fw-bold text-dark"
+                                    id="drawerNOW">0</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financials -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase fw-bold text-muted border-bottom pb-2 mb-3 small">Key Financials</h6>
+                    <div class="row g-2 small">
+                        <div class="col-12 d-flex justify-content-between">
+                            <span class="text-muted">Market Cap</span>
+                            <span class="font-monospace fw-bold" id="drawerCap">--</span>
+                        </div>
+                        <div class="col-12 d-flex justify-content-between">
+                            <span class="text-muted">Firepower (Buyer)</span>
+                            <span class="font-monospace fw-bold" id="drawerFirepower">--</span>
+                        </div>
+                        <div class="col-12 d-flex justify-content-between">
+                            <span class="text-muted">EV / EBITDA</span>
+                            <span class="font-monospace fw-bold text-info" id="drawerValuation">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drivers -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase fw-bold text-muted border-bottom pb-2 mb-3 small">Strategic Drivers</h6>
+                    <ul class="list-unstyled" id="drawerDrivers">
+                        <!-- Drivers go here -->
+                    </ul>
+                </div>
+
+                <!-- Actions -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase fw-bold text-muted border-bottom pb-2 mb-3 small">Actions</h6>
+                    <div class="d-flex gap-2">
+                        <a href="#" target="_blank" id="btnYahoo" class="btn btn-sm btn-outline-secondary flex-grow-1">
+                            <i class="bi bi-graph-up me-1"></i> Yahoo
+                        </a>
+                        <a href="#" target="_blank" id="btnSec" class="btn btn-sm btn-outline-secondary flex-grow-1">
+                            <i class="bi bi-file-text me-1"></i> SEC
+                        </a>
+                        <button class="btn btn-sm btn-primary flex-grow-1" id="btnDeepDive"
+                            onclick="runRadarDeepDive()">
+                            <i class="bi bi-stars me-1"></i> AI Dossier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Result Container -->
+                <div id="radarDeepDiveResult"
+                    class="d-none mt-3 p-3 bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded font-monospace small">
+                </div>
+
             </div>
         </div>
     </div>
@@ -635,6 +713,136 @@
         // Init Tooltips
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // ============================================
+        // RADAR DRAWER LOGIC
+        // ============================================
+        // 1. Serialize Targets
+        const radarTargets = {};
+        {% for t in targets %}
+        radarTargets["{{ t.ticker }}"] = {{ t | tojson | safe }};
+        {% endfor %}
+
+        let currentDrawerTicker = null;
+
+        function openRadarDrawer(ticker) {
+            const t = radarTargets[ticker];
+            if (!t) return;
+
+            currentDrawerTicker = ticker;
+
+            // Populate Fields
+            document.getElementById('drawerName').textContent = t.name;
+            document.getElementById('drawerTicker').textContent = t.ticker;
+            document.getElementById('drawerSector').textContent = t.sub_industry || 'General';
+
+            // Scores
+            const spi = t.scores.spi || 0;
+            document.getElementById('drawerSPI').textContent = spi;
+            document.getElementById('barSPI').style.width = spi + '%';
+
+            // Color logic for SPI
+            const spiEl = document.getElementById('drawerSPI');
+            spiEl.className = `display-6 fw-bold my-1 ${spi >= 50 ? 'text-danger' : 'text-dark'}`;
+
+            document.getElementById('drawerTGT').textContent = t.scores.susceptibility || 0;
+            document.getElementById('drawerNOW').textContent = t.scores.imminence || 0;
+
+            // Financials
+            document.getElementById('drawerCap').textContent = '$' + (t.market_cap ? (t.market_cap / 1e9).toFixed(1) : '0.0') + 'B';
+            document.getElementById('drawerFirepower').textContent = '$' + (t.evidence.firepower ? (t.evidence.firepower / 1e9).toFixed(1) : '0.0') + 'B';
+            document.getElementById('drawerValuation').textContent = t.ev_ebitda || '--';
+
+            // Drivers
+            const driversList = document.getElementById('drawerDrivers');
+            driversList.innerHTML = '';
+            // Drivers list seems to be complex in deal_command, here we have t.evidence.top_drivers as dicts
+            // or we might have a simple list. Let's inspect 't.evidence.top_drivers'
+            if (t.evidence && t.evidence.top_drivers) {
+                t.evidence.top_drivers.forEach(d => {
+                    const li = document.createElement('li');
+                    li.className = "mb-2 d-flex align-items-start small";
+                    li.innerHTML = `<i class="bi bi-chevron-right text-primary me-2 mt-1"></i> <span>${d.label || d}</span>`;
+                    driversList.appendChild(li);
+                });
+            }
+
+            // Links
+            document.getElementById('btnYahoo').href = `https://finance.yahoo.com/quote/${ticker}`;
+            document.getElementById('btnSec').href = `https://www.sec.gov/cgi-bin/browse-edgar?CIK=${ticker}&action=getcompany`;
+
+            // Clear Deep Dive
+            document.getElementById('radarDeepDiveResult').classList.add('d-none');
+            document.getElementById('radarDeepDiveResult').innerHTML = '';
+
+            // Show Drawer
+            document.getElementById('radarDrawer').classList.add('open');
+        }
+
+        function closeRadarDrawer() {
+            document.getElementById('radarDrawer').classList.remove('open');
+        }
+
+        function toggleRadarDrawerWidth() {
+            const d = document.getElementById('radarDrawer');
+            d.classList.toggle('wide');
+            const icon = document.getElementById('drawerExpandIcon');
+            if (d.classList.contains('wide')) {
+                icon.className = 'bi bi-arrows-angle-contract';
+            } else {
+                icon.className = 'bi bi-arrows-angle-expand';
+            }
+        }
+
+        // Deep Dive (Reuse existing modal logic or fetch)
+        // Since we want the "AI Dossier" logic:
+        async function runRadarDeepDive() {
+            if (!currentDrawerTicker) return;
+
+            const resDiv = document.getElementById('radarDeepDiveResult');
+            const btn = document.getElementById('btnDeepDive');
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Analyzing...';
+            resDiv.classList.remove('d-none');
+            resDiv.innerHTML = '<div class="text-muted fst-italic">Consulting Gemini Expert Model...</div>';
+
+            try {
+                // We can reuse the existing dossier modal logic, OR fetch and show inline.
+                // The implementation plan suggested inline deep dive like deal_command.
+                // Let's use the same endpoint deal_command uses: /api/v2/deep-dive
+                // But wait, deal_radar has 'openDossier' which uses a modal.
+                // The user asked to "replace with the side panel from deal command".
+                // Deal command side panel has inline deep dive.
+
+                const response = await fetch('/api/v2/deep-dive', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ticker: currentDrawerTicker,
+                        type: 'target',
+                        context: radarTargets[currentDrawerTicker]
+                    })
+                });
+                const data = await response.json();
+
+                resDiv.innerHTML = `
+                    <div class="fw-bold mb-2 text-primary"><i class="bi bi-stars me-2"></i>Gemini Analysis</div>
+                    <div class="markdown-body">${data.html || 'No analysis generated.'}</div>
+                `;
+
+            } catch (e) {
+                console.error(e);
+                resDiv.innerHTML = '<div class="text-danger">Analysis Failed. check logs.</div>';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-stars me-1"></i> AI Dossier';
+            }
+        }
+
+        // ============================================
+        // END RADAR DRAWER LOGIC
+        // ============================================
 
         // ============================================
         // BACKGROUND DATA LOADING (SSE)

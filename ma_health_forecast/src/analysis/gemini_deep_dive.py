@@ -59,8 +59,6 @@ def build_deep_dive_prompt(ticker: str, role_type: str, context: dict) -> str:
     # 3. The Master Prompt
     prompt = f"""
     You are a Senior Managing Director at a Tier-1 Investment Bank.
-    You are advising the CEO of Intralinks on the broader market landscape.
-    
     Provide a **Strategic Tear Sheet** on the following MARKET PLAYER:
 
     **SUBJECT COMPANY**: {ticker} ({name})
@@ -107,6 +105,92 @@ def build_deep_dive_prompt(ticker: str, role_type: str, context: dict) -> str:
     
     return prompt
 
+
+def build_radar_dossier_prompt(ticker: str, context: dict) -> str:
+    """
+    Constructs a data-rich 'Dossier' prompt for the Strategic Radar (Legacy Style).
+    Focuses on 'Why It Matters', 'M&A Posture', 'Next 90 Days'.
+    """
+    # Parsing context
+    name = context.get('name', 'Unknown')
+    sector = context.get('sector', 'General')
+    drivers = context.get('drivers', 'Market Data')
+    spi = context.get('spi_score', 'N/A')
+    
+    prompt = f"""
+    You are a Senior M&A Strategist at a major Investment Bank.
+    Provide a **Strategic Dossier** on the following company for the 'Strategic Radar' watchlist.
+
+    **SUBJECT**: {ticker} ({name})
+    **SECTOR**: {sector}
+    **CONTEXT**: {drivers}
+    **SELLER PRESSURE**: {spi}/100
+    
+    **TASK**:
+    Generate a data-heavy, executive summary covering the following 4 distinct sections.
+    Use your internal knowledge to augment the provided context.
+
+    **REQUIRED HTML STRUCTURE**:
+    <div style="font-family: 'Segoe UI', sans-serif; color: #333;">
+
+        <!-- Section 1: Why It Matters Now -->
+        <h5 style="color: #444; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-bottom: 8px;">
+            <i class="bi bi-lightning-charge-fill text-warning me-1"></i> WHY IT MATTERS NOW
+        </h5>
+        <ul style="font-size: 13px; padding-left: 20px; margin-bottom: 15px; line-height: 1.5;">
+            <li style="margin-bottom: 5px;"><b>[Key Catalyst]:</b> [Detail on recent news, filing, or market move]</li>
+            <li style="margin-bottom: 5px;"><b>[Financial Signal]:</b> [Detail on valuation/revenue trend]</li>
+            <li><b>[Strategic Shift]:</b> [Detail on management/governance/product]</li>
+        </ul>
+
+        <!-- Section 2: M&A Posture -->
+        <h5 style="color: #444; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-bottom: 8px;">
+            M&A POSTURE
+        </h5>
+        <div style="background-color: #f1f5f9; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 13px;">
+            <div style="margin-bottom: 6px;">
+                <span style="font-weight: 700; color: #0f172a;">Likely Role:</span> 
+                <span style="background-color: #e2e8f0; padding: 2px 6px; border-radius: 3px; font-size: 12px; font-weight: 600;">SELLER / TARGET</span>
+            </div>
+            <div style="margin-bottom: 6px;">
+                 <span style="font-weight: 700; color: #0f172a;">Confidence:</span> High / Medium / Low
+            </div>
+            <div>
+                <b>Rationale:</b> [1 sentence summary of why they are a target, citing the {spi} SPI score]
+            </div>
+        </div>
+
+        <!-- Section 3: Next 90 Days -->
+        <h5 style="color: #444; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-bottom: 8px;">
+            NEXT 90 DAYS
+        </h5>
+        <p style="font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+            [Predict specific upcoming events: Earnings surprise, Debt maturity, Activist campaign, or Strategic review announcement.]
+        </p>
+
+        <!-- Section 4: Deal Usage -->
+        <h5 style="color: #444; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-bottom: 8px;">
+            DEAL USAGE
+        </h5>
+        <div style="font-size: 13px; display: flex; gap: 10px;">
+            <div style="flex: 1; border: 1px solid #cff4fc; background-color: #f0faff; padding: 8px; border-radius: 4px;">
+                <div style="font-weight: 700; color: #055160; font-size: 11px; text-transform: uppercase; margin-bottom: 4px;">Recommended</div>
+                [Specific Deal Type: e.g. LBO]
+            </div>
+            <div style="flex: 1; border: 1px solid #f8d7da; background-color: #fef1f2; padding: 8px; border-radius: 4px;">
+                <div style="font-weight: 700; color: #842029; font-size: 11px; text-transform: uppercase; margin-bottom: 4px;">Avoid</div>
+                [Specific Deal Type: e.g. Merger]
+            </div>
+        </div>
+    </div>
+    
+    **STRICT RULES**:
+    1. Return ONLY raw HTML.
+    2. Be specific and data-driven.
+    3. Do NOT mention "Intralinks" or "Client". Focus on the company ({ticker}).
+    """
+    return prompt
+
 def analyze_company(ticker, type, context):
     """
     Performs a deep dive analysis using Gemini Pro (or Flash) model.
@@ -123,8 +207,12 @@ def analyze_company(ticker, type, context):
         # Using 2.0 Flash as it is stable in the new SDK
         model_name = 'gemini-2.0-flash-exp' 
         
-        # Use the new prompt builder
-        prompt = build_deep_dive_prompt(ticker, type, context)
+        # Select Prompt Builder based on Type
+        if type == 'radar_target':
+            prompt = build_radar_dossier_prompt(ticker, context)
+        else:
+            # Default to Banker Deep Dive (Deal Command)
+            prompt = build_deep_dive_prompt(ticker, type, context)
         
         response = client.models.generate_content(
             model=model_name,

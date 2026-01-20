@@ -63,6 +63,7 @@ def build_deep_dive_prompt(ticker: str, role_type: str, context: dict) -> str:
 
     **SUBJECT COMPANY**: {ticker} ({name})
     **SECTOR**: {sub_sector}
+    **CURRENT DATE**: January 2026 (Treat 2024/2025 data as historical)
     
     **HARD DATA ANCHORS (CITE THESE)**:
     - Firepower: {firepower_str}
@@ -123,6 +124,7 @@ def build_radar_dossier_prompt(ticker: str, context: dict) -> str:
 
     **SUBJECT**: {ticker} ({name})
     **SECTOR**: {sector}
+    **CURRENT DATE**: January 2026 (Treat 2024/2025 data as historical)
     **CONTEXT**: {drivers}
     **SELLER PRESSURE**: {spi}/100
     

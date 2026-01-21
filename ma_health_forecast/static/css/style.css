@@ -773,3 +773,75 @@ h6 {
 [data-theme="dark"] .sortable-header:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
+
+/* --- FIXES for Deal Architect Dark/Light Mode --- */
+
+/* 1. Light Mode Title Visibility - Max Contrast */
+body:not([data-theme="dark"]) .glass-header h1,
+body:not([data-theme="dark"]) .glass-header h4,
+body:not([data-theme="dark"]) .navbar-brand {
+    color: #0b1120 !important;
+    /* Deepest Navy (almost black) */
+    font-weight: 800;
+}
+
+/* 2. Dark Mode Deep Dive Button (Fixing btn-outline-dark visibility) */
+[data-theme="dark"] .btn-outline-dark {
+    color: #f1f5f9;
+    /* Slate 100 */
+    border-color: #475569;
+    /* Slate 600 */
+}
+
+[data-theme="dark"] .btn-outline-dark:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+    border-color: #e2e8f0;
+}
+
+/* 3. Dark Mode Modal & Card Fixes (Overriding hardcoded Bootstrap classes) */
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .modal-body,
+[data-theme="dark"] .modal-footer,
+[data-theme="dark"] .col-md-3.bg-light,
+/* Left panel of modal */
+[data-theme="dark"] .col-md-9.bg-white
+
+/* Right panel of modal */
+    {
+    background-color: var(--il-card-bg) !important;
+    color: var(--il-text) !important;
+    border-color: var(--il-border) !important;
+}
+
+/* Force dark background on elements with .bg-white/.bg-light in dark mode */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-light {
+    background-color: #1e293b !important;
+    /* Slate 800 (slightly lighter than card-bg) for contrast */
+    color: var(--il-text) !important;
+}
+
+/* Fix List Group Items (Deal Physics Box) */
+[data-theme="dark"] .list-group-item {
+    background-color: var(--il-card-bg) !important;
+    /* Match card bg */
+    color: var(--il-text) !important;
+    border-color: var(--il-border) !important;
+}
+
+/* Fix Text Colors in Dark Mode */
+[data-theme="dark"] .text-dark {
+    color: #f8fafc !important;
+    /* White text for things labelled text-dark */
+}
+
+[data-theme="dark"] .text-muted {
+    color: #94a3b8 !important;
+    /* Lighter gray for readability */
+}
+
+/* Modal Close Button - White in Dark Mode */
+[data-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}

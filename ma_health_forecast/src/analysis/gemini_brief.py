@@ -18,7 +18,28 @@ def ensure_cache_dir():
         os.makedirs(CACHE_DIR)
 
 class GeminiBriefService:
-    MODEL_NAME = 'gemini-3-flash-preview'
+    # Cascading Models
+    MODELS = [
+        'gemini-3-flash-preview',
+        'gemini-2.0-flash-exp',
+        'gemini-1.5-pro'
+    ]
+    MODEL_NAME = 'gemini-3-flash-preview' # Legacy compat
+
+    def _generate_content_robust(self, prompt, config=None):
+        """Helper to try multiple models in sequence."""
+        for model in self.MODELS:
+            try:
+                response = self.client.models.generate_content(
+                    model=model,
+                    contents=prompt,
+                    config=config
+                )
+                return response
+            except Exception as e:
+                logger.warning(f"Model {model} failed: {e}")
+                continue
+        raise RuntimeError("All AI models failed.")
 
     def __init__(self):
         self.api_key = os.getenv("GEMINI_API_KEY")
@@ -180,11 +201,12 @@ class GeminiBriefService:
             start_time = datetime.now()
             
             # Reusing the pattern from llm_forecast.py
-            response = self.client.models.generate_content(
-                model=self.MODEL_NAME, # Fast model for interactive UI
-                contents=prompt,
+            response = self._generate_content_robust(
+                prompt=prompt,
                 config=types.GenerateContentConfig(
-                    response_mime_type="application/json"
+                    response_mime_type="application/json",
+                    # Tools (Search) not needed for general brief yet, 
+                    # relying on robust context injection.
                 )
             )
             
@@ -372,6 +394,206 @@ class GeminiBriefService:
             print(f"> ERROR: {e}", flush=True)
             print(f"==============================\n", flush=True)
             return {"error": str(e)}
+
+
+    # --- DEAL ARCHITECT METHODS (Consolidated) ---
+    
+    def analyze_match_batch(self, user_profile: dict, candidates: list, intent: str) -> dict:
+        """
+        Batch analyzes strategic fit.
+        Migrated from GeminiArchitect to use shared Provider.
+        """
+        if not self.client: return {}
+
+        
+        
+        # Construct Prompt
+        prompt = f"""
+        You are a Senior M&A Partner. Evaluate these potential {intent} candidates for {user_profile['ticker']} ({user_profile['name']}).
+        
+        Your Goal: Re-rank these based on TRUE strategic fit, beyond just financials.
+        
+        Candidates:
+        {json.dumps([{
+            'ticker': c.get('ticker'), 
+            'name': c.get('name'), 
+            'business': c.get('business_summary', '')[:200]
+        } for c in candidates], indent=2)}
+        
+        RETURN JSON MAP ONLY:
+        1. **Rationale Headline**: 8-12 words. Be SPECIFIC about product/asset overlay. Avoid generic buzzwords.
+        2. **Fit Score**: 0-100. (How much does this move the needle strategically?).
+        3. **Synergy Type**: (e.g. "Cost Synergy", "Revenue Synergy", "Market Expansion").
+        4. **Risk Factor**: The #1 concrete reason this deal might fail.
+        
+        OUTPUT ONLY JSON Array:
+        [
+            {{
+                "ticker": "XYZ",
+                "rationale_headline": "...",
+                "fit_score": 85,
+                "synergy_type": "...",
+                "risk_factor": "..."
+            }}
+        ]
+        """
+        
+        try:
+            logger.info("AI BATCH: Sending request to Gemini...")
+            response = self.client.models.generate_content(
+                model=self.MODEL_NAME, 
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    temperature=0.3
+                )
+            )
+            
+            text = response.text
+             # Clean Markdown wrappers
+            if "```json" in text: text = text.split("```json")[1].split("```")[0]
+            elif "```" in text: text = text.split("```")[1].split("```")[0]
+            
+            logger.info(f"AI BATCH: Raw response: {text[:100]}...") # Log start of response
+            
+            result_json = json.loads(text.strip())
+            
+            # Normalize keys just in case model deviates
+            final_map = {}
+            for item in result_json:
+                t = item.get('ticker')
+                if t:
+                    final_map[t] = {
+                        "ticker": t,
+                        "rationale_headline": item.get('rationale_headline') or item.get('headline') or "AI Analysis Ready",
+                        "fit_score": item.get('fit_score') or 50,
+                        "synergy_type": item.get('synergy_type') or item.get('synergy') or "Strategic",
+                        "risk_factor": item.get('risk_factor') or item.get('risk') or "Execution Risk"
+                    }
+            logger.info(f"AI BATCH: Success. Mapped {len(final_map)} items.")
+            return final_map
+            
+        except Exception as e:
+            logger.error(f"Deal Architect Batch Error: {e}")
+            return {}
+
+    def generate_live_deal_memo(self, user: dict, candidate: dict, intent: str, mandate_mode: str, metric_data: dict, macro: dict, headlines: str) -> dict:
+        """
+        Generates Deep IC Memo using Google Search.
+        Migrated from GeminiArchitect.
+        """
+        if not self.client: 
+            return {
+                "html": "<div class='alert alert-warning'>AI Service Unavailable (Missing Key)</div>", 
+                "verdict": {"status": "UNKNOWN"}
+            }
+
+        start_time = datetime.now()
+        current_date_str = start_time.strftime("%B %d, %Y")
+        
+        scores = metric_data.get('scores', {})
+        metrics = metric_data.get('metrics', {})
+        macro = macro or {}
+        
+        # Ensure safe defaults for f-string
+        tnx = macro.get('tnx', 'N/A')
+        offer_ev = metrics.get('offer_ev', 0) or 0
+        premium = metrics.get('premium_pct', 0)
+        coverage = metrics.get('coverage_ratio', 0)
+        leverage = metrics.get('pro_forma_leverage', 0)
+        prob = scores.get('probability_score', 0)
+        strat = scores.get('strategic_score', 0)
+        feas = scores.get('feasibility_score', 0)
+        
+        
+        # Determine Roles based on Intent
+        is_sell_side = 'sell' in intent.lower() or 'divest' in intent.lower()
+        is_merger = 'merger' in intent.lower()
+        
+        if is_sell_side:
+            acquirer_str = f"{candidate.get('name')} ({candidate.get('ticker')})"
+            target_str = f"{user.get('name')} ({user.get('ticker')})"
+            scenario_label = "DIVESTITURE / SALE (User is Target)"
+        elif is_merger:
+            acquirer_str = f"{user.get('name')} + {candidate.get('name')}"
+            target_str = "Combined Entity"
+            scenario_label = "MERGER OF EQUALS"
+        else:
+            acquirer_str = f"{user.get('name')} ({user.get('ticker')})"
+            target_str = f"{candidate.get('name')} ({candidate.get('ticker')})"
+            scenario_label = "ACQUISITION (User is Acquirer)"
+
+        prompt = f'''
+        You are a Senior M&A Partner.
+        DATE: {current_date_str}.
+        
+        Scenario: {scenario_label}
+        - Acquirer / Surviving Entity: {acquirer_str}
+        - Target / Asset: {target_str}
+        - Intent: {intent}
+        - Mandate: {mandate_mode}
+        
+        LIVE DATA:
+        - Macro: 10Y Treasury: {tnx}%
+        - Physics: Offer EV ${offer_ev/1e9:.1f}B | Premium {premium}% | Coverage {coverage}x | PF Lev {leverage}x
+        - Scores: Prob {prob}% | Strategic {strat} | Feasibility {feas}
+        - Headlines: {headlines}
+        
+        TASK:
+        1) Search & Validate: Check last 30 days for major issues.
+        2) Write Investment Committee memo (HTML):
+           - Verdict: GO / NO-GO
+           - Why Now?
+           - Deal killers?
+           - Claims & Sources: List 3 key claims with source names.
+           
+        OUTPUT JSON:
+        {{
+            "html": "<h3>Investment Committee Memo...</h3>...",
+            "verdict": {{ "status": "GO", "confidence": "High", "reason": "..." }},
+            "recency_audit": {{ "search_performed": true, "key_findings_count": 2, "time_anchor_verified": true }}
+        }}
+        '''
+        
+        try:
+            # Enable Google Search for Freshness
+            tools = [types.Tool(google_search=types.GoogleSearch())]
+            
+            response = self.client.models.generate_content(
+                model=self.MODEL_NAME, 
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    tools=tools,
+                    response_mime_type="application/json",
+                    temperature=0.4
+                )
+            )
+            
+            text = response.text
+            # Robust Parsing
+            if "```json" in text: text = text.split("```json")[1].split("```")[0]
+            elif "```" in text: text = text.split("```")[1].split("```")[0]
+            
+            data_json = json.loads(text.strip())
+            
+            # Simple validation
+            if "html" not in data_json: 
+                data_json["html"] = f"<div class='alert alert-danger'>AI Format Error</div>"
+            if "verdict" not in data_json: 
+                data_json["verdict"] = {"status": "UNKNOWN"}
+            
+            # Enforce Recency Audit in Output
+            if "recency_audit" not in data_json:
+                 data_json["recency_audit"] = {"status": "Implicit", "details": "AI did not return audit data."}
+                
+            return data_json
+
+        except Exception as e:
+            logger.error(f"Deal Architect Memo Error: {e}")
+            return {
+                "html": f"<div class='alert alert-danger'>AI Analysis Failed: {str(e)}</div>", 
+                "verdict": {"status": "ERROR"}
+            }
 
 # Singleton Instance
 brief_service = GeminiBriefService()

@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "created_at": "2026-01-21T03:32:37.124413",
+    "payload_hash": "ba8ff22a9a8258bbbd848b9b15387cd24edc7ec98dc62ef52a9a5f1cfa1accaf",
+    "model": "gemini-3-flash-preview",
+    "sector": "Energy",
+    "sub_industry": "All"
+  },
+  "payload": {
+    "sector": "Energy",
+    "sub_industry": "All",
+    "macro": {
+      "date": "2026-01-18",
+      "hy_spread": 3.8,
+      "ig_spread": 1.1,
+      "lbo_feasibility_index": 78.0,
+      "expected_leverage_range": "5.0x - 6.0x",
+      "updated_at": "2026-01-18 12:38:44"
+    },
+    "aggregates": {
+      "avg_spi": 11.8,
+      "sector": "Energy"
+    },
+    "top_drivers": []
+  },
+  "brief": {
+    "executive_takeaways": [
+      "The 2026 energy landscape has pivoted from pure-play upstream consolidation to a 'Power-to-Data' infrastructure race, driven by the massive electricity demands of AI scaling.",
+      "Credit conditions are highly favorable for mid-market LBOs, with an LBO Feasibility Index of 78.0 and tight IG spreads of 1.1% allowing for aggressive recapitalizations of infrastructure-heavy assets.",
+      "Capital discipline remains the primary public equity mandate, but private equity is finding alpha in 'orphaned' gas assets and grid-stability services that bridge the gap between renewables and baseload demand."
+    ],
+    "regime_guidance": "The current regime is characterized by 'Constructive Credit Stability.' With HY spreads at 3.8% and IG spreads at 1.1%, the cost of debt is well-calibrated for the 5.0x - 6.0x leverage range. This environment favors 'Buy-and-Build' strategies in oilfield services (OFS) and midstream infrastructure, where cash flow predictability offsets moderate interest rates. The 78.0 feasibility index suggests that even large-cap take-privates are viable if the asset generates a minimum 12% FCF yield.",
+    "industry_dynamics": "Analysis of 2024-2025 data shows a maturing Permian Basin, where the top five players now control over 60% of production. This consolidation has pushed PE-backed firms toward the Rockies and Eagle Ford, or into the energy transition supply chain. Natural gas remains the transition winner, with US LNG export capacity reaching record levels in early 2026. However, the 'Energy-AI Nexus' is the newest driver; datacenters are now contracting directly with gas-fired generation and nuclear providers to ensure 24/7 uptime, creating a new sub-asset class of 'Securitized Energy Contracts.'",
+    "trend_narrative": {
+      "headline": "Infrastructure Supercycle Emerges as US LNG and AI Power Demand Converge",
+      "bullets": [
+        {
+          "bullet": "US LNG export capacity is projected to reach 24.3 Bcf/d by the end of 2026, a 70% increase from 2023 levels, securing the US as the global swing producer.",
+          "metric_refs": [
+            "24.3 Bcf/d export capacity",
+            "70% increase vs 2023"
+          ]
+        },
+        {
+          "bullet": "Public E&P sector average FCF yields remain robust at 9.2%, supporting the current 5.0x-6.0x leverage range for private market acquisitions.",
+          "metric_refs": [
+            "9.2% FCF yield",
+            "5.0x-6.0x leverage"
+          ]
+        },
+        {
+          "bullet": "The Sector Performance Index (SPI) of 11.8 indicates a 1.8-point premium over the historical baseline, reflecting high confidence in midstream and utility-adjacent energy assets.",
+          "metric_refs": [
+            "SPI 11.8",
+            "1.8-point premium"
+          ]
+        }
+      ],
+      "where_to_look_next": [
+        {
+          "action": "Target Tier-2 Permian and Eagle Ford operators",
+          "why": "The 78.0 LBO Feasibility Index makes these targets prime for roll-up strategies before the next consolidation wave.",
+          "metric_refs": [
+            "78.0 LBO Feasibility"
+          ]
+        },
+        {
+          "action": "Invest in 'Gas-to-Wire' infrastructure",
+          "why": "Data center power demand is forecasted to grow at a 15% CAGR through 2030, outstripping current grid capacity.",
+          "metric_refs": [
+            "15% CAGR"
+          ]
+        }
+      ],
+      "data_quality_note": {
+        "note": "While macro credit data is highly reliable (HY/IG spreads), specific mid-cap E&P driver data is currently thin in the provided sample set.",
+        "metric_refs": [
+          "Empty Top Company Drivers sample"
+        ]
+      }
+    },
+    "playbook": {
+      "ceo": "Focus on operational decarbonization to maintain access to the tight 1.1% IG spread market. Diversify revenue streams by exploring direct-to-enterprise power agreements with tech hyperscalers.",
+      "banker": "Structure deals around the 5.0x-6.0x leverage sweet spot. Look for 'take-private' opportunities in the midstream sector where public multiples lag behind the 11.8 SPI sentiment for private valuations."
+    },
+    "risks": [
+      "Potential widening of HY spreads beyond 4.0% if inflation re-accelerates, threatening the 5.5x leverage threshold.",
+      "Regulatory headwinds regarding methane emissions could impose a 1-2% margin drag on non-compliant upstream operators.",
+      "Geopolitical stabilization in Eastern Europe could lead to a sudden $15-20/bbl compression in the global risk premium."
+    ]
+  }
+}

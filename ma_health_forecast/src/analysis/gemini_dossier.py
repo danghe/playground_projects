@@ -31,7 +31,7 @@ class GeminiDossierService:
     - Output: JSON Executive Summary with Citations
     - Policy: Aggressive Caching (SHA256)
     """
-    MODEL_NAME = 'gemini-2.0-flash-exp' # Updated to 2.0 Flash for speed/quality balance
+    MODEL_NAME = 'gemini-3-flash-preview' # Updated to 3.0 Flash as per project standard
 
     def __init__(self):
         self.api_key = os.getenv("GEMINI_API_KEY")

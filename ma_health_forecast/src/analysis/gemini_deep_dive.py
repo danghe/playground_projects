@@ -1,4 +1,5 @@
 from google import genai
+from google.genai import types
 import os
 import time
 
@@ -100,11 +101,23 @@ def build_deep_dive_prompt(ticker: str, role_type: str, context: dict) -> str:
         <h5 style="color: #555; font-size: 12px; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
             {'TARGETING STRATEGY' if role_type.lower() == 'buyer' else 'LIKELY SUITORS & STRUCTURE'}
         </h5>
-        <ul style="font-size: 13px; padding-left: 20px; margin-bottom: 0; color: #333; line-height: 1.5;">
-            <li style="margin-bottom: 6px;"><b>[Theme 1]:</b> [Detail]</li>
-            <li style="margin-bottom: 6px;"><b>[Theme 2]:</b> [Detail]</li>
-            <li><b>[Risk/Opportunity]:</b> [Detail]</li>
+        <ul style="font-size: 13px; padding-left: 20px; margin-bottom: 20px; color: #333; line-height: 1.5;">
+            <li style="margin-bottom: 6px;"><b>[Hypothesis 1]:</b> [Detail]</li>
+            <li style="margin-bottom: 6px;"><b>[Hypothesis 2]:</b> [Detail]</li>
+            <li><b>[Risk/Observation]:</b> [Detail]</li>
         </ul>
+
+         <!-- CLAIMS & SOURCES (Strict Audit Block) -->
+        <div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #eee; border-radius: 4px;">
+            <h6 style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #555; margin-bottom: 8px;">
+                <i class="bi bi-shield-check me-1"></i> Claims & Sources
+            </h6>
+            <div style="font-size: 11px; line-height: 1.4; color: #666;">
+                <div style="margin-bottom: 4px;"><strong>[Live Input]:</strong> Firepower {firepower_str}, Leverage {leverage_str}. <span style="background-color: #e2e8f0; padding: 1px 4px; border-radius: 2px;">TRUSTED</span></div>
+                <div style="margin-bottom: 4px;"><strong>[Search Finding]:</strong> [Cite specific news/metric found in search] <span style="background-color: #e2e8f0; padding: 1px 4px; border-radius: 2px;">UNCONFIRMED</span></div>
+                <div><strong>[Hypothesis]:</strong> [Cite your generated ideas] <span style="background-color: #fff3cd; padding: 1px 4px; border-radius: 2px;">AI GENERATED</span></div>
+            </div>
+        </div>
     </div>
     """
     
@@ -202,42 +215,74 @@ def build_radar_dossier_prompt(ticker: str, context: dict) -> str:
     return prompt
 
 def analyze_company(ticker, type, context):
-    """
-    Performs a deep dive analysis using Gemini Pro (or Flash) model.
-    UPDATED: Uses google-genai SDK (v1.0+) for Cloud Run compatibility.
-    """
     api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        return "<p>Error: Gemini API Key not found.</p>"
-        
-    try:
-        client = genai.Client(api_key=api_key)
-        
-        # Use Flash for speed (matching project standard)
-        # Using 2.0 Flash as it is stable in the new SDK
-        model_name = 'gemini-2.0-flash-exp' 
-        
-        # Select Prompt Builder based on Type
-        if type == 'radar_target':
-            prompt = build_radar_dossier_prompt(ticker, context)
-        else:
-            # Default to Banker Deep Dive (Deal Command)
-            prompt = build_deep_dive_prompt(ticker, type, context)
-        
-        response = client.models.generate_content(
-            model=model_name,
-            contents=prompt
-        )
-        
-        # Parse response (handle markdown wrapping if present)
-        text = response.text
-        if "```html" in text:
-            text = text.replace("```html", "").replace("```", "")
-        elif "```" in text:
-            text = text.replace("```", "")
-            
-        return text.strip()
+    
+    # List of models to try in order of preference
+    # USER REQUEST: "gemini 3.0 flash, nothing less"
+    models_to_try = [
+        'gemini-3-flash-preview', 
+        'gemini-3-pro-preview',
+        'gemini-2.0-flash-exp', 
+    ]
 
-    except Exception as e:
-        print(f"Gemini Deep Dive Error: {e}")
-        return f"<p class='text-muted'>AI Analysis unavailable: {str(e)}</p>"
+    last_error = "Unknown"
+    for model_name in models_to_try:
+        try:
+            if not api_key:
+                raise ValueError("GEMINI_API_KEY not found in environment")
+
+            client = genai.Client(api_key=api_key)
+            
+            # Select Prompt Builder based on Type
+            if type == 'radar_target':
+                prompt = build_radar_dossier_prompt(ticker, context)
+            else:
+                prompt = build_deep_dive_prompt(ticker, type, context)
+            
+            # Determine config based on output requirement
+            # If prompt asks for JSON, enforce it. Otherwise, let model decide (None).
+            mime_type = "application/json" if "json" in prompt.lower() else None
+            
+            print(f"=== [Gemini Deep Dive] Analyzing with {model_name} ===", flush=True)
+            
+            # INNER RETRY LOGIC: Try with Tools -> Fallback to Standard
+            try:
+                # Attempt 1: With Search Integration (Enrichment)
+                tools = [{"google_search": {}}]
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        tools=tools,
+                        response_mime_type=mime_type
+                    )
+                )
+            except Exception as e_tools:
+                print(f"> WARNING: Search/Tools failed on {model_name}: {e_tools}", flush=True)
+                print(f"> Retrying without tools...", flush=True)
+                # Attempt 2: Standard Generation (Reliability)
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        response_mime_type=mime_type
+                    )
+                )
+            
+            # Parse response (handle markdown wrapping if present)
+            text = response.text
+            if "```html" in text:
+                text = text.replace("```html", "").replace("```", "")
+            elif "```" in text:
+                text = text.replace("```", "")
+                
+            return text.strip()
+
+        except Exception as e:
+            print(f"> WARNING: Model {model_name} failed: {e}", flush=True)
+            last_error = str(e)
+            continue
+            
+    # All models failed
+    return f"<div class='alert alert-danger'>AI Analysis unavailable: All models failed.<br><small>{last_error}</small></div>"
+

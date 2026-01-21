@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platform Guide - Intralinks M&A Health Forecast</title>
+    <title>Platform Guide - M&A Health Forecast</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -22,12 +22,87 @@
         <!-- Header -->
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <h1 class="display-5 fw-bold mb-3">Platform Guide <span
-                        class="badge bg-primary fs-6 align-middle ms-2">v2.1</span></h1>
-                <p class="text-muted lead mx-auto" style="max-width: 700px;">
-                    Comprehensive documentation for the M&A Health Forecast & Deal Command System.
-                    Understanding the methodology, data sources, and execution workflows.
+                <h1 class="display-5 fw-bold mb-3">M&A Health Forecast <span
+                        class="badge bg-primary fs-6 align-middle ms-2">v2.6</span></h1>
+                <p class="text-muted lead mx-auto" style="max-width: 800px;">
+                    A strategic intelligence platform functioning as a "forward-looking cockpit" for global dealmaking.
+                    It answers the critical question: <span class="fw-bold text-dark">"Is the window for M&A opening or
+                        closing over the next 12 months?"</span>
                 </p>
+            </div>
+        </div>
+
+        <!-- Executive Summary & Audience -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-info-circle-fill text-primary me-2"></i>Executive
+                            Summary</h5>
+                        <p class="text-muted">
+                            In volatile markets, timing is everything. This platform eliminates guesswork by integrating
+                            live economic signals directly from the <strong>Federal Reserve (FRED)</strong> to quantify
+                            the "pulse" of the M&A ecosystem.
+                            It provides a dual-layer forecast:
+                        </p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded text-center h-100">
+                                    <div class="fw-bold text-dark mb-1">1. The Math (VAR Model)</div>
+                                    <small class="text-muted">A statistical baseline that projects market trajectory
+                                        based on historical correlations between credit, volatility, and
+                                        valuations.</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded text-center h-100">
+                                    <div class="fw-bold text-dark mb-1">2. The Strategy (Gemini AI)</div>
+                                    <small class="text-muted">A "Virtual Chief Strategy Officer" that explains the
+                                        <em>why</em> behind the trends and identifies regime shifts linear models
+                                        miss.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Who Is It Good For? -->
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-warning"><i class="bi bi-person-badge me-2"></i>C-Suite &
+                                    Strategy</h6>
+                                <p class="small text-muted mb-2"><strong>Usage:</strong> "Weather forecasting" for the
+                                    business.</p>
+                                <p class="small text-muted"><strong>Value:</strong> Deciding when to aggressively expand
+                                    vs. strictly conserve cash based on the 12-month outlook.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-primary"><i class="bi bi-bank me-2"></i>Investment Bankers</h6>
+                                <p class="small text-muted mb-2"><strong>Usage:</strong> Pitch creation and client
+                                    advisory.</p>
+                                <p class="small text-muted"><strong>Value:</strong> Providing data-backed evidence on
+                                    why clients should sell now, or identifying "off-market" targets.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-success"><i class="bi bi-briefcase me-2"></i>Corp Dev</h6>
+                                <p class="small text-muted mb-2"><strong>Usage:</strong> Target sourcing and screening.
+                                </p>
+                                <p class="small text-muted"><strong>Value:</strong> Automating the "Monday Morning" idea
+                                    generation process by filtering thousands of companies instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -35,13 +110,15 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
                 <div class="card bg-light border-0">
-                    <div class="card-body p-4 d-flex justify-content-around flex-wrap gap-3">
+                    <div class="card-body p-3 d-flex justify-content-center flex-wrap gap-4">
                         <a href="#macro-section" class="text-decoration-none fw-bold text-primary"><i
                                 class="bi bi-graph-up me-1"></i> Market Health</a>
                         <a href="#radar-section" class="text-decoration-none fw-bold text-warning"><i
                                 class="bi bi-radar me-1"></i> Strategic Radar</a>
                         <a href="#command-section" class="text-decoration-none fw-bold text-success"><i
                                 class="bi bi-crosshair me-1"></i> Deal Command</a>
+                        <a href="#architect-section" class="text-decoration-none fw-bold text-purple"><i
+                                class="bi bi-vector-pen me-1"></i> Deal Architect</a>
                     </div>
                 </div>
             </div>
@@ -56,65 +133,72 @@
                     <div class="card-header bg-primary text-white py-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="mb-0 fw-bold"><i class="bi bi-graph-up me-2"></i>Market Health (Macro)</h4>
-                            <span class="badge bg-white text-primary">Signal Detection</span>
+                            <span class="badge bg-white text-primary">The Core Engine</span>
                         </div>
                     </div>
                     <div class="card-body p-5">
-                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">Methodology & Data Sources</h5>
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">Functional Overview</h5>
+                        <p class="text-muted mb-4">The Market Health module answers the question: <em>"Is the macro
+                                environment conducive to M&A?"</em> It aggregates 5 key economic signals to produce a
+                            composite "M&A Temperature" and forecasts deal volume 12 months out.</p>
 
-                        <div class="row g-4 mb-5">
-                            <div class="col-md-6">
-                                <div class="p-3 bg-light rounded h-100">
-                                    <h6 class="fw-bold text-primary mb-3">Data Foundation (FRED)</h6>
-                                    <p class="small text-muted mb-0">We ingest real-time economic data primarily from
-                                        the Federal Reserve Economic Data (FRED) API. Key indicators include:</p>
-                                    <ul class="small text-muted mt-2">
-                                        <li><strong>Interest Rates:</strong> 10-Year Treasury Constant Maturity Rate
-                                            (DGS10)</li>
-                                        <li><strong>Credit Spreads:</strong> ICE BofA US High Yield Index
-                                            Option-Adjusted Spread (BAMLH0A0HYM2)</li>
-                                        <li><strong>GDP Growth:</strong> Real Gross Domestic Product (GDPC1)</li>
-                                        <li><strong>Market Volatility:</strong> CBOE Volatility Index (VIX)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 bg-light rounded h-100">
-                                    <h6 class="fw-bold text-primary mb-3">M&A Health Index Algorithm</h6>
-                                    <p class="small text-muted mb-2">The "M&A Health Index" is a proprietary composite
-                                        score (0-100) determining the favorability of the dealmaking environment.</p>
-                                    <p class="small text-muted"><strong>Formula:</strong> We apply a Vector
-                                        Autoregression (VAR) model to the historical time-series of the indicators
-                                        above. The model calculates the impulse response of M&A volume to shocks in
-                                        these macro variables.</p>
-                                    <p class="small text-muted fst-italic">"Higher Index = Lower Cost of Capital +
-                                        Higher CEO Confidence + Lower Volatility"</p>
-                                </div>
-                            </div>
+                        <h6 class="fw-bold text-primary mb-3">1. Top-Down Methodology (VAR Model)</h6>
+                        <p class="small text-muted mb-3">We utilize a <strong>Vector Autoregression (VAR)</strong>
+                            model, a stochastic process model used to capture the linear interdependencies among
+                            multiple time series. Unlike simple regression, VAR treats every variable as potentially
+                            endogenous—acknowledging that volatility affects credit spreads, which in turn affects deal
+                            volume.</p>
+
+                        <div class="table-responsive mb-4">
+                            <table class="table table-bordered table-sm small">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Signal Component</th>
+                                        <th>Proxy Indicator</th>
+                                        <th>Source (FRED Code)</th>
+                                        <th>Economic Rationale</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Credit Conditions</td>
+                                        <td>ICE BofA US High Yield Index OAS</td>
+                                        <td class="font-monospace">BAMLH0A0HYM2</td>
+                                        <td>Measures the "Risk Premium". Wider spreads = Expensive debt = Lower M&A.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Volatility</td>
+                                        <td>CBOE Volatility Index (VIX)</td>
+                                        <td class="font-monospace">VIXCLS</td>
+                                        <td>Proxy for "Deal Certainty". High VIX kills board confidence.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Liquidity</td>
+                                        <td>C&I Loans, All Commercial Banks</td>
+                                        <td class="font-monospace">BUSLOANS</td>
+                                        <td>Fuel for LBOs and acquisitions. Rising volume = Bullish.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Valuation</td>
+                                        <td>S&P 500 Index</td>
+                                        <td class="font-monospace">SP500</td>
+                                        <td>Baseline for price expectations and stock currency value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Baseline Volume</td>
+                                        <td>Historical M&A Deal Value</td>
+                                        <td class="font-monospace">Proprietary/IMAA</td>
+                                        <td>The dependent variable being forecasted.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
-                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">AI Integration (Gemini 3.0 Pro)</h5>
-                        <div class="row g-4 mb-3">
-                            <div class="col-md-12">
-                                <div class="d-flex gap-3">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-stars text-primary fs-3"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="fw-bold text-dark">Forecast Narrative & Executive Summary</h6>
-                                        <p class="small text-muted">While the VAR model provides the <em>numbers</em>,
-                                            Gemini 3.0 Pro provides the <em>story</em>. We feed the raw forecast vectors
-                                            and historical context into the LLM context window.</p>
-                                        <p class="small text-muted"><strong>Utility:</strong> The Executive Summary
-                                            explains <em>why</em> the index is moving. It connects a 50bps drop in
-                                            credit spreads to a likely surge in LBO activity 6 months out. Use this to
-                                            construct your pitch deck narrative: <span class="fst-italic text-dark">"The
-                                                window opens in Q3."</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <h6 class="fw-bold text-primary mb-3">2. Impulse Response Function (IRF)</h6>
+                        <p class="small text-muted">The "Shock Simulator" allows users to perturb one variable (e.g., +1
+                            SD shock to VIX) and observe the orthogonalized response of M&A Volume over 12 periods. This
+                            quantifies <em>resilience</em> vs. <em>fragility</em> in the current market regime.</p>
                     </div>
                 </div>
 
@@ -123,57 +207,55 @@
                     <div class="card-header bg-warning text-dark py-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="mb-0 fw-bold"><i class="bi bi-radar me-2"></i>Strategic Radar</h4>
-                            <span class="badge bg-dark text-warning">Target Screening</span>
+                            <span class="badge bg-dark text-warning">Sector Monitoring</span>
                         </div>
                     </div>
                     <div class="card-body p-5">
-                        <div class="row mb-5">
-                            <div class="col-lg-7">
-                                <h5 class="fw-bold text-dark mb-3">Purpose & Components</h5>
-                                <p class="text-muted">The Strategic Radar acts as a pre-screening filter to identify
-                                    "Deal Ready" companies before they officially hire an advisor. It continuously scans
-                                    the coverage universe.</p>
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">Bottom-Up Surveillance</h5>
+                        <p class="text-muted mb-4">While Market Health looks at the forest, Strategic Radar looks at the
+                            trees. It scans the entire coverage universe to calculate a <strong>Seller Pressure Index
+                                (SPI)</strong> for every company, identifying those most likely to transact regardless
+                            of the macro environment.</p>
 
-                                <h6 class="fw-bold text-secondary mt-4 mb-2">AI Brief & Sector Narrative</h6>
-                                <p class="small text-muted">The "AI Brief" button triggers a real-time synthesis of the
-                                    entire sector. It ingests recent news, earnings transcripts, and 10-K filings for
-                                    the top 20 tickers.</p>
-                                <ul class="small text-muted">
-                                    <li><strong>Data Sources:</strong> Yahoo Finance News Stream, SEC EDGAR (indexed).
-                                    </li>
-                                    <li><strong>Output:</strong> A strategic memo highlighting sector-wide themes (e.g.,
-                                        "Consolidation in Mid-Cap Pharma").</li>
-                                </ul>
+                        <h6 class="fw-bold text-warning mb-3">1. The SPI Scoring Model (0-100)</h6>
+                        <p class="small text-muted">The SPI is a composite score derived from 3 weighted operational
+                            signals. High scores (>70) indicate a high probability of openness to a sale or activist
+                            intervention.</p>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light border rounded h-100">
+                                    <strong class="d-block text-dark mb-2">A. Price Dislocation (40%)</strong>
+                                    <p class="small text-muted mb-0">Compares current price to 52-week High. Steep drops
+                                        (>30%) imply shareholder dissatisfaction and vulnerability.</p>
+                                    <div class="tiny-font text-secondary mt-2 fst-italic">Source: yfinance (Live)</div>
+                                </div>
                             </div>
-                            <div class="col-lg-5">
-                                <div class="bg-light p-4 rounded small">
-                                    <h6 class="fw-bold text-dark border-bottom border-secondary pb-2 mb-3">Seller
-                                        Propensity Index (SPI)</h6>
-                                    <p class="mb-2"><strong>Score:</strong> 0-100</p>
-                                    <p class="mb-3"><strong>Drivers:</strong></p>
-                                    <ul class="list-unstyled ps-2 border-start border-warning border-3">
-                                        <li class="mb-1"><strong>Activism:</strong> Recent 13D filings or proxy fights.
-                                        </li>
-                                        <li class="mb-1"><strong>Stress:</strong> High Net Debt/EBITDA (>4x) or looming
-                                            maturity walls.</li>
-                                        <li class="mb-1"><strong>Valuation:</strong> Trading >30% below 52-week high.
-                                        </li>
-                                    </ul>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light border rounded h-100">
+                                    <strong class="d-block text-dark mb-2">B. Operational Stress (30%)</strong>
+                                    <p class="small text-muted mb-0">Measures Leverage (Net Debt/EBITDA) and Growth
+                                        trajectory. High leverage + Low growth = Forced Seller.</p>
+                                    <div class="tiny-font text-secondary mt-2 fst-italic">Source: 10-K/10-Q
+                                        (Fundamental)</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light border rounded h-100">
+                                    <strong class="d-block text-dark mb-2">C. Strategic Flux (30%)</strong>
+                                    <p class="small text-muted mb-0">Analysis of news sentiment, leadership changes, or
+                                        failed product launches that trigger strategic reviews.</p>
+                                    <div class="tiny-font text-secondary mt-2 fst-italic">Source: Gemini AI (News
+                                        Analysis)</div>
                                 </div>
                             </div>
                         </div>
 
-                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">Actions: The AI Dossier</h5>
-                        <p class="small text-muted">Each company row features an interactive "Action" menu. Selecting
-                            <strong>"Generate Dossier"</strong> prompts Gemini to build a 2-page tear sheet.
-                        </p>
-                        <div class="alert alert-warning bg-warning bg-opacity-10 border-0 d-flex align-items-center">
-                            <i class="bi bi-exclamation-circle-fill text-warning me-3 fs-5"></i>
-                            <div class="small">
-                                <strong>Executive Tip:</strong> The Dossier is designed to be copy-pasted directly into
-                                a pitch book. It generates "Potential Acquirers" and "Deal Rationale" automatically.
-                            </div>
-                        </div>
+                        <h6 class="fw-bold text-warning mb-3">2. AI "Quick Takes"</h6>
+                        <p class="small text-muted">The system uses <strong>Gemini 2.0 Flash</strong> to read the latest
+                            headlines and earnings transcripts for high-SPI targets, summarizing the "Deal Thesis" into
+                            a single sentence (e.g., <em>"Shareholder activism driving divestiture of non-core EU
+                                assets."</em>).</p>
                     </div>
                 </div>
 
@@ -186,54 +268,155 @@
                         </div>
                     </div>
                     <div class="card-body p-5">
-                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">The Matchmaker Engine</h5>
-                        <p class="text-muted mb-4">Deal Command is the execution dashboard where Supply meets Demand. It
-                            takes the "Sellers" identified in Radar and matches them with capable "Acquirers".</p>
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-4">Origination & Matchmaking</h5>
+                        <p class="text-muted mb-4">Deal Command is the "Matchmaker". It moves beyond list-building to
+                            <strong>Pairwise Analysis</strong>, evaluating the specific fit between an Acquirer (You)
+                            and the Universe (Targets).
+                        </p>
 
-                        <div class="row g-4">
-                            <div class="col-md-4">
-                                <div class="card h-100 border-success">
-                                    <div class="card-header bg-success text-white small fw-bold">1. Supply Side</div>
-                                    <div class="card-body small">
-                                        <p>Filters the Radar results into distinct "Playbooks":</p>
-                                        <ul>
-                                            <li><strong>Forced Sellers:</strong> Distressed assets.</li>
-                                            <li><strong>Strategic Reviews:</strong> Board-initiated processes.</li>
-                                            <li><strong>Carve-outs:</strong> Non-core divisions of Conglomerates.</li>
-                                        </ul>
-                                    </div>
+                        <h6 class="fw-bold text-success mb-3">The "Gate & Score" Logic</h6>
+                        <p class="small text-muted">To avoid wasting time on unrealistic deals, the engine applies a
+                            strict funnel before scoring fit.</p>
+
+                        <div class="table-responsive mb-4">
+                            <table class="table table-bordered table-sm small">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Test</th>
+                                        <th>Logic / Threshold</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold text-danger">1. Hard Gates</td>
+                                        <td>Knockout Criteria</td>
+                                        <td>
+                                            <ul class="mb-0 ps-3">
+                                                <li><strong>Materiality:</strong> Target Rev > 3% of Acquirer Rev.</li>
+                                                <li><strong>Affordability:</strong> User Total Capacity > Deal Value (or
+                                                    LBO Feasible).</li>
+                                                <li><strong>Solvency:</strong> Combined EBITDA > 0 (No
+                                                    distress-on-distress).</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold text-success">2. Scoring</td>
+                                        <td>Weighted Fit Score</td>
+                                        <td>
+                                            <ul class="mb-0 ps-3">
+                                                <li><strong>Strategic (40%):</strong> Industry overlap, Growth
+                                                    injection, Value Arb.</li>
+                                                <li><strong>Feasibility (30%):</strong> Clean balance sheet, low
+                                                    pro-forma leverage.</li>
+                                                <li><strong>Close Prob (30%):</strong> Willingness (SPI) + Regulatory
+                                                    Risk.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: DEAL ARCHITECT (NEW) -->
+                <div id="architect-section" class="card shadow-sm mb-5 border-0">
+                    <div class="card-header text-white py-3" style="background-color: #6f42c1;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0 fw-bold"><i class="bi bi-vector-pen me-2"></i>Deal Architect</h4>
+                            <span class="badge bg-white text-dark" style="color: #6f42c1 !important;">Strategic
+                                Simulation</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 class="fw-bold text-dark border-bottom pb-2 mb-3">The "Virtual Sandbox" (Deep Dive)
+                                </h5>
+                                <p class="text-muted">
+                                    Deal Architect is the final step. It allows users to "Simulate" a specific deal
+                                    structure to check viability before going to committee. It uses live rate data to
+                                    model debt costs.
+                                </p>
+
+                                <h6 class="fw-bold text-purple mt-4 mb-3">Model Mechanics: The "Deal Physics"</h6>
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered table-sm small">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Metric</th>
+                                                <th>Calculation Formula</th>
+                                                <th>Thresholds</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold">Offer EV</td>
+                                                <td>(Target Market Cap + Net Debt) * (1 + Premium%)</td>
+                                                <td>Default Premium: <strong>25%</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">Firepower Coverage</td>
+                                                <td>(Acquirer Cash + Debt Cap + Stock Cap) / Offer EV</td>
+                                                <td><span class="text-success">&gt; 1.5x</span> = Strong</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">Pro-Forma Leverage</td>
+                                                <td>(Acq Debt + Tgt Debt + New Deal Debt) / Combined EBITDA</td>
+                                                <td>
+                                                    <span class="text-success">&lt; 4.0x</span> = Healthy<br>
+                                                    <span class="text-danger">&gt; 4.5x</span> = Breach (Requires Equity
+                                                    Cure)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">Close Probability</td>
+                                                <td>0.4*Financing + 0.25*Regulatory + 0.35*Willingness</td>
+                                                <td><strong>&lt; 50%</strong> = High Execution Risk</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100 border-success">
-                                    <div class="card-header bg-success text-white small fw-bold">2. Demand Side</div>
-                                    <div class="card-body small">
-                                        <p>Analyzes the "Buyer Universe" (Strategics & Sponsors) for:</p>
-                                        <ul>
-                                            <li><strong>Firepower:</strong> Cash + Debt Capacity.</li>
-                                            <li><strong>Strategic Fit:</strong> Adjacency logic (e.g. Vertical
-                                                Integration).</li>
-                                            <li><strong>Dry Powder:</strong> PE Fund vintage and remaining capital.</li>
-                                        </ul>
+                                <p class="small text-muted fst-italic"><i class="bi bi-info-circle me-1"></i>Macro
+                                    Input: The cost of new debt is anchored dynamically to the <strong>10-Year Treasury
+                                        Yield (^TNX)</strong> plus a credit spread.</p>
+
+                                <h6 class="fw-bold text-purple mt-4 mb-3">2. The AI Intelligence Layer</h6>
+                                <p class="small text-muted mb-3">The platform doesn't just calculate; it
+                                    <em>reasons</em>. We employ <strong>Google Gemini 2.0 Pro</strong> to act as a
+                                    "Virtual Associate", ensuring qualitative risks aren't missed.</p>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-light rounded h-100 border border-purple-light">
+                                            <strong class="d-block text-purple mb-2"><i
+                                                    class="bi bi-lightning-charge me-2"></i>"Quick Takes"
+                                                (Batch)</strong>
+                                            <p class="small text-muted mb-0">
+                                                Instantly scans the top 10 matches to generate a "One-Line Strategic
+                                                Hook" and a specific <span class="text-danger fw-bold">Red Flag
+                                                    Risk</span> for each. This helps users skim rapid-fire opportunities
+                                                without opening every file.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100 border-success">
-                                    <div class="card-header bg-success text-white small fw-bold">3. The Match</div>
-                                    <div class="card-body small">
-                                        <p><strong>Logic:</strong></p>
-                                        <p class="mb-0"><em>IF</em> Seller = "Distressed" <em>AND</em> Buyer =
-                                            "Turnaround Fund"</p>
-                                        <p class="mb-0"><em>THEN</em> Match Score = High.</p>
-                                        <hr>
-                                        <p class="mb-0 text-success fw-bold">Includes "AI Rationale" for every match.
-                                        </p>
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-light rounded h-100 border border-purple-light">
+                                            <strong class="d-block text-purple mb-2"><i
+                                                    class="bi bi-file-earmark-text me-2"></i>IC Memo Generation</strong>
+                                            <p class="small text-muted mb-0">
+                                                The "Deep Dive" generates a structured Investment Committee memo. It
+                                                synthesizes the numeric "Deal Physics" with qualitative fit, drafting
+                                                sections for <strong>Strategic Rationale</strong>, <strong>Synergy
+                                                    Potential</strong>, and <strong>Execution Risks</strong>.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -248,6 +431,15 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .text-purple {
+            color: #6f42c1;
+        }
+
+        .border-purple-light {
+            border-color: #e9dcf7 !important;
+        }
+    </style>
 </body>
 
 </html>

@@ -13,6 +13,9 @@ import time
 from datetime import datetime
 from dotenv import load_dotenv
 
+# Load environment variables before any src imports
+load_dotenv()
+
 # --- Core Modules ---
 from src.index.ma_index import build_index, load_config, scale_0_100
 from src.forecast.var_forecast import forecast_with_var
@@ -25,9 +28,10 @@ from src.analysis.gemini_brief import brief_service
 from src.analysis.gemini_dossier import dossier_service
 from src.data.retrieval_service import retrieval_service
 from src.data.schema import get_db_path
-
-# Load environment variables
-load_dotenv()
+from src.analysis.profile_engine import build_user_profile
+from src.analysis.matchmaker import MatchEngine
+from src.analysis.gemini_architect import GeminiArchitect
+from src.analysis.deal_architect_deep_dive import perform_live_dossier
 
 app = Flask(__name__)
 print("--- STARTING APP: v2.2 (Help Page + Deal Command Fixes) ---")
@@ -715,7 +719,19 @@ def company_dossier():
     result = dossier_service.generate_dossier(ticker, context_payload, force_refresh=force)
     return jsonify(result)
 
+
+# --- DEAL ARCHITECT v1.1 ROUTES ---
+
+@app.route('/deal-architect')
+def deal_architect_page():
+    return render_template('deal_architect.html', active_page='architect')
+
+
+
+
+
 # --- DEAL COMMAND v2.1 ROUTES ---
+
 
 @app.route('/deal-command')
 def deal_command():
@@ -1062,6 +1078,142 @@ def v2_sector_brief():
     )
     return jsonify(res)
 
+@app.route('/api/tickers', methods=['GET'])
+def api_search_tickers():
+    """Returns a list of tickers/names for autocomplete."""
+    query = request.args.get('q', '').lower()
+    from src.data.universe_service import UniverseService
+    svc = UniverseService()
+    
+    results = []
+    count = 0
+    for c in svc.universe:
+        t = c.get('ticker', '').lower()
+        n = c.get('title', '').lower()
+        if not t: continue
+        
+        if query in t or query in n:
+            results.append({
+                "ticker": c['ticker'],
+                "name": c.get('title') or c.get('short_name'),
+                "sector": c.get('sector', 'Unknown'),
+                "industry": c.get('sub_industry', 'Unknown'),
+                "market_cap": c.get('market_cap', 0)
+            })
+            count += 1
+            if count >= 20: break
+    return jsonify(results)
+
+
+
+
+# --- Deal Architect Routes (Consolidated) ---
+
+@app.route('/api/deal-architect/match', methods=['POST'])
+def api_deal_match():
+    """Rank candidates with Banker Logic + AI Batch Analysis."""
+    data = request.json
+    user_ticker = data.get('user_ticker', 'CVS')
+    intent = data.get('intent', 'BUY')
+    mandate = data.get('mandate', 'Adjacency')
+    include_ai = data.get('include_ai', False)
+    
+    # 1. Profile & Universe
+    from src.data.universe_service import UniverseService
+    from src.analysis.matchmaker import MatchEngine # Ensure import
+    
+    user_profile = build_user_profile(user_ticker)
+    
+    # 2. Banker Logic
+    engine = MatchEngine() # No args in new class
+    # Returns List[MatchCandidate]
+    candidates = engine.find_matches(user_profile, intent, mandate)
+    
+    # Convert dataclasses to dicts
+    matches = [c.to_dict() for c in candidates]
+    
+    # 3. AI Batch (Consolidated Service)
+    ai_insights = {}
+    if include_ai and matches:
+        top_matches = matches[:10] # Batch limit
+        ai_insights = brief_service.analyze_match_batch(
+            user_profile={"ticker": user_profile.ticker, "name": user_profile.business_summary},
+            candidates=top_matches,
+            intent=intent
+        )
+        
+        # Re-Rank based on AI Fit Score (User Request)
+        if ai_insights:
+            for m in top_matches:
+                t = m.get('ticker')
+                if t in ai_insights:
+                    m['ai_fit_score'] = ai_insights[t].get('fit_score', 0)
+            
+            # Sort top 10 by AI Score descending
+            top_matches.sort(key=lambda x: x.get('ai_fit_score', 0), reverse=True)
+            # Reconstruct matches list with re-ranked top 10
+            matches = top_matches + matches[10:]
+            
+    return jsonify({
+        "matches": matches,
+        "ai_batch": ai_insights
+    })
+
+@app.route('/api/deal-architect/deep-dive', methods=['POST'])
+def api_deep_dive():
+    """Live Deep Dive using Consolidated Service."""
+    data = request.json
+    user_ticker = data.get('user_ticker')
+    target_ticker = data.get('target_ticker')
+    intent = data.get('intent', 'BUY')
+    mandate = data.get('mandate', 'Adjacency')
+    
+    # 1. Live Data & Calc
+    try:
+        result = perform_live_dossier(user_ticker, target_ticker, intent, mandate)
+        
+        # 2. AI Memo (Consolidated Service)
+        memo = brief_service.generate_live_deal_memo(
+            user=result['user'],
+            candidate=result['candidate'],
+            intent=intent,
+            mandate_mode=mandate,
+            metric_data={"metrics": result['metrics'], "scores": result['scores']},
+            macro=result['macro'],
+            headlines=result.get('headlines', '') # Fixed key usage
+        )
+        
+        print(f"DEBUG MEMO KEYS: {memo.keys()}")
+        
+        response_payload = {
+            "metrics": result['metrics'],
+            "scores": result['scores'],
+            "macro": result['macro'],
+            "memo_html": memo.get('html', "<b>Error: Missing HTML key</b>"), # Safety fallback
+            "verdict": memo.get('verdict', {}),
+            "recency_audit": memo.get('recency_audit', {}),
+            "timestamp": datetime.now().strftime("%H:%M:%S")
+        }
+        print(f"DEBUG RESPONSE KEYS: {response_payload.keys()}")
+        
+        return jsonify(response_payload)
+    except Exception as e:
+        print(f"ERROR in api_deal_match: {e}")
+        return jsonify({
+            "error": str(e),
+            "memo_html": f"<div class='alert alert-danger'>System Error: {str(e)}</div>",
+            "verdict": {"status": "ERROR"},
+            "metrics": {},
+            "scores": {},
+            "macro": {}
+        })
+
 if __name__ == '__main__':
-    print("Starting M&A Health Forecast Platform (Full Restore)...")
-    app.run(debug=True, port=5000)
+    print("Starting M&A Health Forecast Platform (v2.3 Deal Architect)...")
+    if not os.path.exists(get_db_path()):
+        print("Database not found. Please run init_db.py first.")
+    
+    # Reload trigger 8
+    
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port, threaded=True)

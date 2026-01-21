@@ -1,0 +1,420 @@
+{
+  "da4bb9ad2837077fa2b145855ee23a81": {
+    "timestamp": "2026-01-20T23:54:05.627791",
+    "data": {
+      "WIT": {
+        "ticker": "WIT",
+        "match_score_ai": 75,
+        "rationale_headline": "Acquiring WIPRO LTD provides potential synergies in software development and IT services.",
+        "synergy_type": "Technology",
+        "risk_factor": "Culture Clashes"
+      },
+      "BRK-B": {
+        "ticker": "BRK-B",
+        "match_score_ai": 30,
+        "rationale_headline": "Acquiring BERKSHIRE HATHAWAY INC provides diversification into financials sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Regulatory hurdles"
+      },
+      "SLF": {
+        "ticker": "SLF",
+        "match_score_ai": 30,
+        "rationale_headline": "Acquiring SUN LIFE FINANCIAL INC offers diversification into the financials sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Regulatory hurdles"
+      },
+      "RNR": {
+        "ticker": "RNR",
+        "match_score_ai": 30,
+        "rationale_headline": "Acquiring RENAISSANCERE HOLDINGS LTD provides diversification into the financials sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Regulatory hurdles"
+      },
+      "VIPS": {
+        "ticker": "VIPS",
+        "match_score_ai": 20,
+        "rationale_headline": "Acquiring Vipshop Holdings Ltd provides exposure to the consumer cyclical sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Market volatility"
+      },
+      "TAL": {
+        "ticker": "TAL",
+        "match_score_ai": 20,
+        "rationale_headline": "Acquiring TAL Education Group offers diversification into the consumer defensive sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Regulatory scrutiny"
+      },
+      "TGS": {
+        "ticker": "TGS",
+        "match_score_ai": 10,
+        "rationale_headline": "Acquiring GAS TRANSPORTER OF THE SOUTH INC offers diversification into the energy sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Geopolitical risks"
+      },
+      "SIM": {
+        "ticker": "SIM",
+        "match_score_ai": 10,
+        "rationale_headline": "Acquiring GRUPO SIMEC, S.A.B. de C.V. provides diversification into the basic materials sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Commodity price volatility"
+      }
+    },
+    "model": "gemini-2.0-flash-exp"
+  },
+  "e68d9ad41ac47bf0a1a66dacb5d48ae3": {
+    "timestamp": "2026-01-21T00:02:10.285549",
+    "data": {
+      "VIK": {
+        "ticker": "VIK",
+        "match_score_ai": 60,
+        "rationale_headline": "Acquiring Viking Holdings expands SS&C's reach into the consumer cyclical sector, diversifying its portfolio.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Culture clash between a technology firm and a consumer cyclical company."
+      },
+      "AMRZ": {
+        "ticker": "AMRZ",
+        "match_score_ai": 40,
+        "rationale_headline": "Amrize provides SS&C with diversification into the Basic Materials sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Limited synergy between software and basic materials."
+      },
+      "WIT": {
+        "ticker": "WIT",
+        "match_score_ai": 75,
+        "rationale_headline": "Acquiring Wipro strengthens SS&C's technology offerings and expands its global presence.",
+        "synergy_type": "Technology",
+        "risk_factor": "Integration challenges due to size and complexity of Wipro."
+      },
+      "MTD": {
+        "ticker": "MTD",
+        "match_score_ai": 70,
+        "rationale_headline": "Mettler Toledo acquisition deepens SS&C's foothold in the healthcare industry, providing access to new markets.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Regulatory hurdles in the healthcare sector."
+      },
+      "LEN": {
+        "ticker": "LEN",
+        "match_score_ai": 50,
+        "rationale_headline": "Lennar acquisition allows SS&C to expand its services into the consumer cyclical sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Potential market cyclicality affecting revenue streams."
+      },
+      "TME": {
+        "ticker": "TME",
+        "match_score_ai": 45,
+        "rationale_headline": "Tencent Music acquisition provides SS&C with exposure to the communication services sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Limited overlap between financial software and music streaming services."
+      },
+      "ROL": {
+        "ticker": "ROL",
+        "match_score_ai": 55,
+        "rationale_headline": "Rollins provides SS&C diversification into the consumer cyclical sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Lack of clear synergy beyond diversification."
+      },
+      "NRG": {
+        "ticker": "NRG",
+        "match_score_ai": 35,
+        "rationale_headline": "NRG acquisition allows SS&C to diversify into the Utilities sector.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Limited operational synergy between technology and energy sectors."
+      }
+    },
+    "model": "gemini-2.0-flash-exp"
+  },
+  "a319cc7d454e1d5227f1400f8010f764": {
+    "timestamp": "2026-01-21T00:02:29.281061",
+    "data": {
+      "AAPL": {
+        "ticker": "AAPL",
+        "match_score_ai": 70,
+        "rationale_headline": "Acquiring SS&C expands Apple's software and services offerings in the financial services and healthcare industries.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Culture clash between a large consumer tech company and a specialized financial services provider."
+      },
+      "MSFT": {
+        "ticker": "MSFT",
+        "match_score_ai": 75,
+        "rationale_headline": "SS&C acquisition complements Microsoft's cloud and enterprise solutions with specialized financial and healthcare software.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Integration challenges of SS&C's products into the Microsoft ecosystem."
+      },
+      "AVGO": {
+        "ticker": "AVGO",
+        "match_score_ai": 40,
+        "rationale_headline": "Potential diversification into software and services for Broadcom, but limited synergy with existing business.",
+        "synergy_type": "Technology",
+        "risk_factor": "Lack of experience in software and services within financial services and healthcare."
+      },
+      "QCOM": {
+        "ticker": "QCOM",
+        "match_score_ai": 30,
+        "rationale_headline": "Limited strategic fit for Qualcomm; SS&C's business has little overlap with Qualcomm's core competencies.",
+        "synergy_type": "Unknown",
+        "risk_factor": "Lack of synergy and potential distraction from core business."
+      },
+      "MU": {
+        "ticker": "MU",
+        "match_score_ai": 20,
+        "rationale_headline": "No clear strategic rationale for Micron to acquire SS&C.",
+        "synergy_type": "Unknown",
+        "risk_factor": "No strategic alignment."
+      },
+      "AMAT": {
+        "ticker": "AMAT",
+        "match_score_ai": 20,
+        "rationale_headline": "No clear strategic rationale for Applied Materials to acquire SS&C.",
+        "synergy_type": "Unknown",
+        "risk_factor": "No strategic alignment."
+      },
+      "CRM": {
+        "ticker": "CRM",
+        "match_score_ai": 80,
+        "rationale_headline": "Acquisition strengthens Salesforce's industry-specific cloud offerings, particularly in financial services.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Integration of different software platforms and sales strategies."
+      },
+      "SAP": {
+        "ticker": "SAP",
+        "match_score_ai": 80,
+        "rationale_headline": "Acquisition strengthens SAP's industry-specific cloud offerings, particularly in financial services and healthcare.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Integration of different software platforms and sales strategies."
+      }
+    },
+    "model": "gemini-2.0-flash-exp"
+  },
+  "580aa811dd483d599f3bcb0a9fa6f5d3": {
+    "timestamp": "2026-01-21T00:03:07.323528",
+    "data": {
+      "WIT": {
+        "ticker": "WIT",
+        "match_score_ai": 75,
+        "rationale_headline": "Acquiring Wipro enhances SS&C's service offerings in the technology sector.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Cultural differences may hinder integration."
+      },
+      "ATHM": {
+        "ticker": "ATHM",
+        "match_score_ai": 30,
+        "rationale_headline": "Autohome provides limited strategic fit given SS&C's focus on financial services and healthcare.",
+        "synergy_type": "Unknown",
+        "risk_factor": "Limited synergy with SS&C's core business."
+      },
+      "WOLF": {
+        "ticker": "WOLF",
+        "match_score_ai": 70,
+        "rationale_headline": "Wolfspeed's technology offerings could complement SS&C's existing software capabilities.",
+        "synergy_type": "Technology Synergy",
+        "risk_factor": "Integration of disparate technology platforms."
+      },
+      "HUYA": {
+        "ticker": "HUYA",
+        "match_score_ai": 25,
+        "rationale_headline": "HUYA's communication services are misaligned with SS&C's focus.",
+        "synergy_type": "Unknown",
+        "risk_factor": "Lack of strategic alignment."
+      },
+      "ZH": {
+        "ticker": "ZH",
+        "match_score_ai": 20,
+        "rationale_headline": "Zhihu's communication services are misaligned with SS&C's focus.",
+        "synergy_type": "Unknown",
+        "risk_factor": "Lack of strategic alignment."
+      }
+    },
+    "model": "gemini-2.0-flash-exp"
+  },
+  "068e1019da81bcfcc509be619b639bd7": {
+    "timestamp": "2026-01-21T00:06:25.088735",
+    "data": {
+      "WIT": {
+        "ticker": "WIT",
+        "match_score_ai": 60,
+        "rationale_headline": "Acquiring WIPRO LTD expands SS&C's technology offerings in the financial services industry.",
+        "synergy_type": "Technology",
+        "risk_factor": "Culture clash and integration challenges."
+      },
+      "TME": {
+        "ticker": "TME",
+        "match_score_ai": 30,
+        "rationale_headline": "Tencent Music Entertainment Group provides limited synergies within SS&C's focus on financial services and healthcare.",
+        "synergy_type": "Unknown",
+        "risk_factor": "Limited strategic alignment."
+      },
+      "COHR": {
+        "ticker": "COHR",
+        "match_score_ai": 60,
+        "rationale_headline": "COHERENT CORP.'s technology solutions could enhance SS&C's existing platform.",
+        "synergy_type": "Technology",
+        "risk_factor": "Integration of disparate technology platforms."
+      },
+      "BR": {
+        "ticker": "BR",
+        "match_score_ai": 80,
+        "rationale_headline": "BROADRIDGE FINANCIAL SOLUTIONS, INC. offers complementary services in financial technology.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Potential regulatory hurdles due to market overlap."
+      },
+      "TDY": {
+        "ticker": "TDY",
+        "match_score_ai": 60,
+        "rationale_headline": "TELEDYNE TECHNOLOGIES INC's technology may provide expansion opportunities within SS&C's offerings.",
+        "synergy_type": "Technology",
+        "risk_factor": "Integration and focus outside of the financial services core."
+      },
+      "STM": {
+        "ticker": "STM",
+        "match_score_ai": 60,
+        "rationale_headline": "STMicroelectronics N.V. could enhance SS&C's technology infrastructure.",
+        "synergy_type": "Technology",
+        "risk_factor": "Integration of disparate technology platforms."
+      },
+      "LDOS": {
+        "ticker": "LDOS",
+        "match_score_ai": 60,
+        "rationale_headline": "Leidos Holdings, Inc. expands SS&C's reach into new sectors.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Culture clash and integration challenges."
+      },
+      "OMC": {
+        "ticker": "OMC",
+        "match_score_ai": 30,
+        "rationale_headline": "OMNICOM GROUP INC. provides minimal synergy with SS&C's primary focus.",
+        "synergy_type": "Unknown",
+        "risk_factor": "Limited strategic alignment."
+      }
+    },
+    "model": "gemini-2.0-flash-exp"
+  },
+  "9b6aab261ad3c03b10804813416958fd": {
+    "timestamp": "2026-01-21T01:04:25.383032",
+    "data": {
+      "WIT": {
+        "ticker": "WIT",
+        "match_score_ai": 85,
+        "rationale_headline": "Acquiring Wipro scales SS&C's global IT service delivery and digital transformation capabilities in the financial sector.",
+        "synergy_type": "Technology Synergy",
+        "risk_factor": "Integration complexity of a massive global workforce and cultural misalignment."
+      },
+      "RNR": {
+        "ticker": "RNR",
+        "match_score_ai": 65,
+        "rationale_headline": "Direct vertical integration into the reinsurance market to deploy proprietary financial software and asset management tools.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Strict insurance industry regulations and capital requirement shifts."
+      },
+      "VIPS": {
+        "ticker": "VIPS",
+        "match_score_ai": 10,
+        "rationale_headline": "Consumer e-commerce operations provide no strategic overlap with financial or healthcare software services.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Total lack of industrial logic and core competency mismatch."
+      },
+      "TAL": {
+        "ticker": "TAL",
+        "match_score_ai": 5,
+        "rationale_headline": "Education services fall outside the core mission of financial and healthcare technology enablement.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Significant geopolitical and regulatory risks within the Chinese education sector."
+      },
+      "TGS": {
+        "ticker": "TGS",
+        "match_score_ai": 5,
+        "rationale_headline": "Energy infrastructure and gas transportation are unrelated to SS&C\u2019s software-driven business model.",
+        "synergy_type": "Cost Synergy",
+        "risk_factor": "Exposure to volatile energy commodities and geographical concentration risks."
+      },
+      "SIM": {
+        "ticker": "SIM",
+        "match_score_ai": 5,
+        "rationale_headline": "Steel manufacturing offers zero technical or market synergy for a financial services technology provider.",
+        "synergy_type": "Cost Synergy",
+        "risk_factor": "Capital-intensive nature of basic materials vs. high-margin software models."
+      },
+      "RLX": {
+        "ticker": "RLX",
+        "match_score_ai": 5,
+        "rationale_headline": "Consumer vaping technology provides no value to enterprise financial or healthcare software stacks.",
+        "synergy_type": "Revenue Synergy",
+        "risk_factor": "Severe reputational and public health regulatory hurdles."
+      },
+      "ATHM": {
+        "ticker": "ATHM",
+        "match_score_ai": 15,
+        "rationale_headline": "Automotive marketplace data offers minimal, tangential value to SS&C's core financial services client base.",
+        "synergy_type": "Technology Synergy",
+        "risk_factor": "Sector-specific market volatility in the automotive and media industries."
+      }
+    },
+    "model": "gemini-3-flash-preview"
+  },
+  "5dc12f5252b65af4726aec483fe1f8fa": {
+    "timestamp": "2026-01-21T01:17:13.490920",
+    "data": {},
+    "model": "gemini-3-flash-preview"
+  },
+  "64311b1f67c8da8a195645a2da0d0b4b": {
+    "timestamp": "2026-01-21T01:22:05.460361",
+    "data": {
+      "YALA": {
+        "ticker": "YALA",
+        "match_score_ai": 35,
+        "rationale_headline": "Expansion into social technology platforms diversifies the tech stack away from core B2B services.",
+        "synergy_type": "Technology",
+        "risk_factor": "Market misalignment with SSNC's enterprise software focus."
+      },
+      "HRTG": {
+        "ticker": "HRTG",
+        "match_score_ai": 65,
+        "rationale_headline": "Vertical integration into the insurance sector provides direct access to financial service end-users.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Increased regulatory oversight in the insurance industry."
+      },
+      "GNE": {
+        "ticker": "GNE",
+        "match_score_ai": 15,
+        "rationale_headline": "Diversification into utilities offers no clear synergy with financial or healthcare software.",
+        "synergy_type": "Cost",
+        "risk_factor": "Lack of operational expertise in the energy sector."
+      },
+      "USNA": {
+        "ticker": "USNA",
+        "match_score_ai": 20,
+        "rationale_headline": "Consumer health products represent a radical departure from healthcare software-enabled services.",
+        "synergy_type": "Revenue",
+        "risk_factor": "Brand dilution and business model conflict."
+      },
+      "RNGR": {
+        "ticker": "RNGR",
+        "match_score_ai": 10,
+        "rationale_headline": "Energy services sector lacks industrial logic for a high-margin technology provider.",
+        "synergy_type": "Cost",
+        "risk_factor": "Extreme sector divergence."
+      },
+      "ASPN": {
+        "ticker": "ASPN",
+        "match_score_ai": 12,
+        "rationale_headline": "Industrial aerogel manufacturing provides no overlap with SSNC's digital service ecosystem.",
+        "synergy_type": "Technology",
+        "risk_factor": "Capital expenditure requirements of manufacturing vs software."
+      },
+      "BH": {
+        "ticker": "BH",
+        "match_score_ai": 18,
+        "rationale_headline": "Conglomerate structure in consumer cyclicals fails to complement software-driven growth strategies.",
+        "synergy_type": "Cost",
+        "risk_factor": "Cultural and organizational complexity."
+      },
+      "SRI": {
+        "ticker": "SRI",
+        "match_score_ai": 10,
+        "rationale_headline": "Automotive electronics and systems offer zero strategic fit for financial services technology.",
+        "synergy_type": "Technology",
+        "risk_factor": "Sector irrelevance."
+      }
+    },
+    "model": "gemini-3-flash-preview"
+  }
+}

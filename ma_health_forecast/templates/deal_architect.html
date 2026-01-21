@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Architect | M&A Health Forecast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Shared Executive Header -->
+    {% with active_page='architect' %}
+    {% include 'header_partial.html' %}
+    {% endwith %}
+
+    <div class="container-fluid py-4 px-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+            <div>
+                <h2 class="mb-0 fw-bold">Deal Architect <span class="badge bg-warning text-dark align-middle"
+                        style="font-size: 0.4em;">v1.2</span></h2>
+                <p class="text-muted small mb-0">Strategic Deal Origination & Deep Dive Analysis</p>
+            </div>
+            <div>
+                <span class="badge bg-light text-secondary border">Live Market Data</span>
+            </div>
+        </div>
+
+        <!-- CONTEXT BAR (My Ticker) -->
+        <div class="mb-4 d-flex align-items-center bg-white p-3 rounded shadow-sm border border-light">
+            <div class="me-3">
+                <label for="userTicker" class="form-label text-uppercase fw-bold text-muted small mb-0">My Firm
+                    (Acquirer)</label>
+            </div>
+            <div class="position-relative" style="width: 400px;">
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-building"></i></span>
+                    <input type="text" id="userTicker" class="form-control fw-bold border-start-0 font-monospace"
+                        placeholder="Search ticker or name..." autocomplete="off"
+                        oninput="handleTickerSearch(this.value)" onfocus="handleTickerSearch(this.value)">
+                    <button class="btn btn-outline-secondary border-start-0" type="button"
+                        onclick="document.getElementById('userTicker').value=''; handleTickerSearch('')">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+                <!-- Autocomplete Dropdown -->
+                <div id="tickerSuggestions" class="list-group position-absolute w-100 shadow-lg mt-1"
+                    style="z-index: 1050; display: none; max-height: 400px; overflow-y: auto;">
+                    <!-- Items populated by JS -->
+                </div>
+            </div>
+            <div class="ms-3 text-muted small fst-italic">
+                <i class="bi bi-info-circle me-1"></i>Defines the balance sheet & strategy for matching.
+            </div>
+        </div>
+
+        <!-- MAIN LAYOUT: Single view for Origination -->
+        <div class="row">
+            <!-- Controls -->
+            <div class="col-md-3 border-end">
+                <div class="card shadow-sm border-0 bg-light mb-4 sticky-top" style="top: 20px; z-index: 1000;">
+                    <div class="card-body p-4">
+                        <h6 class="text-uppercase text-muted border-bottom pb-2 fw-bold small">Mandate Config
+                        </h6>
+
+                        <label class="form-label small mt-2 fw-bold text-dark">Strategic Intent</label>
+                        <select class="form-select form-select-sm mb-3" id="intentSelect">
+                            <option value="BUY" selected>Buy-Side (Acquisition)</option>
+                            <option value="SELL">Sell-Side (Divestiture)</option>
+                            <option value="MERGE">Merger of Equals</option>
+                        </select>
+
+                        <label class="form-label small fw-bold text-dark">Sector Scope</label>
+                        <select class="form-select form-select-sm mb-3" id="scopeSelect">
+                            <option value="Consolidation">Consolidation (Sub-Sector)</option>
+                            <option value="Adjacency">Adjacency (Sector)</option>
+                            <option value="Diversification" selected>Diversification (All)</option>
+                        </select>
+
+
+                        <div class="form-check form-switch mt-3 p-2 bg-white rounded border">
+                            <input class="form-check-input ms-0 me-2" type="checkbox" id="aiBatchCheck">
+                            <label class="form-check-label small fw-bold" for="aiBatchCheck">AI Quick Takes
+                                (Batch)</label>
+                        </div>
+
+                        <!-- Filters -->
+                        <h6 class="text-uppercase text-muted border-bottom pb-2 fw-bold small mt-4">Screening</h6>
+                        <label class="form-label small fw-bold text-dark mt-2"
+                            title="Filter candidates below this Close Probability Score">Min Close Probability</label>
+                        <input type="range" class="form-range w-100" id="minProbRange" min="0" max="100" step="10"
+                            value="0"
+                            oninput="document.getElementById('probVal').innerText = this.value + '%'; applyFilters();">
+                        <div class="text-end small text-muted" id="probVal">0% (Show All)</div>
+
+
+                        <label class="form-label small fw-bold text-dark mt-2">Min Deal Size (EV)</label>
+                        <select class="form-select form-select-sm" id="minEvSelect" onchange="applyFilters()">
+                            <option value="0" selected>Any</option>
+                            <option value="1000000000">$1B+</option>
+                            <option value="5000000000">$5B+</option>
+                            <option value="10000000000">$10B+</option>
+                        </select>
+
+                        <button class="btn btn-primary w-100 mt-4 py-2 fw-bold shadow-sm" onclick="runMatchmaker()">
+                            <i class="bi bi-search me-1"></i> Find Targets
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="col-md-9">
+                <div id="matchLoading" class="text-center d-none py-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="text-muted mt-3 small text-uppercase fw-bold">Running Banker Logic...</p>
+                </div>
+
+                <div id="matchResults">
+                    <!-- Empty State -->
+                    <div class="text-center py-5 text-muted bg-light rounded border border-light dashed-border">
+                        <i class="bi bi-diagram-3 display-1 text-secondary opacity-25"></i>
+                        <p class="mt-3 fw-bold">Configure mandate and search to originate deals.</p>
+                        <small>Applies strict logic gates for strategic fit, feasibility, and
+                            probability.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shortlist / Compare Bottom Bar -->
+    <div id="shortlistBar" class="fixed-bottom bg-white border-top shadow-lg p-3 d-none" style="z-index: 1040;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <h6 class="mb-0 fw-bold me-3 text-primary"><i class="bi bi-pin-angle-fill me-2"></i>Shortlist <span
+                        class="badge bg-secondary ms-1" id="shortlistCount">0</span></h6>
+                <div id="shortlistThumbs" class="d-flex gap-2">
+                    <!-- Thumbnails injected here -->
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-outline-danger btn-sm me-2" onclick="clearShortlist()">Clear</button>
+                <button class="btn btn-dark btn-sm fw-bold" id="btnCompare" onclick="openCompareModal()" disabled><i
+                        class="bi bi-layout-split me-1"></i>Compare Selected</button>
+                <button class="btn btn-outline-secondary btn-sm ms-2" onclick="exportShortlist()" title="Export JSON"><i
+                        class="bi bi-download"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEEP DIVE MODAL -->
+
+    <div class="modal fade" id="deepDiveModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-lightning-charge-fill text-warning me-2"></i>Live
+                        Deep Dive</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="row g-0 h-100">
+                        <!-- Left: Physics & Scorecard -->
+                        <div class="col-md-3 bg-light border-end p-3 overflow-auto">
+                            <div class="mb-3">
+                                <label class="small text-muted fw-bold">Target Ticker</label>
+                                <div class="font-monospace fw-bold fs-5 text-primary" id="modalTargetTicker">---</div>
+                            </div>
+
+                            <div id="modalPhysicsBox">
+                                <!-- Physics populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Right: AI Memo -->
+                        <div class="col-md-9 p-4 bg-white">
+                            <div id="modalLoading" class="text-center d-none py-5">
+                                <div class="spinner-border text-success" role="status"></div>
+                                <p class="text-muted mt-3 small">Fetching Live Data & Generating Memo...</p>
+                            </div>
+                            <div id="modalContent">
+                                <!-- Memo populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light small text-muted justify-content-between">
+                    <div id="modalFooterMeta"></div>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPARE MODAL -->
+    <div class="modal fade" id="compareModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Side-by-Side Comparison</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0 overflow-auto">
+                    <table class="table table-bordered mb-0 table-striped small">
+                        <thead class="table-light text-muted text-uppercase small">
+                            <tr id="compareHeaderRow">
+                                <th style="width: 150px;">Metric</th>
+                                <!-- Columns filled by JS -->
+                            </tr>
+                        </thead>
+                        <tbody id="compareBody">
+                            <!-- Rows filled by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & Scripts -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // --- MATCHMAKER ---
+        async function runMatchmaker() {
+            const user = document.getElementById('userTicker').value;
+            const intent = document.getElementById('intentSelect').value;
+            const mandate = document.getElementById('scopeSelect').value;
+            const useAI = document.getElementById('aiBatchCheck').checked;
+
+            document.getElementById('matchLoading').classList.remove('d-none');
+            document.getElementById('matchResults').innerHTML = '';
+            aiData = {}; // Clear previous AI results
+
+            try {
+                const resp = await fetch('/api/deal-architect/match', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_ticker: user,
+                        intent,
+                        mandate,
+                        include_ai: useAI
+                    })
+                });
+                const data = await resp.json();
+                renderMatches(data, intent);
+            } catch (e) {
+                document.getElementById('matchResults').innerHTML = `<div class="alert alert-danger">${e}</div>`;
+            } finally {
+                document.getElementById('matchLoading').classList.add('d-none');
+            }
+        }
+
+        let allMatches = []; // Global store for filtering
+        let aiData = {}; // Global store for AI Batch
+        let shortlist = [];
+
+        function renderMatches(data, intent) {
+            if (data.matches) {
+                allMatches = data.matches; // Store for filtering
+                aiData = data.ai_batch || {}; // update or clear AI data
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const minProb = parseInt(document.getElementById('minProbRange').value) || 0;
+            const minEV = parseInt(document.getElementById('minEvSelect').value) || 0;
+
+            // Filter
+            const filtered = allMatches.filter(m => {
+                const prob = m.scores.probability;
+                const ev = m.enterprise_value || m.market_cap || 0;
+                return prob >= minProb && ev >= minEV;
+            });
+
+            // Render
+            const intent = document.getElementById('intentSelect').value;
+            renderFilteredMatches(filtered, intent);
+        }
+
+        function renderFilteredMatches(matches, intent) {
+            const container = document.getElementById('matchResults');
+            if (!matches || matches.length === 0) {
+                container.innerHTML = '<div class="alert alert-warning border-warning d-flex align-items-center"><i class="bi bi-exclamation-triangle me-2"></i>No matches passed the strict filters. Try relaxing them.</div>';
+                return;
+            }
+
+            let html = `<div class="d-flex justify-content-between mb-3 align-items-center"><span class="badge bg-primary px-3 py-2 rounded-pill">${matches.length} Candidates</span> <small class="text-muted fst-italic">Sorted by Fit Score</small></div>`;
+            html += '<div class="row row-cols-1 row-cols-lg-2 g-4">';
+
+            matches.forEach((m, i) => {
+                // Confidence Setup
+                const conf = m.confidence || 1.0;
+                let confLabel = 'High';
+                let confColor = 'success';
+                let confIcon = 'check-circle-fill';
+
+                if (conf < 0.5) { confLabel = 'Low'; confColor = 'danger'; confIcon = 'exclamation-circle-fill'; }
+                else if (conf < 0.8) { confLabel = 'Med'; confColor = 'warning'; confIcon = 'dash-circle-fill'; }
+
+                // Pinned State
+                const isPinned = shortlist.includes(m.ticker);
+                const pinClass = isPinned ? 'btn-warning text-dark' : 'btn-outline-secondary text-muted';
+                const pinIcon = isPinned ? 'bi-pin-angle-fill' : 'bi-pin-angle';
+
+                let aiBlock = ''; // Ensure variable is declared
+                if (aiData && aiData[m.ticker]) {
+                    const ai = aiData[m.ticker];
+                    console.log(`[AI Debug] ${m.ticker}:`, ai); // Debug
+
+                    if (ai.rationale_headline || ai.risk_factor) {
+                        // Success Case
+                        aiBlock = `
+                            <div class="mt-3 p-3 bg-light border-start border-4 border-warning rounded small">
+                                <div class="fw-bold text-dark mb-1"><i class="bi bi-robot me-1 text-warning"></i> ${ai.rationale_headline || 'AI Insight'}</div>
+                                <div class="d-flex justify-content-between text-muted mt-2 border-top pt-2" style="font-size: 0.85em;">
+                                    <span>${ai.synergy_type || 'Synergy TBD'}</span>
+                                    <span class="text-danger fw-bold">${ai.risk_factor ? '⚠️ ' + ai.risk_factor : ''}</span>
+                                </div>
+                            </div>
+                        `;
+                    } else if (document.getElementById('aiBatchCheck').checked) {
+                        // Fallback: User asked for AI, but data is pending/empty
+                        aiBlock = `
+                            <div class="mt-3 p-2 bg-light border rounded small text-center text-muted fst-italic">
+                                <span class="spinner-grow spinner-grow-sm text-warning me-1" role="status" aria-hidden="true" style="width: 0.5rem; height: 0.5rem;"></span>
+                                Click 'Find Targets' to Generate
+                            </div>
+                        `;
+                    }
+                } else if (document.getElementById('aiBatchCheck').checked && i < 10) {
+                    // Top 10 Fallback (if they were supposed to have data but don't yet)
+                    aiBlock = `
+                            <div class="mt-3 p-2 bg-light border rounded small text-center text-muted fst-italic">
+                                <span class="spinner-grow spinner-grow-sm text-secondary me-1" role="status" aria-hidden="true" style="width: 0.5rem; height: 0.5rem;"></span>
+                                Queued for AI...
+                            </div>
+                        `;
+                }
+
+                // Action Button
+                const btnLabel = intent === 'SELL' ? 'Engage Buyer' : 'Deep Dive';
+
+                html += `
+        <div class="col">
+            <div class="card h-100 shadow-sm border-light hover-shadow transition-all">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <div class="d-flex align-items-center page-header-actions">
+                                <h5 class="card-title text-primary fw-bold mb-0 me-2">${m.name}</h5>
+                                <button class="btn btn-sm ${pinClass} py-0 px-2 rounded-pill ms-2" 
+                                    onclick="togglePin('${m.ticker}')" title="Pin to Shorlist">
+                                    <i class="bi ${pinIcon}"></i>
+                                </button>
+                            </div>
+                            <span class="font-monospace text-muted small">${m.ticker}</span>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-${m.overall > 75 ? 'success' : 'secondary'} fs-6">Score: ${m.scores.overall}</span>
+                            <div class="small fw-bold text-${confColor} mt-1" style="font-size: 0.75em;">
+                                <i class="bi bi-${confIcon}"></i> Conf: ${confLabel}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-subtitle text-muted small mb-3 border-bottom pb-2">${m.sub_industry} &bull; EV: ${m.ev_fmt}</p>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between small mb-1"><span>Strategic</span> <span class="fw-bold text-info">${m.scores.strategic}</span></div>
+                        <div class="progress mb-2" style="height: 4px;">
+                            <div class="progress-bar bg-info" style="width: ${m.scores.strategic}%"></div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between small mb-1"><span>Feasibility</span> <span class="fw-bold text-success">${m.scores.feasibility}</span></div>
+                        <div class="progress mb-2" style="height: 4px;">
+                            <div class="progress-bar bg-success" style="width: ${m.scores.feasibility}%"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between small mb-1"><span>Probability</span> <span class="fw-bold text-warning">${m.scores.probability}</span></div>
+                        <div class="progress mb-2" style="height: 4px;">
+                            <div class="progress-bar bg-warning" style="width: ${m.scores.probability}%"></div>
+                        </div>
+                        
+                        <!-- Breakdown (Upgrade B) -->
+                        <div class="d-flex justify-content-between mt-2 pt-1 border-top" style="font-size: 0.7em;">
+                            <span class="text-muted" title="Financing">FIN: <strong>${m.scores.financing}</strong></span>
+                            <span class="text-muted" title="Regulatory">REG: <strong>${m.scores.regulatory}</strong></span>
+                            <span class="text-muted" title="Willingness (${m.status_flags.willingness})">WILL: <strong>${m.scores.willingness}</strong></span>
+                        </div>
+                    </div>
+                    
+                    <div class="small mb-3 bg-light p-2 rounded">
+                        <div class="mb-1"><span class="badge bg-${m.status_flags.verdict === 'GO' ? 'success' : (m.status_flags.verdict === 'NO-GO' ? 'danger' : 'warning')} text-dark small py-0 px-1 me-1" style="font-size: 0.7em;">${m.status_flags.verdict}</span></div>
+                        ${m.drivers.slice(0, 3).map(d => `<div class="d-block text-truncate mb-1"><i class="bi bi-check-circle-fill text-${d.impact.includes('High') ? 'success' : 'secondary'} me-1"></i> <strong>${d.label}:</strong> ${d.value}</div>`).join('')}
+                    </div>
+
+                    ${aiBlock}
+                </div>
+                <div class="card-footer bg-white border-top-0 pt-0 pb-3">
+                    <button class="btn btn-sm btn-outline-dark w-100 fw-bold" onclick="launchDeepDive('${m.ticker}')">
+                        ${btnLabel} <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        `;
+            });
+            html += '</div>';
+            document.getElementById('matchResults').innerHTML = html;
+        }
+
+        // --- DEEP DIVE MODAL ---
+        async function launchDeepDive(ticker) {
+            const user = document.getElementById('userTicker').value;
+            const intent = document.getElementById('intentSelect').value;
+            const mandate = document.getElementById('scopeSelect').value;
+
+            // Show Modal
+            const modalEl = document.getElementById('deepDiveModal');
+            const modal = new bootstrap.Modal(modalEl);
+            document.getElementById('modalTargetTicker').innerText = ticker;
+
+            // Reset Modal State
+            document.getElementById('modalLoading').classList.remove('d-none');
+            document.getElementById('modalContent').innerHTML = '';
+            document.getElementById('modalPhysicsBox').innerHTML = '<p class="text-muted small">Calculated live...</p>';
+            modal.show();
+
+            try {
+                const resp = await fetch('/api/deal-architect/deep-dive', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_ticker: user, target_ticker: ticker, intent, mandate })
+                });
+                const data = await resp.json();
+                renderDeepDiveModal(data);
+            } catch (e) {
+                document.getElementById('modalContent').innerHTML = `<div class="alert alert-danger">${e}</div>`;
+            } finally {
+                document.getElementById('modalLoading').classList.add('d-none');
+            }
+        }
+
+        function renderDeepDiveModal(data) {
+            // 1. Memo (Right Col)
+            document.getElementById('modalContent').innerHTML = data.memo_html;
+
+            // 2. Physics (Left Col)
+            const m = data.metrics;
+            const s = data.scores;
+            const pHTML = `
+                <div class="card shadow-sm border-0 bg-white mb-3">
+                    <div class="card-header bg-dark text-white small py-1 text-uppercase fw-bold">Deal Physics</div>
+                    <ul class="list-group list-group-flush small">
+                        <li class="list-group-item d-flex justify-content-between"><span>Offer EV</span> <strong class="font-monospace">$${(m.offer_ev / 1e9).toFixed(1)}B</strong></li>
+                        <li class="list-group-item d-flex justify-content-between"><span>Premium</span> <strong>${m.premium_pct}%</strong></li>
+                        <li class="list-group-item d-flex justify-content-between" data-bs-toggle="tooltip" title="User Firepower / Offer EV. Source: Computed"><span>Firepower Coverage</span> <strong>${m.coverage_ratio}x</strong></li>
+                        <li class="list-group-item d-flex justify-content-between"><span>PF Lev</span> <strong class="${m.pro_forma_leverage > 4.5 ? 'text-danger' : 'text-success'}">${m.pro_forma_leverage}x</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="card shadow-sm border-0 bg-white mb-3">
+                    <div class="card-header bg-primary text-white small py-1 text-uppercase fw-bold">Scorecard</div>
+                    <ul class="list-group list-group-flush small">
+                        <li class="list-group-item d-flex justify-content-between"><span>Strategic</span> <strong>${s.strategic_score}</strong></li>
+                        <li class="list-group-item d-flex justify-content-between"><span>Feasibility</span> <strong>${s.feasibility_score}</strong></li>
+                        <li class="list-group-item d-flex justify-content-between"><span>Close Prob</span> <strong>${s.close_probability}%</strong></li>
+                        <li class="list-group-item bg-light text-muted small fst-italic py-1" style="font-size: 0.75em;">
+                            Fin: ${s.financing_score} | Reg: ${s.regulatory_score} | Will: ${s.willingness_score}
+                        </li>
+                    </ul>
+                    
+                    <!-- Feasibility Drivers (Upgrade A) -->
+                    <div class="card-header bg-secondary text-white small py-1 text-uppercase fw-bold mt-3">Feasibility Drivers</div>
+                    <ul class="list-group list-group-flush small">
+                         <li class="list-group-item d-flex justify-content-between"><span>Cash Coverage</span> <strong>${m.feasibility_drivers.cash_coverage}</strong></li>
+                         <li class="list-group-item d-flex justify-content-between"><span>Lev Band</span> <strong>${m.feasibility_drivers.pf_leverage_band}</strong></li>
+                         <li class="list-group-item d-flex justify-content-between"><span>Rate Sens</span> <strong>${m.feasibility_drivers.rate_sensitivity}</strong></li>
+                    </ul>
+                </div>
+                
+                ${renderStructureOptions(m.structure_options)}
+
+                <div class="mt-4">
+                    <h6 class="text-muted text-uppercase small fw-bold mb-2" style="font-size: 0.7em; letter-spacing: 1px;">Metric Definitions</h6>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item bg-transparent">
+                             <div class="small" style="font-size: 0.75em; color: #666;">
+                                <div class="mb-2">
+                                    <strong class="text-dark">Offer EV:</strong> Estimated Enterprise Value (Market Cap + Debt - Cash) including the premium.
+                                </div>
+                                <div class="mb-2">
+                                    <strong class="text-dark">Premium:</strong> % Markup on current stock price (Default 25%).
+                                </div>
+                                <div class="mb-2">
+                                    <strong class="text-dark">Firepower Coverage:</strong> (User Firepower / Deal Value). >1.0x means fully fundable.
+                                </div>
+                                <div class="mb-2">
+                                    <strong class="text-dark">PF Lev:</strong> Estimated Net Debt / EBITDA of combined entity. <4.5x is healthy (Buy), <4.0x (Merge).
+                                </div>
+                                <div class="mb-2">
+                                    <strong class="text-dark">Feasibility Drivers:</strong> Key factors impacting deal execution (Cash coverage, Rate sensitivity).
+                                </div>
+                                <div class="mb-2">
+                                    <strong class="text-dark">Close Probability:</strong> Weighted score of Financing (40%), Regulatory (25%), and Seller Willingness (35%).
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalPhysicsBox').innerHTML = pHTML;
+
+            // Footer Meta
+            document.getElementById('modalFooterMeta').innerHTML = `<span><i class="bi bi-clock me-1"></i> Generated: ${data.timestamp}</span> <span class="ms-3"><i class="bi bi-graph-up me-1"></i> Live Macro: ^TNX ${data.macro.tnx}%</span>`;
+        }
+
+        function renderStructureOptions(options) {
+            if (!options || options.length === 0) return '';
+            return `
+                <div class="alert alert-warning small mt-3 border-warning">
+                    <h6 class="fw-bold mb-1"><i class="bi bi-tools me-1"></i>Structure Options (Cure Breach)</h6>
+                    <ul class="mb-0 ps-3">
+                        ${options.map(o => `<li><strong>${o.name}:</strong> ${o.desc} <span class="badge bg-success text-light ms-1">${o.impact}</span></li>`).join('')}
+                    </ul>
+                </div>
+             `;
+        }
+
+        // --- SHORTLIST LOGIC ---
+        function togglePin(ticker) {
+            if (shortlist.includes(ticker)) {
+                shortlist = shortlist.filter(t => t !== ticker);
+            } else {
+                if (shortlist.length >= 5) { alert("Max 5 items in shortlist."); return; }
+                shortlist.push(ticker);
+            }
+            applyFilters(); // Re-render buttons
+            updateShortlistBar();
+        }
+
+        function updateShortlistBar() {
+            const bar = document.getElementById('shortlistBar');
+            const count = document.getElementById('shortlistCount');
+            const thumbs = document.getElementById('shortlistThumbs');
+            const btnComp = document.getElementById('btnCompare');
+
+            if (shortlist.length > 0) {
+                bar.classList.remove('d-none');
+                count.innerText = shortlist.length;
+                thumbs.innerHTML = shortlist.map(t => `<span class="badge bg-light text-dark border">${t}</span>`).join('');
+                btnComp.disabled = shortlist.length < 2;
+            } else {
+                bar.classList.add('d-none');
+            }
+        }
+
+        function clearShortlist() {
+            shortlist = [];
+            applyFilters();
+            updateShortlistBar();
+        }
+
+        function openCompareModal() {
+            const modalEl = document.getElementById('compareModal');
+            const modal = new bootstrap.Modal(modalEl);
+
+            const head = document.getElementById('compareHeaderRow');
+            const body = document.getElementById('compareBody');
+
+            // Get objects
+            const items = allMatches.filter(m => shortlist.includes(m.ticker));
+
+            // Header
+            let headHTML = '<th>Metric</th>';
+            items.forEach(i => headHTML += `<th class="text-center bg-light">${i.ticker}<br><small class="text-muted text-truncate d-block" style="max-width:100px; margin:auto;">${i.name}</small></th>`);
+            head.innerHTML = headHTML;
+
+            // Metrics
+            const metrics = [
+                { label: 'Overall Score', key: 'scores.overall' },
+                { label: 'Confidence', key: 'confidence' },
+                { label: 'Strategic Fit', key: 'scores.strategic' },
+                { label: 'Feasibility', key: 'scores.feasibility' },
+                { label: 'Probability', key: 'scores.probability' },
+                { label: 'EV', key: 'ev_fmt' },
+                { label: 'SPI (Seller Pressure)', key: 'spi' }
+            ];
+
+            let bodyHTML = '';
+            metrics.forEach(met => {
+                bodyHTML += `<tr><td class="fw-bold text-muted">${met.label}</td>`;
+                items.forEach(item => {
+                    let val = getNested(item, met.key);
+                    // Formatting
+                    if (met.key === 'confidence') val = Math.round(val * 100) + '%';
+                    bodyHTML += `<td class="text-center">${val}</td>`;
+                });
+                bodyHTML += `</tr>`;
+            });
+
+            body.innerHTML = bodyHTML;
+            modal.show();
+        }
+
+        function getNested(obj, path) {
+            return path.split('.').reduce((o, p) => (o ? o[p] : 'N/A'), obj);
+        }
+
+        // --- AUTOCOMPLETE LOGIC ---
+
+        let debounceTimer;
+
+        async function handleTickerSearch(query) {
+            const list = document.getElementById('tickerSuggestions');
+            if (!query || query.length < 1) {
+                list.style.display = 'none';
+                return;
+            }
+
+            // Debounce
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(async () => {
+                try {
+                    const res = await fetch(`/api/tickers?q=${encodeURIComponent(query)}`);
+                    const results = await res.json();
+
+                    if (results.length === 0) {
+                        list.style.display = 'none';
+                        return;
+                    }
+
+                    let html = '';
+                    results.forEach(item => {
+                        // Rich Formatting
+                        // Format Market Cap: > 1B => $xB, < 1B => $xM
+                        let capFmt = 'N/A';
+                        if (item.market_cap) {
+                            if (item.market_cap >= 1e9) capFmt = `$${(item.market_cap / 1e9).toFixed(1)}B`;
+                            else capFmt = `$${(item.market_cap / 1e6).toFixed(1)}M`;
+                        }
+
+                        html += `
+                        <button type="button" class="list-group-item list-group-item-action"
+                            onclick="selectTicker('${item.ticker}')">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <div>
+                                    <span class="fw-bold font-monospace text-primary fs-5">${item.ticker}</span>
+                                    <span class="badge bg-light text-secondary border ms-2">${capFmt}</span>
+                                </div>
+                                <span class="small text-muted fst-italic">${item.sector}</span>
+                            </div>
+                            <div class="text-truncate small text-dark fw-bold">${item.name || ''}</div>
+                            <div class="small text-muted">${item.industry}</div>
+                        </button>
+                        `;
+                    });
+
+                    list.innerHTML = html;
+                    list.style.display = 'block';
+
+                } catch (e) {
+                    console.error("Autocomplete failed", e);
+                }
+            }, 300);
+        }
+
+        function selectTicker(ticker) {
+            document.getElementById('userTicker').value = ticker;
+            document.getElementById('tickerSuggestions').style.display = 'none';
+        }
+
+        // Close on click outside
+        document.addEventListener('click', function (e) {
+            const container = document.querySelector('.position-relative');
+            const list = document.getElementById('tickerSuggestions');
+            if (container && !container.contains(e.target)) {
+                list.style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
